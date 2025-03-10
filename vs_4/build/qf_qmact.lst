@@ -1,0 +1,181 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccEOwPyM.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"qf_qmact.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.QMActive_ctor,"ax",%progbits
+  18              		.align	1
+  19              		.global	QMActive_ctor
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	QMActive_ctor:
+  25              	.LVL0:
+  26              	.LFB18:
+  27              		.file 1 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #define QP_IMPL           // this is QP implementation
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #include "qp_port.h"      // QP port
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccEOwPyM.s 			page 2
+
+
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #include "qp_pkg.h"       // QP package-scope interface
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #include "qsafe.h"        // QP Functional Safety (FuSa) Subsystem
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #ifdef Q_SPY              // QS software tracing enabled?
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     #include "qs_port.h"  // QS port
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     #include "qs_pkg.h"   // QS facilities for pre-defined trace records
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #else
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     #include "qs_dummy.h" // disable the QS software tracing
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #endif // Q_SPY
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** 
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //Q_DEFINE_THIS_MODULE("qf_qmact")
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** 
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //............................................................................
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** //! @protected @memberof QMActive
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** void QMActive_ctor(QMActive * const me,
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     QStateHandler const initial)
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** {
+  28              		.loc 1 47 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 47 1 is_stmt 0 view .LVU1
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0400     		movs	r4, r0
+  41 0004 0D00     		movs	r5, r1
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // clear the whole QMActive object, so that the framework can start
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // correctly even if the startup code fails to clear the uninitialized
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // data (as is required by the C Standard).
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     QF_bzero_(me, sizeof(*me));
+  42              		.loc 1 51 5 is_stmt 1 view .LVU2
+  43 0006 C021     		movs	r1, #192
+  44              	.LVL1:
+  45              		.loc 1 51 5 is_stmt 0 view .LVU3
+  46 0008 FFF7FEFF 		bl	QF_bzero_
+  47              	.LVL2:
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** 
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // NOTE: QActive inherits the QActvie class, but it calls the
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // constructor of the QMsm subclass. This is because QMActive inherits
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // the behavior from the QMsm subclass.
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     QMsm_ctor((QMsm *)(me), initial);
+  48              		.loc 1 56 5 is_stmt 1 view .LVU4
+  49 000c 2900     		movs	r1, r5
+  50 000e 2000     		movs	r0, r4
+  51 0010 FFF7FEFF 		bl	QMsm_ctor
+  52              	.LVL3:
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** 
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // NOTE: this vtable is identical as QMsm, but is provided
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // for the QMActive subclass to provide a UNIQUE vptr to distinguish
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     // subclasses of QActive (e.g., in the debugger).
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     static struct QAsmVtable const vtable = { // QMActive virtual table
+  53              		.loc 1 61 5 view .LVU5
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****         &QMsm_init_,
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccEOwPyM.s 			page 3
+
+
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****         &QMsm_dispatch_,
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****         &QMsm_isIn_
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #ifdef Q_SPY
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****         ,&QMsm_getStateHandler_
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** #endif
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     };
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c ****     me->super.super.vptr = &vtable; // hook vptr to QMActive vtable
+  54              		.loc 1 69 5 view .LVU6
+  55              		.loc 1 69 26 is_stmt 0 view .LVU7
+  56 0014 014B     		ldr	r3, .L2
+  57 0016 2360     		str	r3, [r4]
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qmact.c **** }
+  58              		.loc 1 70 1 view .LVU8
+  59              		@ sp needed
+  60              	.LVL4:
+  61              	.LVL5:
+  62              		.loc 1 70 1 view .LVU9
+  63 0018 70BD     		pop	{r4, r5, r6, pc}
+  64              	.L3:
+  65 001a C046     		.align	2
+  66              	.L2:
+  67 001c 00000000 		.word	.LANCHOR0
+  68              		.cfi_endproc
+  69              	.LFE18:
+  71              		.section	.rodata.vtable.0,"a"
+  72              		.align	2
+  73              		.set	.LANCHOR0,. + 0
+  76              	vtable.0:
+  77 0000 00000000 		.word	QMsm_init_
+  78 0004 00000000 		.word	QMsm_dispatch_
+  79 0008 00000000 		.word	QMsm_isIn_
+  80              		.text
+  81              	.Letext0:
+  82              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+  83              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+  84              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+  85              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h"
+  86              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+  87              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
+  88              		.file 8 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h"
+  89              		.file 9 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccEOwPyM.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 qf_qmact.c
+C:\Users\main\AppData\Local\Temp\ccEOwPyM.s:18     .text.QMActive_ctor:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccEOwPyM.s:24     .text.QMActive_ctor:00000000 QMActive_ctor
+C:\Users\main\AppData\Local\Temp\ccEOwPyM.s:67     .text.QMActive_ctor:0000001c $d
+C:\Users\main\AppData\Local\Temp\ccEOwPyM.s:72     .rodata.vtable.0:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccEOwPyM.s:76     .rodata.vtable.0:00000000 vtable.0
+
+UNDEFINED SYMBOLS
+QF_bzero_
+QMsm_ctor
+QMsm_init_
+QMsm_dispatch_
+QMsm_isIn_
