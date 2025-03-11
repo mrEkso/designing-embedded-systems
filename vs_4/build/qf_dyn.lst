@@ -1,0 +1,1246 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"qf_dyn.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.QF_poolInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	QF_poolInit
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	QF_poolInit:
+  25              	.LVL0:
+  26              	.LFB18:
+  27              		.file 1 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #define QP_IMPL           // this is QP implementation
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #include "qp_port.h"      // QP port
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 2
+
+
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #include "qp_pkg.h"       // QP package-scope interface
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #include "qsafe.h"        // QP Functional Safety (FuSa) Subsystem
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #ifdef Q_SPY              // QS software tracing enabled?
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     #include "qs_port.h"  // QS port
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     #include "qs_pkg.h"   // QS facilities for pre-defined trace records
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #else
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     #include "qs_dummy.h" // disable the QS software tracing
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif // Q_SPY
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #if (QF_MAX_EPOOL > 0U)   // mutable events configured?
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** Q_DEFINE_THIS_MODULE("qf_dyn")
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @public @memberof QF
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** void QF_poolInit(
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     void * const poolSto,
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast32_t const poolSize,
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast16_t const evtSize)
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** {
+  28              		.loc 1 51 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 51 1 is_stmt 0 view .LVU1
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 20
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 C646     		mov	lr, r8
+  42 0004 00B5     		push	{lr}
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 24
+  45              		.cfi_offset 8, -24
+  46 0006 8046     		mov	r8, r0
+  47 0008 0F00     		movs	r7, r1
+  48 000a 1500     		movs	r5, r2
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast8_t const poolNum = QF_priv_.maxPool_;
+  49              		.loc 1 52 5 is_stmt 1 view .LVU2
+  50              		.loc 1 52 24 is_stmt 0 view .LVU3
+  51 000c 144B     		ldr	r3, .L6
+  52 000e DC6B     		ldr	r4, [r3, #60]
+  53              	.LVL1:
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // see precondition{qf_dyn,200} and precondition{qf_dyn,201}
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+  54              		.loc 1 56 5 is_stmt 1 view .LVU4
+  55 0010 FFF7FEFF 		bl	vPortEnterCritical
+  56              	.LVL2:
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(100, poolNum < QF_MAX_EPOOL);
+  57              		.loc 1 58 5 view .LVU5
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 3
+
+
+  58 0014 022C     		cmp	r4, #2
+  59 0016 1BD8     		bhi	.L4
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     if (poolNum > 0U) {
+  60              		.loc 1 59 5 view .LVU6
+  61              		.loc 1 59 8 is_stmt 0 view .LVU7
+  62 0018 002C     		cmp	r4, #0
+  63 001a 08D0     		beq	.L3
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         Q_REQUIRE_INCRIT(110,
+  64              		.loc 1 60 9 is_stmt 1 view .LVU8
+  65 001c 621E     		subs	r2, r4, #1
+  66 001e 9300     		lsls	r3, r2, #2
+  67 0020 9B18     		adds	r3, r3, r2
+  68 0022 9B00     		lsls	r3, r3, #2
+  69 0024 0E4A     		ldr	r2, .L6
+  70 0026 D318     		adds	r3, r2, r3
+  71 0028 9B89     		ldrh	r3, [r3, #12]
+  72 002a AB42     		cmp	r3, r5
+  73 002c 14D2     		bcs	.L5
+  74              	.L3:
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QF_EPOOL_EVENT_SIZE_(QF_priv_.ePool_[poolNum - 1U]) < evtSize);
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_priv_.maxPool_ = poolNum + 1U; // one more pool
+  75              		.loc 1 63 5 view .LVU9
+  76              		.loc 1 63 33 is_stmt 0 view .LVU10
+  77 002e 631C     		adds	r3, r4, #1
+  78              		.loc 1 63 23 view .LVU11
+  79 0030 0B4E     		ldr	r6, .L6
+  80 0032 F363     		str	r3, [r6, #60]
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_EXIT();
+  81              		.loc 1 65 5 is_stmt 1 view .LVU12
+  82 0034 FFF7FEFF 		bl	vPortExitCritical
+  83              	.LVL3:
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // perform the port-dependent initialization of the event-pool
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_EPOOL_INIT_(QF_priv_.ePool_[poolNum], poolSto, poolSize, evtSize);
+  84              		.loc 1 68 5 view .LVU13
+  85 0038 A000     		lsls	r0, r4, #2
+  86 003a 0019     		adds	r0, r0, r4
+  87 003c 8000     		lsls	r0, r0, #2
+  88 003e 8019     		adds	r0, r0, r6
+  89 0040 2B00     		movs	r3, r5
+  90 0042 3A00     		movs	r2, r7
+  91 0044 4146     		mov	r1, r8
+  92 0046 FFF7FEFF 		bl	QMPool_init
+  93              	.LVL4:
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #ifdef Q_SPY
+  71:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // generate the object-dictionary entry for the initialized pool
+  72:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     {
+  73:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         uint8_t obj_name[9] = "EvtPool?";
+  74:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         obj_name[7] = (uint8_t)((uint8_t)'0' + poolNum + 1U);
+  75:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_obj_dict_pre_(&QF_priv_.ePool_[poolNum], (char const *)obj_name);
+  76:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+  77:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif // Q_SPY
+  78:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+  94              		.loc 1 78 1 is_stmt 0 view .LVU14
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 4
+
+
+  95              		@ sp needed
+  96              	.LVL5:
+  97              	.LVL6:
+  98              	.LVL7:
+  99              	.LVL8:
+ 100              		.loc 1 78 1 view .LVU15
+ 101 004a 80BC     		pop	{r7}
+ 102 004c B846     		mov	r8, r7
+ 103 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 104              	.LVL9:
+ 105              	.L4:
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     if (poolNum > 0U) {
+ 106              		.loc 1 58 5 discriminator 1 view .LVU16
+ 107 0050 6421     		movs	r1, #100
+ 108 0052 0448     		ldr	r0, .L6+4
+ 109 0054 FFF7FEFF 		bl	Q_onError
+ 110              	.LVL10:
+ 111              	.L5:
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QF_EPOOL_EVENT_SIZE_(QF_priv_.ePool_[poolNum - 1U]) < evtSize);
+ 112              		.loc 1 60 9 discriminator 1 view .LVU17
+ 113 0058 6E21     		movs	r1, #110
+ 114 005a 0248     		ldr	r0, .L6+4
+ 115 005c FFF7FEFF 		bl	Q_onError
+ 116              	.LVL11:
+ 117              	.L7:
+ 118              		.align	2
+ 119              	.L6:
+ 120 0060 00000000 		.word	QF_priv_
+ 121 0064 00000000 		.word	.LANCHOR0
+ 122              		.cfi_endproc
+ 123              	.LFE18:
+ 125              		.section	.text.QF_poolGetMaxBlockSize,"ax",%progbits
+ 126              		.align	1
+ 127              		.global	QF_poolGetMaxBlockSize
+ 128              		.syntax unified
+ 129              		.code	16
+ 130              		.thumb_func
+ 132              	QF_poolGetMaxBlockSize:
+ 133              	.LFB19:
+  79:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  80:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+  81:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @public @memberof QF
+  82:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** uint_fast16_t QF_poolGetMaxBlockSize(void) {
+ 134              		.loc 1 82 44 is_stmt 1 view -0
+ 135              		.cfi_startproc
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138 0000 10B5     		push	{r4, lr}
+ 139              	.LCFI2:
+ 140              		.cfi_def_cfa_offset 8
+ 141              		.cfi_offset 4, -8
+ 142              		.cfi_offset 14, -4
+  83:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+  84:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+ 143              		.loc 1 84 5 view .LVU19
+ 144 0002 FFF7FEFF 		bl	vPortEnterCritical
+ 145              	.LVL12:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 5
+
+
+  85:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast16_t const max_size =
+ 146              		.loc 1 85 5 view .LVU20
+  86:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QF_EPOOL_EVENT_SIZE_(QF_priv_.ePool_[QF_priv_.maxPool_ - 1U]);
+ 147              		.loc 1 86 9 is_stmt 0 view .LVU21
+ 148 0006 064B     		ldr	r3, .L9
+ 149 0008 DA6B     		ldr	r2, [r3, #60]
+ 150 000a 511E     		subs	r1, r2, #1
+ 151 000c 8A00     		lsls	r2, r1, #2
+ 152 000e 5218     		adds	r2, r2, r1
+ 153 0010 9100     		lsls	r1, r2, #2
+ 154 0012 5B18     		adds	r3, r3, r1
+ 155 0014 9C89     		ldrh	r4, [r3, #12]
+ 156              	.LVL13:
+  87:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_EXIT();
+ 157              		.loc 1 87 5 is_stmt 1 view .LVU22
+ 158 0016 FFF7FEFF 		bl	vPortExitCritical
+ 159              	.LVL14:
+  88:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  89:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     return max_size;
+ 160              		.loc 1 89 5 view .LVU23
+  90:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 161              		.loc 1 90 1 is_stmt 0 view .LVU24
+ 162 001a 2000     		movs	r0, r4
+ 163              		@ sp needed
+ 164              	.LVL15:
+ 165              		.loc 1 90 1 view .LVU25
+ 166 001c 10BD     		pop	{r4, pc}
+ 167              	.L10:
+ 168 001e C046     		.align	2
+ 169              	.L9:
+ 170 0020 00000000 		.word	QF_priv_
+ 171              		.cfi_endproc
+ 172              	.LFE19:
+ 174              		.section	.text.QF_getPoolMin,"ax",%progbits
+ 175              		.align	1
+ 176              		.global	QF_getPoolMin
+ 177              		.syntax unified
+ 178              		.code	16
+ 179              		.thumb_func
+ 181              	QF_getPoolMin:
+ 182              	.LVL16:
+ 183              	.LFB20:
+  91:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  92:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+  93:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @public @memberof QF
+  94:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** uint_fast16_t QF_getPoolMin(uint_fast8_t const poolNum) {
+ 184              		.loc 1 94 57 is_stmt 1 view -0
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188              		.loc 1 94 57 is_stmt 0 view .LVU27
+ 189 0000 10B5     		push	{r4, lr}
+ 190              	.LCFI3:
+ 191              		.cfi_def_cfa_offset 8
+ 192              		.cfi_offset 4, -8
+ 193              		.cfi_offset 14, -4
+ 194 0002 0400     		movs	r4, r0
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 6
+
+
+  95:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+  96:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+ 195              		.loc 1 96 5 is_stmt 1 view .LVU28
+ 196 0004 FFF7FEFF 		bl	vPortEnterCritical
+ 197              	.LVL17:
+  97:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+  98:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(300, (poolNum <= QF_MAX_EPOOL)
+ 198              		.loc 1 98 5 view .LVU29
+ 199 0008 621E     		subs	r2, r4, #1
+ 200 000a 022A     		cmp	r2, #2
+ 201 000c 0DD8     		bhi	.L12
+ 202              		.loc 1 98 5 is_stmt 0 discriminator 2 view .LVU30
+ 203 000e 094B     		ldr	r3, .L14
+ 204 0010 DB6B     		ldr	r3, [r3, #60]
+ 205 0012 A342     		cmp	r3, r4
+ 206 0014 09D3     		bcc	.L12
+  99:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                       && (0U < poolNum) && (poolNum <= QF_priv_.maxPool_));
+ 100:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 101:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast16_t const min = (uint_fast16_t)QF_priv_.ePool_[poolNum - 1U].nMin;
+ 207              		.loc 1 101 5 is_stmt 1 view .LVU31
+ 208              		.loc 1 101 75 is_stmt 0 view .LVU32
+ 209 0016 9300     		lsls	r3, r2, #2
+ 210 0018 9B18     		adds	r3, r3, r2
+ 211 001a 9B00     		lsls	r3, r3, #2
+ 212 001c 054A     		ldr	r2, .L14
+ 213 001e D318     		adds	r3, r2, r3
+ 214 0020 5C8A     		ldrh	r4, [r3, #18]
+ 215              	.LVL18:
+ 102:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 103:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_EXIT();
+ 216              		.loc 1 103 5 is_stmt 1 view .LVU33
+ 217 0022 FFF7FEFF 		bl	vPortExitCritical
+ 218              	.LVL19:
+ 104:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 105:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     return min;
+ 219              		.loc 1 105 5 view .LVU34
+ 106:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 220              		.loc 1 106 1 is_stmt 0 view .LVU35
+ 221 0026 2000     		movs	r0, r4
+ 222              		@ sp needed
+ 223              	.LVL20:
+ 224              		.loc 1 106 1 view .LVU36
+ 225 0028 10BD     		pop	{r4, pc}
+ 226              	.LVL21:
+ 227              	.L12:
+  98:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                       && (0U < poolNum) && (poolNum <= QF_priv_.maxPool_));
+ 228              		.loc 1 98 5 discriminator 3 view .LVU37
+ 229 002a 9621     		movs	r1, #150
+ 230 002c 4900     		lsls	r1, r1, #1
+ 231 002e 0248     		ldr	r0, .L14+4
+ 232 0030 FFF7FEFF 		bl	Q_onError
+ 233              	.LVL22:
+ 234              	.L15:
+ 235              		.align	2
+ 236              	.L14:
+ 237 0034 00000000 		.word	QF_priv_
+ 238 0038 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 7
+
+
+ 239              		.cfi_endproc
+ 240              	.LFE20:
+ 242              		.section	.text.QF_newX_,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	QF_newX_
+ 245              		.syntax unified
+ 246              		.code	16
+ 247              		.thumb_func
+ 249              	QF_newX_:
+ 250              	.LVL23:
+ 251              	.LFB21:
+ 107:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 108:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+ 109:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @private @memberof QF
+ 110:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** QEvt * QF_newX_(
+ 111:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast16_t const evtSize,
+ 112:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast16_t const margin,
+ 113:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     enum_t const sig)
+ 114:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** {
+ 252              		.loc 1 114 1 is_stmt 1 view -0
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256              		.loc 1 114 1 is_stmt 0 view .LVU39
+ 257 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 258              	.LCFI4:
+ 259              		.cfi_def_cfa_offset 24
+ 260              		.cfi_offset 3, -24
+ 261              		.cfi_offset 4, -20
+ 262              		.cfi_offset 5, -16
+ 263              		.cfi_offset 6, -12
+ 264              		.cfi_offset 7, -8
+ 265              		.cfi_offset 14, -4
+ 266 0002 0D00     		movs	r5, r1
+ 267 0004 1700     		movs	r7, r2
+ 115:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // find the pool id that fits the requested event size...
+ 116:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint8_t poolNum = 0U; // zero-based poolNum initially
+ 268              		.loc 1 116 5 is_stmt 1 view .LVU40
+ 269              	.LVL24:
+ 117:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     for (; poolNum < QF_priv_.maxPool_; ++poolNum) {
+ 270              		.loc 1 117 5 view .LVU41
+ 116:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     for (; poolNum < QF_priv_.maxPool_; ++poolNum) {
+ 271              		.loc 1 116 13 is_stmt 0 view .LVU42
+ 272 0006 0024     		movs	r4, #0
+ 273              		.loc 1 117 5 view .LVU43
+ 274 0008 01E0     		b	.L17
+ 275              	.LVL25:
+ 276              	.L26:
+ 277              		.loc 1 117 41 is_stmt 1 view .LVU44
+ 278 000a 0134     		adds	r4, r4, #1
+ 279              	.LVL26:
+ 280              		.loc 1 117 41 is_stmt 0 view .LVU45
+ 281 000c E4B2     		uxtb	r4, r4
+ 282              	.LVL27:
+ 283              	.L17:
+ 284              		.loc 1 117 12 is_stmt 1 discriminator 1 view .LVU46
+ 285              		.loc 1 117 20 is_stmt 0 discriminator 1 view .LVU47
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 8
+
+
+ 286 000e 2600     		movs	r6, r4
+ 287              		.loc 1 117 30 discriminator 1 view .LVU48
+ 288 0010 1F4B     		ldr	r3, .L29
+ 289 0012 DB6B     		ldr	r3, [r3, #60]
+ 290              		.loc 1 117 5 discriminator 1 view .LVU49
+ 291 0014 9C42     		cmp	r4, r3
+ 292 0016 07D2     		bcs	.L18
+ 118:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         if (evtSize <= QF_EPOOL_EVENT_SIZE_(QF_priv_.ePool_[poolNum])) {
+ 293              		.loc 1 118 9 is_stmt 1 view .LVU50
+ 294              		.loc 1 118 24 is_stmt 0 view .LVU51
+ 295 0018 A300     		lsls	r3, r4, #2
+ 296 001a 1B19     		adds	r3, r3, r4
+ 297 001c 9B00     		lsls	r3, r3, #2
+ 298 001e 1C4A     		ldr	r2, .L29
+ 299 0020 D318     		adds	r3, r2, r3
+ 300 0022 9B89     		ldrh	r3, [r3, #12]
+ 301              		.loc 1 118 12 view .LVU52
+ 302 0024 8342     		cmp	r3, r0
+ 303 0026 F0D3     		bcc	.L26
+ 304              	.L18:
+ 119:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             break;
+ 120:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         }
+ 121:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 122:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 123:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+ 124:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+ 305              		.loc 1 124 5 is_stmt 1 view .LVU53
+ 306 0028 FFF7FEFF 		bl	vPortEnterCritical
+ 307              	.LVL28:
+ 125:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 126:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // precondition:
+ 127:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // - cannot run out of registered pools
+ 128:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(400, poolNum < QF_priv_.maxPool_);
+ 308              		.loc 1 128 5 view .LVU54
+ 309 002c 184B     		ldr	r3, .L29
+ 310 002e DB6B     		ldr	r3, [r3, #60]
+ 311 0030 9E42     		cmp	r6, r3
+ 312 0032 18D2     		bcs	.L27
+ 129:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 130:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     ++poolNum; // convert to 1-based poolNum
+ 313              		.loc 1 130 5 view .LVU55
+ 314 0034 0134     		adds	r4, r4, #1
+ 315              	.LVL29:
+ 316              		.loc 1 130 5 is_stmt 0 view .LVU56
+ 317 0036 E4B2     		uxtb	r4, r4
+ 318              	.LVL30:
+ 131:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 132:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_EXIT();
+ 319              		.loc 1 132 5 is_stmt 1 view .LVU57
+ 320 0038 FFF7FEFF 		bl	vPortExitCritical
+ 321              	.LVL31:
+ 133:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 134:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // get event e (port-dependent)...
+ 135:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QEvt *e;
+ 322              		.loc 1 135 5 view .LVU58
+ 136:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #ifdef Q_SPY
+ 137:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_EPOOL_GET_(QF_priv_.ePool_[poolNum - 1U], e,
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 9
+
+
+ 138:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                   ((margin != QF_NO_MARGIN) ? margin : 0U),
+ 139:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                   (uint_fast8_t)QS_EP_ID + poolNum);
+ 140:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #else
+ 141:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_EPOOL_GET_(QF_priv_.ePool_[poolNum - 1U], e,
+ 323              		.loc 1 141 5 view .LVU59
+ 324 003c 631E     		subs	r3, r4, #1
+ 325 003e 9800     		lsls	r0, r3, #2
+ 326 0040 C018     		adds	r0, r0, r3
+ 327 0042 8000     		lsls	r0, r0, #2
+ 328 0044 124B     		ldr	r3, .L29
+ 329 0046 C018     		adds	r0, r0, r3
+ 330 0048 124B     		ldr	r3, .L29+4
+ 331 004a 9D42     		cmp	r5, r3
+ 332 004c 10D0     		beq	.L25
+ 333 004e 2900     		movs	r1, r5
+ 334              	.L21:
+ 335              		.loc 1 141 5 is_stmt 0 discriminator 4 view .LVU60
+ 336 0050 0022     		movs	r2, #0
+ 337 0052 FFF7FEFF 		bl	QMPool_get
+ 338              	.LVL32:
+ 339 0056 061E     		subs	r6, r0, #0
+ 340              	.LVL33:
+ 142:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                   ((margin != QF_NO_MARGIN) ? margin : 0U), 0U);
+ 143:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif
+ 144:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 145:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     if (e != (QEvt *)0) { // was e allocated correctly?
+ 341              		.loc 1 145 5 is_stmt 1 discriminator 4 view .LVU61
+ 342              		.loc 1 145 8 is_stmt 0 discriminator 4 view .LVU62
+ 343 0058 0CD0     		beq	.L22
+ 146:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         e->sig      = (QSignal)sig; // set the signal
+ 344              		.loc 1 146 9 is_stmt 1 view .LVU63
+ 345              		.loc 1 146 21 is_stmt 0 view .LVU64
+ 346 005a 0780     		strh	r7, [r0]
+ 147:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         e->poolNum_ = poolNum;
+ 347              		.loc 1 147 9 is_stmt 1 view .LVU65
+ 348              		.loc 1 147 21 is_stmt 0 view .LVU66
+ 349 005c 8470     		strb	r4, [r0, #2]
+ 148:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         e->refCtr_  = 0U;
+ 350              		.loc 1 148 9 is_stmt 1 view .LVU67
+ 351              		.loc 1 148 21 is_stmt 0 view .LVU68
+ 352 005e 0023     		movs	r3, #0
+ 353 0060 C370     		strb	r3, [r0, #3]
+ 149:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 150:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_CRIT_ENTRY();
+ 354              		.loc 1 150 9 is_stmt 1 view .LVU69
+ 151:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_BEGIN_PRE(QS_QF_NEW, (uint_fast8_t)QS_EP_ID + poolNum)
+ 355              		.loc 1 151 9 view .LVU70
+ 152:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_TIME_PRE();        // timestamp
+ 356              		.loc 1 152 13 view .LVU71
+ 153:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_EVS_PRE(evtSize);  // the size of the event
+ 357              		.loc 1 153 13 view .LVU72
+ 154:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_SIG_PRE(sig);      // the signal of the event
+ 358              		.loc 1 154 13 view .LVU73
+ 155:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_END_PRE()
+ 156:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_CRIT_EXIT();
+ 359              		.loc 1 156 9 view .LVU74
+ 360              	.LVL34:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 10
+
+
+ 361              	.L16:
+ 157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 158:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     else { // event was not allocated
+ 159:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 160:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QF_CRIT_ENTRY();
+ 161:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         // This assertion means that the event allocation failed,
+ 162:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         // and this failure cannot be tolerated. The most frequent
+ 163:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         // reason is an event leak in the application.
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         Q_ASSERT_INCRIT(420, margin != QF_NO_MARGIN);
+ 165:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 166:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_BEGIN_PRE(QS_QF_NEW_ATTEMPT,
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 (uint_fast8_t)QS_EP_ID + poolNum)
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_TIME_PRE();        // timestamp
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_EVS_PRE(evtSize);  // the size of the event
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_SIG_PRE(sig);      // the signal of the event
+ 171:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_END_PRE()
+ 172:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 173:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QF_CRIT_EXIT();
+ 174:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 175:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 176:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // the returned event e is guaranteed to be valid (not NULL)
+ 177:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     // if we can't tolerate failed allocation
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     return e;
+ 179:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 362              		.loc 1 179 1 is_stmt 0 view .LVU75
+ 363 0062 3000     		movs	r0, r6
+ 364              		@ sp needed
+ 365              	.LVL35:
+ 366              	.LVL36:
+ 367              	.LVL37:
+ 368              	.LVL38:
+ 369              		.loc 1 179 1 view .LVU76
+ 370 0064 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 371              	.LVL39:
+ 372              	.L27:
+ 128:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 373              		.loc 1 128 5 discriminator 1 view .LVU77
+ 374 0066 C821     		movs	r1, #200
+ 375 0068 4900     		lsls	r1, r1, #1
+ 376 006a 0B48     		ldr	r0, .L29+8
+ 377 006c FFF7FEFF 		bl	Q_onError
+ 378              	.LVL40:
+ 379              	.L25:
+ 141:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                   ((margin != QF_NO_MARGIN) ? margin : 0U), 0U);
+ 380              		.loc 1 141 5 view .LVU78
+ 381 0070 0021     		movs	r1, #0
+ 382 0072 EDE7     		b	.L21
+ 383              	.LVL41:
+ 384              	.L22:
+ 160:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         // This assertion means that the event allocation failed,
+ 385              		.loc 1 160 9 is_stmt 1 view .LVU79
+ 386 0074 FFF7FEFF 		bl	vPortEnterCritical
+ 387              	.LVL42:
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 388              		.loc 1 164 9 view .LVU80
+ 389 0078 064B     		ldr	r3, .L29+4
+ 390 007a 9D42     		cmp	r5, r3
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 11
+
+
+ 391 007c 02D0     		beq	.L28
+ 166:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 (uint_fast8_t)QS_EP_ID + poolNum)
+ 392              		.loc 1 166 9 view .LVU81
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_EVS_PRE(evtSize);  // the size of the event
+ 393              		.loc 1 168 13 view .LVU82
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_SIG_PRE(sig);      // the signal of the event
+ 394              		.loc 1 169 13 view .LVU83
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_END_PRE()
+ 395              		.loc 1 170 13 view .LVU84
+ 173:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 396              		.loc 1 173 9 view .LVU85
+ 397 007e FFF7FEFF 		bl	vPortExitCritical
+ 398              	.LVL43:
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 399              		.loc 1 178 5 view .LVU86
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 400              		.loc 1 178 12 is_stmt 0 view .LVU87
+ 401 0082 EEE7     		b	.L16
+ 402              	.L28:
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 403              		.loc 1 164 9 discriminator 1 view .LVU88
+ 404 0084 D221     		movs	r1, #210
+ 405 0086 4900     		lsls	r1, r1, #1
+ 406 0088 0348     		ldr	r0, .L29+8
+ 407 008a FFF7FEFF 		bl	Q_onError
+ 408              	.LVL44:
+ 409              	.L30:
+ 410 008e C046     		.align	2
+ 411              	.L29:
+ 412 0090 00000000 		.word	QF_priv_
+ 413 0094 FFFF0000 		.word	65535
+ 414 0098 00000000 		.word	.LANCHOR0
+ 415              		.cfi_endproc
+ 416              	.LFE21:
+ 418              		.section	.text.QF_gc,"ax",%progbits
+ 419              		.align	1
+ 420              		.global	QF_gc
+ 421              		.syntax unified
+ 422              		.code	16
+ 423              		.thumb_func
+ 425              	QF_gc:
+ 426              	.LVL45:
+ 427              	.LFB22:
+ 180:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 181:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+ 182:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @public @memberof QF
+ 183:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** void QF_gc(QEvt const * const e) {
+ 428              		.loc 1 183 34 is_stmt 1 view -0
+ 429              		.cfi_startproc
+ 430              		@ args = 0, pretend = 0, frame = 0
+ 431              		@ frame_needed = 0, uses_anonymous_args = 0
+ 432              		.loc 1 183 34 is_stmt 0 view .LVU90
+ 433 0000 70B5     		push	{r4, r5, r6, lr}
+ 434              	.LCFI5:
+ 435              		.cfi_def_cfa_offset 16
+ 436              		.cfi_offset 4, -16
+ 437              		.cfi_offset 5, -12
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 12
+
+
+ 438              		.cfi_offset 6, -8
+ 439              		.cfi_offset 14, -4
+ 440 0002 0400     		movs	r4, r0
+ 184:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+ 185:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+ 441              		.loc 1 185 5 is_stmt 1 view .LVU91
+ 442 0004 FFF7FEFF 		bl	vPortEnterCritical
+ 443              	.LVL46:
+ 186:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 187:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(500, e != (QEvt *)0);
+ 444              		.loc 1 187 5 view .LVU92
+ 445 0008 002C     		cmp	r4, #0
+ 446 000a 10D0     		beq	.L39
+ 188:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 189:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint8_t const poolNum = e->poolNum_;
+ 447              		.loc 1 189 5 view .LVU93
+ 448              		.loc 1 189 19 is_stmt 0 view .LVU94
+ 449 000c A578     		ldrb	r5, [r4, #2]
+ 450              	.LVL47:
+ 190:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     if (poolNum != 0U) { // is it a pool event (mutable)?
+ 451              		.loc 1 191 5 is_stmt 1 view .LVU95
+ 452              		.loc 1 191 8 is_stmt 0 view .LVU96
+ 453 000e 002D     		cmp	r5, #0
+ 454 0010 2FD0     		beq	.L33
+ 192:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 193:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         if (e->refCtr_ > 1U) { // isn't this the last reference?
+ 455              		.loc 1 193 9 is_stmt 1 view .LVU97
+ 456              		.loc 1 193 14 is_stmt 0 view .LVU98
+ 457 0012 E378     		ldrb	r3, [r4, #3]
+ 458 0014 DBB2     		uxtb	r3, r3
+ 459              		.loc 1 193 12 view .LVU99
+ 460 0016 012B     		cmp	r3, #1
+ 461 0018 13D9     		bls	.L34
+ 194:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 195:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_BEGIN_PRE(QS_QF_GC_ATTEMPT,
+ 462              		.loc 1 195 13 is_stmt 1 view .LVU100
+ 196:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                     (uint_fast8_t)QS_EP_ID + poolNum)
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_TIME_PRE();       // timestamp
+ 463              		.loc 1 197 17 view .LVU101
+ 198:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_SIG_PRE(e->sig);  // the signal of the event
+ 464              		.loc 1 198 17 view .LVU102
+ 199:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_2U8_PRE(poolNum, e->refCtr_);
+ 465              		.loc 1 199 17 view .LVU103
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_END_PRE()
+ 201:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 202:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             Q_ASSERT_INCRIT(505, e->refCtr_ > 0U);
+ 466              		.loc 1 202 13 view .LVU104
+ 467 001a E378     		ldrb	r3, [r4, #3]
+ 468 001c 002B     		cmp	r3, #0
+ 469 001e 0BD0     		beq	.L40
+ 203:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QEvt_refCtr_dec_(e); // decrement the ref counter
+ 470              		.loc 1 203 13 view .LVU105
+ 471              	.LVL48:
+ 472              	.LBB6:
+ 473              	.LBI6:
+ 474              		.file 2 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 13
+
+
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #ifndef QP_PKG_H_
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QP_PKG_H_
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QACTIVE_CAST_(ptr_)    ((QActive *)(ptr_))
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define Q_PTR2UINT_CAST_(ptr_) ((uintptr_t)(ptr_))
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** typedef struct {
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #if (QF_MAX_EPOOL > 0U)
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     QF_EPOOL_TYPE_ ePool_[QF_MAX_EPOOL]; //!< @private @memberof QF_Attr
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint_fast8_t maxPool_;               //!< @private @memberof QF_Attr
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #else
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint8_t dummy;                       //!< @private @memberof QF_Attr
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #endif //  (QF_MAX_EPOOL == 0U)
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** } QF_Attr;
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** extern QF_Attr QF_priv_; //!< @static @private @memberof QF
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //! @static @private @memberof QF
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** void QF_bzero_(
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     void * const start,
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint_fast16_t const len);
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Bitmasks are for the QTimeEvt::flags attribute
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QTE_FLAG_IS_LINKED      (1U << 7U)
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QTE_FLAG_WAS_DISARMED   (1U << 6U)
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 14
+
+
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //! @private @memberof QEvt
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** static inline void QEvt_refCtr_inc_(QEvt const * const me) {
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     // NOTE: this function must be called inside a critical section
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint8_t const rc = me->refCtr_ + 1U;
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** }
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //! @private @memberof QEvt
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** static inline void QEvt_refCtr_dec_(QEvt const * const me) {
+ 475              		.loc 2 68 20 view .LVU106
+ 476              	.LBB7:
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     // NOTE: this function must be called inside a critical section
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint8_t const rc = me->refCtr_ - 1U;
+ 477              		.loc 2 70 5 view .LVU107
+ 478              		.loc 2 70 26 is_stmt 0 view .LVU108
+ 479 0020 E378     		ldrb	r3, [r4, #3]
+ 480              		.loc 2 70 19 view .LVU109
+ 481 0022 013B     		subs	r3, r3, #1
+ 482 0024 DBB2     		uxtb	r3, r3
+ 483              	.LVL49:
+  71:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
+ 484              		.loc 2 71 5 is_stmt 1 view .LVU110
+ 485              		.loc 2 71 27 is_stmt 0 view .LVU111
+ 486 0026 E370     		strb	r3, [r4, #3]
+ 487              	.LVL50:
+ 488              		.loc 2 71 27 view .LVU112
+ 489              	.LBE7:
+ 490              	.LBE6:
+ 204:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 205:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QF_CRIT_EXIT();
+ 491              		.loc 1 205 13 is_stmt 1 view .LVU113
+ 492 0028 FFF7FEFF 		bl	vPortExitCritical
+ 493              	.LVL51:
+ 494              	.L31:
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         }
+ 207:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         else { // this is the last reference to this event, recycle it
+ 208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_BEGIN_PRE(QS_QF_GC,
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                     (uint_fast8_t)QS_EP_ID + poolNum)
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_TIME_PRE();       // timestamp
+ 212:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_SIG_PRE(e->sig);  // the signal of the event
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_2U8_PRE(poolNum, e->refCtr_);
+ 214:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_END_PRE()
+ 215:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             // pool number must be in range
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             Q_ASSERT_INCRIT(510, (poolNum <= QF_priv_.maxPool_)
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                                   && (poolNum <= QF_MAX_EPOOL));
+ 219:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QF_CRIT_EXIT();
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             // NOTE: casting 'const' away is legit because 'e' is a pool event
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #ifdef Q_SPY
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QF_EPOOL_PUT_(QF_priv_.ePool_[poolNum - 1U], (QEvt *)e,
+ 224:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 (uint_fast8_t)QS_EP_ID + poolNum);
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #else
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QF_EPOOL_PUT_(QF_priv_.ePool_[poolNum - 1U], (QEvt *)e,
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 15
+
+
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 0U);
+ 228:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif
+ 229:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         }
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 231:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     else {
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QF_CRIT_EXIT();
+ 233:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 234:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 495              		.loc 1 234 1 is_stmt 0 view .LVU114
+ 496              		@ sp needed
+ 497              	.LVL52:
+ 498              		.loc 1 234 1 view .LVU115
+ 499 002c 70BD     		pop	{r4, r5, r6, pc}
+ 500              	.LVL53:
+ 501              	.L39:
+ 187:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 502              		.loc 1 187 5 discriminator 1 view .LVU116
+ 503 002e FA21     		movs	r1, #250
+ 504 0030 4900     		lsls	r1, r1, #1
+ 505 0032 1148     		ldr	r0, .L41
+ 506 0034 FFF7FEFF 		bl	Q_onError
+ 507              	.LVL54:
+ 508              	.L40:
+ 202:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QEvt_refCtr_dec_(e); // decrement the ref counter
+ 509              		.loc 1 202 13 discriminator 1 view .LVU117
+ 510 0038 FA21     		movs	r1, #250
+ 511 003a FF31     		adds	r1, r1, #255
+ 512 003c 0E48     		ldr	r0, .L41
+ 513 003e FFF7FEFF 		bl	Q_onError
+ 514              	.LVL55:
+ 515              	.L34:
+ 209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                     (uint_fast8_t)QS_EP_ID + poolNum)
+ 516              		.loc 1 209 13 is_stmt 1 view .LVU118
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_SIG_PRE(e->sig);  // the signal of the event
+ 517              		.loc 1 211 17 view .LVU119
+ 212:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 QS_2U8_PRE(poolNum, e->refCtr_);
+ 518              		.loc 1 212 17 view .LVU120
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             QS_END_PRE()
+ 519              		.loc 1 213 17 view .LVU121
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                                   && (poolNum <= QF_MAX_EPOOL));
+ 520              		.loc 1 217 13 view .LVU122
+ 521 0042 0E4B     		ldr	r3, .L41+4
+ 522 0044 DB6B     		ldr	r3, [r3, #60]
+ 523 0046 9D42     		cmp	r5, r3
+ 524 0048 0ED8     		bhi	.L37
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                                   && (poolNum <= QF_MAX_EPOOL));
+ 525              		.loc 1 217 13 is_stmt 0 discriminator 2 view .LVU123
+ 526 004a 032D     		cmp	r5, #3
+ 527 004c 0CD8     		bhi	.L37
+ 219:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 528              		.loc 1 219 13 is_stmt 1 view .LVU124
+ 529 004e FFF7FEFF 		bl	vPortExitCritical
+ 530              	.LVL56:
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 0U);
+ 531              		.loc 1 226 13 view .LVU125
+ 532 0052 013D     		subs	r5, r5, #1
+ 533              	.LVL57:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 16
+
+
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 0U);
+ 534              		.loc 1 226 13 is_stmt 0 view .LVU126
+ 535 0054 A800     		lsls	r0, r5, #2
+ 536 0056 4019     		adds	r0, r0, r5
+ 537 0058 8000     		lsls	r0, r0, #2
+ 538 005a 084D     		ldr	r5, .L41+4
+ 539              	.LVL58:
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                 0U);
+ 540              		.loc 1 226 13 view .LVU127
+ 541 005c 4019     		adds	r0, r0, r5
+ 542 005e 0022     		movs	r2, #0
+ 543 0060 2100     		movs	r1, r4
+ 544 0062 FFF7FEFF 		bl	QMPool_put
+ 545              	.LVL59:
+ 546 0066 E1E7     		b	.L31
+ 547              	.LVL60:
+ 548              	.L37:
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****                                   && (poolNum <= QF_MAX_EPOOL));
+ 549              		.loc 1 217 13 discriminator 3 view .LVU128
+ 550 0068 FF21     		movs	r1, #255
+ 551 006a 4900     		lsls	r1, r1, #1
+ 552 006c 0248     		ldr	r0, .L41
+ 553 006e FFF7FEFF 		bl	Q_onError
+ 554              	.LVL61:
+ 555              	.L33:
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     }
+ 556              		.loc 1 232 9 is_stmt 1 view .LVU129
+ 557 0072 FFF7FEFF 		bl	vPortExitCritical
+ 558              	.LVL62:
+ 559              		.loc 1 234 1 is_stmt 0 view .LVU130
+ 560 0076 D9E7     		b	.L31
+ 561              	.L42:
+ 562              		.align	2
+ 563              	.L41:
+ 564 0078 00000000 		.word	.LANCHOR0
+ 565 007c 00000000 		.word	QF_priv_
+ 566              		.cfi_endproc
+ 567              	.LFE22:
+ 569              		.section	.text.QF_newRef_,"ax",%progbits
+ 570              		.align	1
+ 571              		.global	QF_newRef_
+ 572              		.syntax unified
+ 573              		.code	16
+ 574              		.thumb_func
+ 576              	QF_newRef_:
+ 577              	.LVL63:
+ 578              	.LFB23:
+ 235:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+ 237:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @private @memberof QF
+ 238:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** QEvt const * QF_newRef_(
+ 239:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QEvt const * const e,
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     void const * const evtRef)
+ 241:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** {
+ 579              		.loc 1 241 1 is_stmt 1 view -0
+ 580              		.cfi_startproc
+ 581              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 17
+
+
+ 582              		@ frame_needed = 0, uses_anonymous_args = 0
+ 583              		.loc 1 241 1 is_stmt 0 view .LVU132
+ 584 0000 70B5     		push	{r4, r5, r6, lr}
+ 585              	.LCFI6:
+ 586              		.cfi_def_cfa_offset 16
+ 587              		.cfi_offset 4, -16
+ 588              		.cfi_offset 5, -12
+ 589              		.cfi_offset 6, -8
+ 590              		.cfi_offset 14, -4
+ 591 0002 0400     		movs	r4, r0
+ 592 0004 0D00     		movs	r5, r1
+ 242:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #ifdef Q_UNSAFE
+ 243:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_UNUSED_PAR(evtRef);
+ 244:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif
+ 245:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 246:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+ 247:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+ 593              		.loc 1 247 5 is_stmt 1 view .LVU133
+ 594 0006 FFF7FEFF 		bl	vPortEnterCritical
+ 595              	.LVL64:
+ 248:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 249:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(600, e != (QEvt *)0);
+ 596              		.loc 1 249 5 view .LVU134
+ 597 000a 002C     		cmp	r4, #0
+ 598 000c 10D0     		beq	.L48
+ 250:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 251:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast8_t const poolNum = e->poolNum_;
+ 599              		.loc 1 251 5 view .LVU135
+ 600              		.loc 1 251 35 is_stmt 0 view .LVU136
+ 601 000e A378     		ldrb	r3, [r4, #2]
+ 602              	.LVL65:
+ 252:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_UNUSED_PAR(poolNum); // might be unused
+ 603              		.loc 1 252 5 is_stmt 1 view .LVU137
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 254:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(610, (poolNum != 0U)
+ 604              		.loc 1 254 5 view .LVU138
+ 605 0010 002B     		cmp	r3, #0
+ 606 0012 12D0     		beq	.L45
+ 607              		.loc 1 254 5 is_stmt 0 discriminator 2 view .LVU139
+ 608 0014 002D     		cmp	r5, #0
+ 609 0016 10D1     		bne	.L45
+ 255:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         && (evtRef == (void *)0));
+ 256:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_ASSERT_INCRIT(605, e->refCtr_ < (2U * QF_MAX_ACTIVE));
+ 610              		.loc 1 257 5 is_stmt 1 view .LVU140
+ 611 0018 E378     		ldrb	r3, [r4, #3]
+ 612              	.LVL66:
+ 613              		.loc 1 257 5 is_stmt 0 view .LVU141
+ 614 001a DBB2     		uxtb	r3, r3
+ 615 001c 3F2B     		cmp	r3, #63
+ 616 001e 10D8     		bhi	.L49
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QEvt_refCtr_inc_(e); // increments the ref counter
+ 617              		.loc 1 258 5 is_stmt 1 view .LVU142
+ 618              	.LVL67:
+ 619              	.LBB8:
+ 620              	.LBI8:
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     // NOTE: this function must be called inside a critical section
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 18
+
+
+ 621              		.loc 2 61 20 view .LVU143
+ 622              	.LBB9:
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
+ 623              		.loc 2 63 5 view .LVU144
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
+ 624              		.loc 2 63 26 is_stmt 0 view .LVU145
+ 625 0020 E378     		ldrb	r3, [r4, #3]
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
+ 626              		.loc 2 63 19 view .LVU146
+ 627 0022 0133     		adds	r3, r3, #1
+ 628 0024 DBB2     		uxtb	r3, r3
+ 629              	.LVL68:
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** }
+ 630              		.loc 2 64 5 is_stmt 1 view .LVU147
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** }
+ 631              		.loc 2 64 27 is_stmt 0 view .LVU148
+ 632 0026 E370     		strb	r3, [r4, #3]
+ 633              	.LVL69:
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** }
+ 634              		.loc 2 64 27 view .LVU149
+ 635              	.LBE9:
+ 636              	.LBE8:
+ 259:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 260:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QS_BEGIN_PRE(QS_QF_NEW_REF,
+ 637              		.loc 1 260 5 is_stmt 1 view .LVU150
+ 261:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             (uint_fast8_t)QS_EP_ID + poolNum)
+ 262:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_TIME_PRE();       // timestamp
+ 638              		.loc 1 262 9 view .LVU151
+ 263:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_SIG_PRE(e->sig);  // the signal of the event
+ 639              		.loc 1 263 9 view .LVU152
+ 264:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_2U8_PRE(poolNum, e->refCtr_);
+ 640              		.loc 1 264 9 view .LVU153
+ 265:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QS_END_PRE()
+ 266:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 267:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_EXIT();
+ 641              		.loc 1 267 5 view .LVU154
+ 642 0028 FFF7FEFF 		bl	vPortExitCritical
+ 643              	.LVL70:
+ 268:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 269:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     return e;
+ 644              		.loc 1 269 5 view .LVU155
+ 270:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 645              		.loc 1 270 1 is_stmt 0 view .LVU156
+ 646 002c 2000     		movs	r0, r4
+ 647              		@ sp needed
+ 648              	.LVL71:
+ 649              	.LVL72:
+ 650              		.loc 1 270 1 view .LVU157
+ 651 002e 70BD     		pop	{r4, r5, r6, pc}
+ 652              	.LVL73:
+ 653              	.L48:
+ 249:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 654              		.loc 1 249 5 discriminator 1 view .LVU158
+ 655 0030 9621     		movs	r1, #150
+ 656 0032 8900     		lsls	r1, r1, #2
+ 657 0034 0548     		ldr	r0, .L50
+ 658 0036 FFF7FEFF 		bl	Q_onError
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 19
+
+
+ 659              	.LVL74:
+ 660              	.L45:
+ 254:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         && (evtRef == (void *)0));
+ 661              		.loc 1 254 5 discriminator 3 view .LVU159
+ 662 003a 0549     		ldr	r1, .L50+4
+ 663 003c 0348     		ldr	r0, .L50
+ 664 003e FFF7FEFF 		bl	Q_onError
+ 665              	.LVL75:
+ 666              	.L49:
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QEvt_refCtr_inc_(e); // increments the ref counter
+ 667              		.loc 1 257 5 discriminator 1 view .LVU160
+ 668 0042 0449     		ldr	r1, .L50+8
+ 669 0044 0148     		ldr	r0, .L50
+ 670 0046 FFF7FEFF 		bl	Q_onError
+ 671              	.LVL76:
+ 672              	.L51:
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QEvt_refCtr_inc_(e); // increments the ref counter
+ 673              		.loc 1 257 5 discriminator 1 view .LVU161
+ 674 004a C046     		.align	2
+ 675              	.L50:
+ 676 004c 00000000 		.word	.LANCHOR0
+ 677 0050 62020000 		.word	610
+ 678 0054 5D020000 		.word	605
+ 679              		.cfi_endproc
+ 680              	.LFE23:
+ 682              		.section	.text.QF_deleteRef_,"ax",%progbits
+ 683              		.align	1
+ 684              		.global	QF_deleteRef_
+ 685              		.syntax unified
+ 686              		.code	16
+ 687              		.thumb_func
+ 689              	QF_deleteRef_:
+ 690              	.LVL77:
+ 691              	.LFB24:
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 272:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //............................................................................
+ 273:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** //! @static @private @memberof QF
+ 274:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** void QF_deleteRef_(void const * const evtRef) {
+ 692              		.loc 1 274 47 is_stmt 1 view -0
+ 693              		.cfi_startproc
+ 694              		@ args = 0, pretend = 0, frame = 0
+ 695              		@ frame_needed = 0, uses_anonymous_args = 0
+ 696              		.loc 1 274 47 is_stmt 0 view .LVU163
+ 697 0000 10B5     		push	{r4, lr}
+ 698              	.LCFI7:
+ 699              		.cfi_def_cfa_offset 8
+ 700              		.cfi_offset 4, -8
+ 701              		.cfi_offset 14, -4
+ 702 0002 0400     		movs	r4, r0
+ 275:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_STAT
+ 276:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_ENTRY();
+ 703              		.loc 1 276 5 is_stmt 1 view .LVU164
+ 704 0004 FFF7FEFF 		bl	vPortEnterCritical
+ 705              	.LVL78:
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 278:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QEvt const * const e = (QEvt const *)evtRef;
+ 706              		.loc 1 278 5 view .LVU165
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 20
+
+
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     Q_REQUIRE_INCRIT(700, e != (QEvt *)0);
+ 707              		.loc 1 279 5 view .LVU166
+ 708 0008 002C     		cmp	r4, #0
+ 709 000a 05D0     		beq	.L54
+ 280:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 281:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #ifdef Q_SPY
+ 282:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     uint_fast8_t const poolNum = e->poolNum_;
+ 283:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QS_BEGIN_PRE(QS_QF_DELETE_REF,
+ 284:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****             (uint_fast8_t)QS_EP_ID + poolNum)
+ 285:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_TIME_PRE();       // timestamp
+ 286:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_SIG_PRE(e->sig);  // the signal of the event
+ 287:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****         QS_2U8_PRE(poolNum, e->refCtr_);
+ 288:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QS_END_PRE()
+ 289:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif // def Q_SPY
+ 290:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 291:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_CRIT_EXIT();
+ 710              		.loc 1 291 5 view .LVU167
+ 711 000c FFF7FEFF 		bl	vPortExitCritical
+ 712              	.LVL79:
+ 292:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 293:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #if (QF_MAX_EPOOL > 0U)
+ 294:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c ****     QF_gc(e); // recycle the referenced event
+ 713              		.loc 1 294 5 view .LVU168
+ 714 0010 2000     		movs	r0, r4
+ 715 0012 FFF7FEFF 		bl	QF_gc
+ 716              	.LVL80:
+ 295:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** #endif
+ 296:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** }
+ 717              		.loc 1 296 1 is_stmt 0 view .LVU169
+ 718              		@ sp needed
+ 719              	.LVL81:
+ 720              		.loc 1 296 1 view .LVU170
+ 721 0016 10BD     		pop	{r4, pc}
+ 722              	.LVL82:
+ 723              	.L54:
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_dyn.c **** 
+ 724              		.loc 1 279 5 discriminator 1 view .LVU171
+ 725 0018 AF21     		movs	r1, #175
+ 726 001a 8900     		lsls	r1, r1, #2
+ 727 001c 0148     		ldr	r0, .L55
+ 728 001e FFF7FEFF 		bl	Q_onError
+ 729              	.LVL83:
+ 730              	.L56:
+ 731 0022 C046     		.align	2
+ 732              	.L55:
+ 733 0024 00000000 		.word	.LANCHOR0
+ 734              		.cfi_endproc
+ 735              	.LFE24:
+ 737              		.section	.rodata.Q_this_module_,"a"
+ 738              		.align	2
+ 739              		.set	.LANCHOR0,. + 0
+ 742              	Q_this_module_:
+ 743 0000 71665F64 		.ascii	"qf_dyn\000"
+ 743      796E00
+ 744              		.text
+ 745              	.Letext0:
+ 746              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 21
+
+
+ 747              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 748              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 749              		.file 6 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h"
+ 750              		.file 7 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qmpool.h"
+ 751              		.file 8 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h"
+ 752              		.file 9 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qsafe.h"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccWbcdLz.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 qf_dyn.c
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:18     .text.QF_poolInit:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:24     .text.QF_poolInit:00000000 QF_poolInit
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:120    .text.QF_poolInit:00000060 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:126    .text.QF_poolGetMaxBlockSize:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:132    .text.QF_poolGetMaxBlockSize:00000000 QF_poolGetMaxBlockSize
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:170    .text.QF_poolGetMaxBlockSize:00000020 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:175    .text.QF_getPoolMin:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:181    .text.QF_getPoolMin:00000000 QF_getPoolMin
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:237    .text.QF_getPoolMin:00000034 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:243    .text.QF_newX_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:249    .text.QF_newX_:00000000 QF_newX_
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:412    .text.QF_newX_:00000090 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:419    .text.QF_gc:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:425    .text.QF_gc:00000000 QF_gc
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:564    .text.QF_gc:00000078 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:570    .text.QF_newRef_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:576    .text.QF_newRef_:00000000 QF_newRef_
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:676    .text.QF_newRef_:0000004c $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:683    .text.QF_deleteRef_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:689    .text.QF_deleteRef_:00000000 QF_deleteRef_
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:733    .text.QF_deleteRef_:00000024 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:738    .rodata.Q_this_module_:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccWbcdLz.s:742    .rodata.Q_this_module_:00000000 Q_this_module_
+
+UNDEFINED SYMBOLS
+vPortEnterCritical
+vPortExitCritical
+QMPool_init
+Q_onError
+QF_priv_
+QMPool_get
+QMPool_put

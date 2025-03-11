@@ -1,0 +1,5 @@
+[wokwi]
+version = 1
+firmware = 'build/vs_4.hex'
+elf = 'build/vs_4.elf'
+rfc2217ServerPort = 4000
