@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 1
 
 
    1              		.cpu cortex-m0plus
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
   29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** //============================================================================
   30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** #define QP_IMPL           // this is QP implementation
   31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** #include "qp_port.h"      // QP port
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 2
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 2
 
 
   32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** #include "qp_pkg.h"       // QP package-scope interface
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
   58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c ****     me->end      = (QEQueueCtr)qLen;
   56              		.loc 1 58 5 is_stmt 1 view .LVU8
   57              		.loc 1 58 20 is_stmt 0 view .LVU9
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 3
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 3
 
 
   58 0016 EBB2     		uxtb	r3, r5
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  102              		.align	2
  103              	.L5:
  104 003c 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 4
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 4
 
 
  105              		.cfi_endproc
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  143              		.loc 1 85 16 is_stmt 0 view .LVU33
  144 0010 E37A     		ldrb	r3, [r4, #11]
  145 0012 DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 5
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 5
 
 
  146              	.LVL10:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
   10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
   11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
   12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 6
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 6
 
 
   13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // This software is dual-licensed under the terms of the open-source GNU
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  185              		.loc 2 63 26 is_stmt 0 view .LVU48
  186 0034 EA78     		ldrb	r2, [r5, #3]
  187              		.loc 2 63 19 view .LVU49
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 7
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 7
 
 
  188 0036 0132     		adds	r2, r2, #1
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  220 004a 2368     		ldr	r3, [r4]
  221              	.LVL17:
  222              		.loc 1 115 12 view .LVU64
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 8
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 8
 
 
  223 004c 002B     		cmp	r3, #0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  263              		.loc 1 88 51 view .LVU79
  264 0070 002B     		cmp	r3, #0
  265 0072 D2D0     		beq	.L9
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 9
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 9
 
 
   89:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c ****     if (status) {
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  296 008e FFF7FEFF 		bl	vPortExitCritical
  297              	.LVL29:
  147:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** 
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 10
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 10
 
 
  148:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c ****     return status;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  344              		.cfi_offset 14, -4
  345 0002 0400     		movs	r4, r0
  346 0004 0D00     		movs	r5, r1
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 11
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 11
 
 
  157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** #ifndef Q_SPY
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  381 0024 EA78     		ldrb	r2, [r5, #3]
   63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
  382              		.loc 2 63 19 view .LVU108
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 12
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 12
 
 
  383 0026 0132     		adds	r2, r2, #1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** 
  192:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c ****     QEvt const * const frontEvt = me->frontEvt;
  420              		.loc 1 192 5 view .LVU128
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 13
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 13
 
 
  421              		.loc 1 192 24 is_stmt 0 view .LVU129
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  462              		.loc 1 205 5 is_stmt 1 view .LVU147
  463 0056 FFF7FEFF 		bl	vPortExitCritical
  464              	.LVL51:
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 14
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 14
 
 
  206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** }
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  515              	.LFB21:
  207:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** 
  208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** //............................................................................
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 15
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 15
 
 
  209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c **** //! @public @memberof QEQueue
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_qeq.c ****         me->nFree = tmp; // update the # free
  552              		.loc 1 227 9 is_stmt 1 view .LVU167
  553              		.loc 1 227 19 is_stmt 0 view .LVU168
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 16
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 16
 
 
  554 0014 E372     		strb	r3, [r4, #11]
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  588              		.loc 1 247 13 is_stmt 1 view .LVU187
  589              		.loc 1 247 16 is_stmt 0 view .LVU188
  590 002c 0029     		cmp	r1, #0
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 17
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 17
 
 
  591 002e 00D0     		beq	.L46
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  620              		@ sp needed
  621              	.LVL73:
  622              	.LVL74:
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 18
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 18
 
 
  623              		.loc 1 271 1 view .LVU202
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  671              	.Letext0:
  672              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
  673              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 19
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 19
 
 
  674              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
@@ -1086,25 +1086,25 @@ ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 1
  676              		.file 7 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h"
  677              		.file 8 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qsafe.h"
  678              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h"
-ARM GAS  C:\Users\main\AppData\Local\Temp\ccoyLd4s.s 			page 20
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmyOLxh.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 qf_qeq.c
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:18     .text.QEQueue_init:00000000 $t
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:24     .text.QEQueue_init:00000000 QEQueue_init
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:104    .text.QEQueue_init:0000003c $d
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:109    .text.QEQueue_post:00000000 $t
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:115    .text.QEQueue_post:00000000 QEQueue_post
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:318    .text.QEQueue_post:000000a0 $d
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:324    .text.QEQueue_postLIFO:00000000 $t
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:330    .text.QEQueue_postLIFO:00000000 QEQueue_postLIFO
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:502    .text.QEQueue_postLIFO:00000080 $d
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:507    .text.QEQueue_get:00000000 $t
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:513    .text.QEQueue_get:00000000 QEQueue_get
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:658    .text.QEQueue_get:00000060 $d
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:664    .rodata.Q_this_module_:00000000 $d
-C:\Users\main\AppData\Local\Temp\ccoyLd4s.s:668    .rodata.Q_this_module_:00000000 Q_this_module_
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:18     .text.QEQueue_init:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:24     .text.QEQueue_init:00000000 QEQueue_init
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:104    .text.QEQueue_init:0000003c $d
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:109    .text.QEQueue_post:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:115    .text.QEQueue_post:00000000 QEQueue_post
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:318    .text.QEQueue_post:000000a0 $d
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:324    .text.QEQueue_postLIFO:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:330    .text.QEQueue_postLIFO:00000000 QEQueue_postLIFO
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:502    .text.QEQueue_postLIFO:00000080 $d
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:507    .text.QEQueue_get:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:513    .text.QEQueue_get:00000000 QEQueue_get
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:658    .text.QEQueue_get:00000060 $d
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:664    .rodata.Q_this_module_:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccmyOLxh.s:668    .rodata.Q_this_module_:00000000 Q_this_module_
 
 UNDEFINED SYMBOLS
 vPortEnterCritical

@@ -22,7 +22,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "lcd.h"
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,7 +43,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+extern uint8_t toggle;
+extern uint32_t sharedNumber;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -142,10 +144,13 @@ void StartDefaultTask(void *argument)
 void StartTask02(void *argument)
 {
   /* USER CODE BEGIN myTask02 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1000);
+  for(;;){
+    if (toggle)  // Якщо процес активний
+    {
+      sharedNumber = rand() % 100;  // Генеруємо число 0-99
+      vTaskDelay(2000 / portTICK_PERIOD_MS);  // Чекаємо
+    }
+    vTaskDelay(100 / portTICK_PERIOD_MS);
   }
   /* USER CODE END myTask02 */
 }
@@ -160,11 +165,32 @@ void StartTask02(void *argument)
 void StartTask03(void *argument)
 {
   /* USER CODE BEGIN myTask03 */
-  /* Infinite loop */
+  char buffer[16];
   for(;;)
-  {
-    osDelay(1000);
-  }
+    {
+        if (toggle)  // Якщо процес активний
+        {
+            if (sharedNumber % 2 == 0)  
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+            } 
+            else  
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
+            }
+            snprintf(buffer, sizeof(buffer), "%lu", sharedNumber);
+            lcd_print(buffer);
+        }
+        else  
+        {
+            // Якщо toggle == 0, вимикаємо всі світлодіоди
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+        }
+        vTaskDelay(500 / portTICK_PERIOD_MS);  // Менший delay для більш плавного оновлення
+    }
   /* USER CODE END myTask03 */
 }
 

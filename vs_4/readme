@@ -1,0 +1,2 @@
+Потрібно поміняти в файлі Core/Src/stm32c0xx_it.c наступний рядок на такий:
+HAL_EXTI_IRQHandler(&H_EXTI_13); -> HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);

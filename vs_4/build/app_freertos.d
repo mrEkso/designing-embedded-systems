@@ -31,6 +31,8 @@ build/app_freertos.o: Core/Src/app_freertos.c Core/Inc/app_freertos.h \
  Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_exti.h \
  Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_flash.h \
  Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_flash_ex.h \
+ Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_i2c.h \
+ Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_i2c_ex.h \
  Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_pwr.h \
  Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_pwr_ex.h \
  Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_uart.h \
@@ -38,7 +40,7 @@ build/app_freertos.o: Core/Src/app_freertos.c Core/Inc/app_freertos.h \
  Drivers/BSP/STM32C0xx_Nucleo/stm32c0xx_nucleo.h \
  Core/Inc/stm32c0xx_nucleo_conf.h \
  Drivers/BSP/STM32C0xx_Nucleo/stm32c0xx_nucleo_errno.h \
- Middlewares/Third_Party/CMSIS/RTOS2/Include/cmsis_os2.h
+ Middlewares/Third_Party/CMSIS/RTOS2/Include/cmsis_os2.h Core/Inc/lcd.h
 Core/Inc/app_freertos.h:
 Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 Core/Inc/FreeRTOSConfig.h:
@@ -74,6 +76,8 @@ Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_cortex.h:
 Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_exti.h:
 Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_flash.h:
 Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_flash_ex.h:
+Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_i2c.h:
+Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_i2c_ex.h:
 Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_pwr.h:
 Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_pwr_ex.h:
 Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_uart.h:
@@ -82,3 +86,4 @@ Drivers/BSP/STM32C0xx_Nucleo/stm32c0xx_nucleo.h:
 Core/Inc/stm32c0xx_nucleo_conf.h:
 Drivers/BSP/STM32C0xx_Nucleo/stm32c0xx_nucleo_errno.h:
 Middlewares/Third_Party/CMSIS/RTOS2/Include/cmsis_os2.h:
+Core/Inc/lcd.h:
