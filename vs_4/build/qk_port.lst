@@ -1,0 +1,944 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"qk_port.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.QF_int_disable_,"ax",%progbits
+  18              		.align	1
+  19              		.weak	QF_int_disable_
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	QF_int_disable_:
+  25              	.LFB16:
+  26              		.file 1 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define QP_IMPL 1U
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #include "qp_port.h"
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #include "qsafe.h"        // QP Functional Safety (FuSa) Subsystem
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 2
+
+
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // prototypes ----------------------------------------------------------------
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void PendSV_Handler(void);
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QK_USE_IRQ_HANDLER           // if use IRQ...
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QK_USE_IRQ_HANDLER(void);
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                               // use default (NMI)
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void NMI_Handler(void);
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define SCB_SYSPRI   ((uint32_t volatile *)0xE000ED18U)
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define NVIC_EN      ((uint32_t volatile *)0xE000E100U)
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define NVIC_IP      ((uint32_t volatile *)0xE000E400U)
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define SCB_CPACR   *((uint32_t volatile *)0xE000ED88U)
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define FPU_FPCCR   *((uint32_t volatile *)0xE000EF34U)
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define NVIC_PEND    0xE000E200
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define SCB_ICSR     0xE000ED04
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // helper macros to "stringify" values
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define VAL(x) #x
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #define STRINGIFY(x) VAL(x)
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // interrupts and critical section...
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE:
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The following interrupt disabling/enabling as well as critical section
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // entry/exit functions are defined as "weak" so that they can be
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // re-implemented differently at the application level.
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE:
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // For best performance, these functions are implemented in assembly,
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // but they can be implemented in C as well.
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //int32_t volatile QF_int_lock_nest_; // not used
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** extern char const QF_port_module_[];
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** char const QF_port_module_[] = "qk_port";
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //............................................................................
+  71:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Unconditionally disable interrupts.
+  72:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: this function must NOT use the stack.
+  73:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+  74:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Description:
+  75:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // When QF_USE_BASEPRI is defined, interrupts are disabled with BASEPRI.
+  76:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Otherwise interrupts are disabled with the PRIMASK register.
+  77:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Additionally, the function also asserts that the interrupts are
+  78:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOT disabled upon the entry to the function, which means that
+  79:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // this interrupt management policy CANNOT nest.
+  80:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, weak))
+  81:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QF_int_disable_(void) {
+  27              		.loc 1 81 28 view -0
+  28              		.cfi_startproc
+  29              		@ Naked Function: prologue and epilogue provided by programmer.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  82:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+  32              		.loc 1 82 1 view .LVU1
+  33              		.syntax divided
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 3
+
+
+  34              	@ 82 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+  35 0000 EFF31080 		  MRS     r0,PRIMASK       
+  36 0004 72B6     	  CPSID   i                
+  37 0006 0028     	  CMP     r0,#0            
+  38 0008 00D1     	  BNE     QF_int_disable_error
+  39 000a 7047     	  BX      lr               
+  40              	QF_int_disable_error:      
+  41 000c 0148     	  LDR     r0,=QF_port_module_ 
+  42 000e 6421     	  MOVS    r1,#100          
+  43 0010 014A     	  LDR     r2,=Q_onError    
+  44 0012 1047     	  BX      r2               
+  45              	
+  46              	@ 0 "" 2
+  83:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for interrupt disabling?
+  84:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,BASEPRI       \n" // r0 <- previous BASEPRI
+  85:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#" STRINGIFY(QF_USE_BASEPRI) "\n"
+  86:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MSR     BASEPRI,r1       \n" // NOTE: Cortes-M7 erratum 837070 is OK
+  87:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use PRIMASK for disabling interrupts
+  88:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,PRIMASK       \n" // r0 <- previous PRIMASK
+  89:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSID   i                \n" // set PRIMASK
+  90:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use PRIMASK for disabling interrupts
+  91:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CMP     r0,#0            \n" // assert(PRIMASK/BASEPRI == 0)
+  92:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BNE     QF_int_disable_error\n"
+  93:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      lr               \n"
+  94:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_int_disable_error:      \n"
+  95:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_port_module_ \n"
+  96:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#100          \n"
+  97:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=Q_onError    \n"
+  98:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      r2               \n"
+  99:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 100:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+  47              		.loc 1 100 1 is_stmt 0 view .LVU2
+  48              		.thumb
+  49              		.syntax unified
+  50              		.cfi_endproc
+  51              	.LFE16:
+  53              		.section	.text.QF_int_enable_,"ax",%progbits
+  54              		.align	1
+  55              		.weak	QF_int_enable_
+  56              		.syntax unified
+  57              		.code	16
+  58              		.thumb_func
+  60              	QF_int_enable_:
+  61              	.LFB17:
+ 101:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //............................................................................
+ 102:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Unconditionally enable interrupts.
+ 103:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: this function must NOT use the stack.
+ 104:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 105:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Description:
+ 106:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // When QF_USE_BASEPRI is defined, interrupts are enabled with BASEPRI.
+ 107:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Otherwise interrupts are enabled with the PRIMASK register.
+ 108:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Additionally, the function also asserts that the interrupts ARE
+ 109:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // disabled upon the entry to the function, which means that
+ 110:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // this interrupt management policy CANNOT nest.
+ 111:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, weak))
+ 112:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QF_int_enable_(void) {
+  62              		.loc 1 112 27 is_stmt 1 view -0
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 4
+
+
+  63              		.cfi_startproc
+  64              		@ Naked Function: prologue and epilogue provided by programmer.
+  65              		@ args = 0, pretend = 0, frame = 0
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+  67              		.loc 1 113 1 view .LVU4
+  68              		.syntax divided
+  69              	@ 113 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+  70 0000 EFF31080 		  MRS     r0,PRIMASK       
+  71 0004 0028     	  CMP     r0,#0            
+  72 0006 01D0     	  BEQ     QF_int_enable_error
+  73 0008 62B6     	  CPSIE   i                
+  74 000a 7047     	  BX      lr               
+  75              	QF_int_enable_error:       
+  76 000c 0148     	  LDR     r0,=QF_port_module_ 
+  77 000e 6521     	  MOVS    r1,#101          
+  78 0010 014A     	  LDR     r2,=Q_onError    
+  79 0012 1047     	  BX      r2               
+  80              	
+  81              	@ 0 "" 2
+ 114:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for enabling interrupts?
+ 115:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,BASEPRI       \n" // r0 <- previous BASEPRI
+ 116:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use PRIMASK for enabling interrupts
+ 117:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,PRIMASK       \n" // r0 <- previous PRIMASK
+ 118:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use PRIMASK for enabling interrupts
+ 119:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 120:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CMP     r0,#0            \n" // assert(PRIMASK/BASEPRI != 0)
+ 121:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BEQ     QF_int_enable_error\n"
+ 122:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for enabling interrupts?
+ 123:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#0            \n"
+ 124:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MSR     BASEPRI,r1       \n" // NOTE: Cortes-M7 erratum 837070 is OK
+ 125:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use PRIMASK for enabling interrupts
+ 126:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSIE   i                \n" // clear PRIMASK
+ 127:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use PRIMASK for enabling interrupts
+ 128:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 129:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      lr               \n"
+ 130:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_int_enable_error:       \n"
+ 131:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_port_module_ \n"
+ 132:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#101          \n"
+ 133:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=Q_onError    \n"
+ 134:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      r2               \n"
+ 135:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 136:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+  82              		.loc 1 136 1 is_stmt 0 view .LVU5
+  83              		.thumb
+  84              		.syntax unified
+  85              		.cfi_endproc
+  86              	.LFE17:
+  88              		.section	.text.QF_crit_entry_,"ax",%progbits
+  89              		.align	1
+  90              		.weak	QF_crit_entry_
+  91              		.syntax unified
+  92              		.code	16
+  93              		.thumb_func
+  95              	QF_crit_entry_:
+  96              	.LFB18:
+ 137:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //............................................................................
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 5
+
+
+ 138:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Enter QF critical section.
+ 139:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: this function must NOT use the stack.
+ 140:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 141:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Description:
+ 142:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // When QF_USE_BASEPRI is defined, critical section uses BASEPRI.
+ 143:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Otherwise, critical section uses the PRIMASK register.
+ 144:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Additionally, the function also asserts that the interrupts are
+ 145:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOT disabled upon the entry to the function, which means that
+ 146:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // this critical section CANNOT nest.
+ 147:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, weak))
+ 148:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QF_crit_entry_(void) {
+  97              		.loc 1 148 27 is_stmt 1 view -0
+  98              		.cfi_startproc
+  99              		@ Naked Function: prologue and epilogue provided by programmer.
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+ 102              		.loc 1 149 1 view .LVU7
+ 103              		.syntax divided
+ 104              	@ 149 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+ 105 0000 EFF31080 		  MRS     r0,PRIMASK       
+ 106 0004 72B6     	  CPSID   i                
+ 107 0006 0028     	  CMP     r0,#0            
+ 108 0008 00D1     	  BNE     QF_crit_entry_error
+ 109 000a 7047     	  BX      lr               
+ 110              	QF_crit_entry_error:       
+ 111 000c 0148     	  LDR     r0,=QF_port_module_ 
+ 112 000e 6E21     	  MOVS    r1,#110          
+ 113 0010 014A     	  LDR     r2,=Q_onError    
+ 114 0012 1047     	  BX      r2               
+ 115              	
+ 116              	@ 0 "" 2
+ 150:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for critical section?
+ 151:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,BASEPRI       \n" // r0 <- previous BASEPRI
+ 152:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#" STRINGIFY(QF_USE_BASEPRI) "\n"
+ 153:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MSR     BASEPRI,r1       \n" // NOTE: Cortes-M7 erratum 837070 is OK
+ 154:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use PRIMASK for critical section
+ 155:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,PRIMASK       \n" // r0 <- previous PRIMASK
+ 156:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSID   i                \n" // set PRIMASK
+ 157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use PRIMASK for critical section
+ 158:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CMP     r0,#0            \n" // assert(PRIMASK/BASEPRI == 0)
+ 159:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BNE     QF_crit_entry_error\n"
+ 160:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      lr               \n"
+ 161:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_crit_entry_error:       \n"
+ 162:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_port_module_ \n"
+ 163:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#110          \n"
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=Q_onError    \n"
+ 165:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      r2               \n"
+ 166:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 117              		.loc 1 167 1 is_stmt 0 view .LVU8
+ 118              		.thumb
+ 119              		.syntax unified
+ 120              		.cfi_endproc
+ 121              	.LFE18:
+ 123              		.section	.text.QF_crit_exit_,"ax",%progbits
+ 124              		.align	1
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 6
+
+
+ 125              		.weak	QF_crit_exit_
+ 126              		.syntax unified
+ 127              		.code	16
+ 128              		.thumb_func
+ 130              	QF_crit_exit_:
+ 131              	.LFB19:
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //............................................................................
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Exit QF critical section.
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: this function must NOT use the stack.
+ 171:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 172:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // description:
+ 173:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // When QF_USE_BASEPRI is defined, critical section uses BASEPRI.
+ 174:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Otherwise, critical section uses the PRIMASK register.
+ 175:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Additionally, the function also asserts that the interrupts ARE
+ 176:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // disabled upon the entry to the function, which means that
+ 177:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // this critical section CANNOT nest.
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, weak))
+ 179:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QF_crit_exit_(void) {
+ 132              		.loc 1 179 26 is_stmt 1 view -0
+ 133              		.cfi_startproc
+ 134              		@ Naked Function: prologue and epilogue provided by programmer.
+ 135              		@ args = 0, pretend = 0, frame = 0
+ 136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+ 137              		.loc 1 180 1 view .LVU10
+ 138              		.syntax divided
+ 139              	@ 180 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+ 140 0000 EFF31080 		  MRS     r0,PRIMASK       
+ 141 0004 0028     	  CMP     r0,#0            
+ 142 0006 01D0     	  BEQ     QF_crit_exit_error
+ 143 0008 62B6     	  CPSIE   i                
+ 144 000a 7047     	  BX      lr               
+ 145              	QF_crit_exit_error:        
+ 146 000c 0148     	  LDR     r0,=QF_port_module_ 
+ 147 000e 6F21     	  MOVS    r1,#111          
+ 148 0010 014A     	  LDR     r2,=Q_onError    
+ 149 0012 1047     	  BX      r2               
+ 150              	
+ 151              	@ 0 "" 2
+ 181:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for critical section?
+ 182:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,BASEPRI       \n" // r0 <- previous BASEPRI
+ 183:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use PRIMASK for critical section
+ 184:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,PRIMASK       \n" // r0 <- previous PRIMASK
+ 185:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use PRIMASK for critical section
+ 186:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CMP     r0,#0            \n" // assert(PRIMASK/BASEPRI != 0)
+ 187:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BEQ     QF_crit_exit_error\n"
+ 188:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for critical section?
+ 189:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#0            \n"
+ 190:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MSR     BASEPRI,r1       \n" // NOTE: Cortes-M7 erratum 837070 is OK
+ 191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use PRIMASK
+ 192:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSIE   i                \n" // clear PRIMASK
+ 193:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use PRIMASK
+ 194:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      lr               \n"
+ 195:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_crit_exit_error:        \n"
+ 196:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_port_module_ \n"
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOVS    r1,#111          \n"
+ 198:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=Q_onError    \n"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 7
+
+
+ 199:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      r2               \n"
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 201:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 152              		.loc 1 201 1 is_stmt 0 view .LVU11
+ 153              		.thumb
+ 154              		.syntax unified
+ 155              		.cfi_endproc
+ 156              	.LFE19:
+ 158              		.section	.text.QK_init,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	QK_init
+ 161              		.syntax unified
+ 162              		.code	16
+ 163              		.thumb_func
+ 165              	QK_init:
+ 166              	.LFB20:
+ 202:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 203:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+ 204:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Initialize the exception priorities and IRQ priorities to safe values.
+ 205:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // description:
+ 207:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // On ARMv7-M or higher, this QF port disables interrupts by means of the
+ 208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // BASEPRI register. However, this method cannot disable interrupt
+ 209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // priority zero, which is the default for all interrupts out of reset.
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The following code changes the SysTick priority and all IRQ priorities
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // to the safe value QF_USE_BASEPRI, which the QF critical section can disable.
+ 212:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // This avoids breaching of the QF critical sections in case the
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // application programmer forgets to explicitly set priorities of all
+ 214:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // "kernel aware" interrupts.
+ 215:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: The IRQ priorities established in QK_init() can be later changed
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // by the application-level code.
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QK_init(void) {
+ 167              		.loc 1 218 20 is_stmt 1 view -0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171              		@ link register save eliminated.
+ 219:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- use BASEPRI for critical section?
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // SCB_SYSPRI[2]:  SysTick
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     SCB_SYSPRI[2] = (SCB_SYSPRI[2] | (QF_USE_BASEPRI << 24U));
+ 224:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // set all 240 possible IRQ priories to QF_USE_BASEPRI...
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     for (uint_fast8_t n = 0U; n < (240U/sizeof(uint32_t)); ++n) {
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****         NVIC_IP[n] = (QF_USE_BASEPRI << 24U) | (QF_USE_BASEPRI << 16U)
+ 228:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****                      | (QF_USE_BASEPRI << 8U) | QF_USE_BASEPRI;
+ 229:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     }
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 231:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use BASEPRI for critical section
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 233:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // SCB_SYSPRI[2]: PendSV set to priority 0xFF (lowest)
+ 234:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     SCB_SYSPRI[2] = (SCB_SYSPRI[2] | (0xFFU << 16U));
+ 172              		.loc 1 234 5 view .LVU13
+ 173              		.loc 1 234 32 is_stmt 0 view .LVU14
+ 174 0000 034A     		ldr	r2, .L6
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 8
+
+
+ 175 0002 1168     		ldr	r1, [r2]
+ 176              		.loc 1 234 36 view .LVU15
+ 177 0004 FF23     		movs	r3, #255
+ 178 0006 1B04     		lsls	r3, r3, #16
+ 179 0008 0B43     		orrs	r3, r1
+ 180              		.loc 1 234 19 view .LVU16
+ 181 000a 1360     		str	r3, [r2]
+ 235:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QK_USE_IRQ_NUM   //--------- QK IRQ specified?
+ 237:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // The QK port is configured to use a given ARM Cortex-M IRQ #
+ 238:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // to return to thread mode (default is to use the NMI exception)
+ 239:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // clear the IRQ priority to 0 (highest)
+ 241:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     NVIC_IP[QK_USE_IRQ_NUM >> 2U] &= ~(0xFFU << (8U*(QK_USE_IRQ_NUM & 3U)));
+ 242:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 243:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // enable the IRQ
+ 244:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     NVIC_EN[QK_USE_IRQ_NUM >> 5U] = (1U << (QK_USE_IRQ_NUM & 0x1FU));
+ 245:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- QK IRQ specified
+ 246:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 247:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef __ARM_FP         //--------- if VFP available...
+ 248:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // make sure that the FPU is enabled by setting CP10 & CP11 Full Access
+ 249:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     SCB_CPACR = (SCB_CPACR | ((3UL << 20U) | (3UL << 22U)));
+ 250:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 251:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // FPU automatic state preservation (ASPEN) lazy stacking (LSPEN)
+ 252:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     FPU_FPCCR = (FPU_FPCCR | (1U << 30U) | (1U << 31U));
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- VFP available
+ 254:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 182              		.loc 1 254 1 view .LVU17
+ 183              		@ sp needed
+ 184 000c 7047     		bx	lr
+ 185              	.L7:
+ 186 000e C046     		.align	2
+ 187              	.L6:
+ 188 0010 20ED00E0 		.word	-536810208
+ 189              		.cfi_endproc
+ 190              	.LFE20:
+ 192              		.section	.text.PendSV_Handler,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	PendSV_Handler
+ 195              		.syntax unified
+ 196              		.code	16
+ 197              		.thumb_func
+ 199              	PendSV_Handler:
+ 200              	.LFB21:
+ 255:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 256:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The PendSV exception is used for handling asynchronous preemption in QK.
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The use of the PendSV exception is the recommended and most efficient
+ 259:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // method for performing context switches in ARM Cortex-M.
+ 260:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 261:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The PendSV exception should have the lowest priority in the whole system
+ 262:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // (0xFF, see QK_init). All other exceptions and interrupts should have higher
+ 263:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // priority.
+ 264:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 265:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Also, *all* "kernel aware" ISRs in the QK application must call the
+ 266:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // QK_ISR_EXIT() macro, which triggers PendSV when it detects a need for
+ 267:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // a context switch or asynchronous preemption.
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 9
+
+
+ 268:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 269:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // Due to tail-chaining and its lowest priority, the PendSV exception will be
+ 270:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // entered immediately after the exit from the *last* nested interrupt (or
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // exception). In QK, this is exactly the time when the QK activator needs to
+ 272:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // handle the asynchronous preemption.
+ 273:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 274:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE:
+ 275:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The inline GNU assembler does not accept mnemonics MOVS, LSRS and ADDS,
+ 276:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // but for ARMv6-M the mnemonics MOV, LSR and ADD always set the condition
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // flags in the PSR.
+ 278:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, optimize("-fno-stack-protector")))
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void PendSV_Handler(void) {
+ 201              		.loc 1 279 27 is_stmt 1 view -0
+ 202              		.cfi_startproc
+ 203              		@ Naked Function: prologue and epilogue provided by programmer.
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 280:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+ 206              		.loc 1 280 1 view .LVU19
+ 207              		.syntax divided
+ 208              	@ 280 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+ 209 0000 01B5     		  PUSH    {r0,lr}          
+ 210 0002 0848     	  LDR     r0,=QF_int_disable_ 
+ 211 0004 8047     	  BLX     r0               
+ 212 0006 084A     	  LDR     r2,=0xE000ED04
+ 213 0008 0121     	  MOV     r1,#1            
+ 214 000a C906     	  LSL     r1,r1,#27        
+ 215 000c 1160     	  STR     r1,[r2]          
+ 216 000e CB08     	  LSR     r3,r1,#3         
+ 217 0010 064A     	  LDR     r2,=QK_activate_ 
+ 218 0012 013A     	  SUB     r2,r2,#1         
+ 219 0014 0649     	  LDR     r1,=QK_thread_ret 
+ 220 0016 88B0     	  SUB     sp,sp,#8*4       
+ 221 0018 05A8     	  ADD     r0,sp,#5*4       
+ 222 001a 0EC0     	  STM     r0!,{r1-r3}      
+ 223 001c 0620     	  MOV     r0,#6            
+ 224 001e C043     	  MVN     r0,r0            
+ 225 0020 0047     	  BX      r0               
+ 226              	
+ 227              	@ 0 "" 2
+ 281:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  PUSH    {r0,lr}          \n" // save stack-aligner + EXC_RETURN
+ 282:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 283:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     //<<<<<<<<<<<<<<<<<<<<<<< CRITICAL SECTION BEGIN <<<<<<<<<<<<<<<<<<<<<<<<
+ 284:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_int_disable_ \n"
+ 285:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // call QF_int_disable_()
+ 286:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 287:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_MEM_ISOLATE
+ 288:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_onMemSys  \n"
+ 289:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // call QF_onMemSys()
+ 290:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif
+ 291:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 292:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // The PendSV exception handler can be preempted by an interrupt,
+ 293:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // which might pend PendSV exception again. The following write to
+ 294:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // ICSR[27] un-pends any such spurious instance of PendSV.
+ 295:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=" STRINGIFY(SCB_ICSR) "\n" // Interrupt Control and State
+ 296:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#1            \n"
+ 297:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSL     r1,r1,#27        \n" // r1 := (1 << 27) (UNPENDSVSET bit)
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 10
+
+
+ 298:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  STR     r1,[r2]          \n" // ICSR[27] := 1 (unpend PendSV)
+ 299:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // The QK activator must be called in a Thread mode, while this code
+ 301:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // executes in the Handler mode of the PendSV exception. The switch
+ 302:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // to the Thread mode is accomplished by returning from PendSV using
+ 303:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // a fabricated exception stack frame, where the return address is
+ 304:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // QK_activate_().
+ 305:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     //
+ 306:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: the QK activator is called with interrupts DISABLED and also
+ 307:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // returns with interrupts DISABLED.
+ 308:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSR     r3,r1,#3         \n" // r3 := (r1 >> 3), set T bit (new xpsr)
+ 309:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=QK_activate_ \n" // address of QK_activate_
+ 310:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  SUB     r2,r2,#1         \n" // align Thumb-address at halfword (new pc)
+ 311:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r1,=QK_thread_ret \n" // return address after the call  (new lr)
+ 312:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  SUB     sp,sp,#8*4       \n" // reserve space for exception stack frame
+ 314:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ADD     r0,sp,#5*4       \n" // r0 := 5 registers below the SP
+ 315:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  STM     r0!,{r1-r3}      \n" // save xpsr,pc,lr
+ 316:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 317:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r0,#6            \n"
+ 318:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MVN     r0,r0            \n" // r0 := ~6 == 0xFFFFFFF9
+ 319:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #if (__ARM_ARCH != 6)   //--------- if ARMv7-M and higher...
+ 320:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  DSB                      \n" // ARM Erratum 838869
+ 321:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- ARMv7-M and higher
+ 322:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      r0               \n" // exception-return to the QK activator
+ 323:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 324:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 228              		.loc 1 324 1 is_stmt 0 view .LVU20
+ 229              		.thumb
+ 230              		.syntax unified
+ 231              		.cfi_endproc
+ 232              	.LFE21:
+ 234 0022 0000     		.section	.text.QK_thread_ret,"ax",%progbits
+ 235              		.align	1
+ 236              		.global	QK_thread_ret
+ 237              		.syntax unified
+ 238              		.code	16
+ 239              		.thumb_func
+ 241              	QK_thread_ret:
+ 242              	.LFB22:
+ 325:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 326:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+ 327:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // QK_thread_ret is a helper function executed when the QXK activator returns.
+ 328:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 329:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // After the QK activator returns, we need to resume the preempted
+ 330:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // thread. However, this must be accomplished by a return-from-exception,
+ 331:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // while we are still in the *thread* context. The switching to the
+ 332:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // exception context is accomplished by triggering the NMI exception or
+ 333:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // the selected IRQ (if macro #QK_USE_IRQ_NUM is defined).
+ 334:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 335:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: QK_thread_ret is entered with interrupts DISABLED.
+ 336:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: any function calls made from this code corrupt lr, but it is
+ 337:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOT used to return from QK_thread_ret(). Instead QK_thread_ret()
+ 338:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // "returns" by entering an exception (either NMI or IRQ).
+ 339:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //
+ 340:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE:
+ 341:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The inline GNU assembler does not accept mnemonics MOVS, LSRS and ADDS,
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 11
+
+
+ 342:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // but for ARMv6-M the mnemonics MOV, LSR and ADD always set the condition
+ 343:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // flags in the PSR.
+ 344:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, used))
+ 345:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QK_thread_ret(void) {
+ 243              		.loc 1 345 26 is_stmt 1 view -0
+ 244              		.cfi_startproc
+ 245              		@ Naked Function: prologue and epilogue provided by programmer.
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     __asm volatile (
+ 248              		.loc 1 346 5 view .LVU22
+ 249              		.syntax divided
+ 250              	@ 346 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+ 251 0000 0448     		  LDR     r0,=0xE000ED04
+ 252 0002 0121     	  MOV     r1,#1            
+ 253 0004 C907     	  LSL     r1,r1,#31        
+ 254 0006 0160     	  STR     r1,[r0]          
+ 255 0008 0348     	  LDR     r0,=QF_int_disable_ 
+ 256 000a 8047     	  BLX     r0               
+ 257 000c 0348     	  LDR     r0,=QF_port_module_ 
+ 258 000e 7921     	  MOV     r1,#121          
+ 259 0010 034A     	  LDR     r2,=Q_onError    
+ 260 0012 1047     	  BX      r2               
+ 261              	
+ 262              	@ 0 "" 2
+ 347:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_MEM_ISOLATE
+ 348:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_onMemApp  \n"
+ 349:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // call QF_onMemApp()
+ 350:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif
+ 351:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 352:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #if (__ARM_ARCH == 6)   //--------- if ARMv6-M...
+ 353:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 354:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QK_USE_IRQ_NUM   //--------- IRQ defined, use the specified IRQ
+ 355:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=" STRINGIFY(NVIC_PEND + ((QK_USE_IRQ_NUM >> 5) << 2)) "\n"
+ 356:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#1            \n"
+ 357:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSL     r1,r1,#" STRINGIFY(QK_USE_IRQ_NUM & 0x1F) "\n" // r1 := IRQ bit
+ 358:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  STR     r1,[r0]          \n" // pend the IRQ
+ 359:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 360:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_int_enable_ \n"
+ 361:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // enable interrupts with PRIMASK
+ 362:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // This code stops here and continues in the IRQ handler
+ 363:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 364:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use the NMI (default)
+ 365:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=" STRINGIFY(SCB_ICSR) "\n" // Interrupt Control and State
+ 366:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#1            \n"
+ 367:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSL     r1,r1,#31        \n" // r1 := (1 << 31) (NMI bit)
+ 368:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  STR     r1,[r0]          \n" // ICSR[31] := 1 (pend NMI)
+ 369:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // This code stops here and continues in the NMI handler
+ 370:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: interrupts remain *disabled*.
+ 371:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 372:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use the NMI
+ 373:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 374:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- ARMv7-M and higher...
+ 375:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 376:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI   //--------- QF_USE_BASEPRI
+ 377:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSID   i                \n" // disable interrupts with PRIMASK
+ 378:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_int_enable_ \n"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 12
+
+
+ 379:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // enable interrupts with BASEPRI
+ 380:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- QF_USE_BASEPRI
+ 381:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: interrupts remain disabled with PRIMASK
+ 382:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 383:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef __ARM_FP         //--------- if VFP available...
+ 384:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // make sure that the following IRQ/NMI will NOT use the VFP stack frame
+ 385:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MRS     r0,CONTROL       \n" // r0 := CONTROL
+ 386:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BIC     r0,r0,#4         \n" // r0 := r0 & ~4 (FPCA bit)
+ 387:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MSR     CONTROL,r0       \n" // CONTROL := r0 (clear CONTROL[2] FPCA bit)
+ 388:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ISB                      \n" // ISB after MSR CONTROL (ARM AN321,Sect.4.16)
+ 389:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- VFP available
+ 390:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 391:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QK_USE_IRQ_NUM   //--------- IRQ defined, use the specified IRQ
+ 392:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=" STRINGIFY(NVIC_PEND + ((QK_USE_IRQ_NUM >> 5) << 2)) "\n"
+ 393:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#1            \n"
+ 394:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSL     r1,r1,#" STRINGIFY(QK_USE_IRQ_NUM & 0x1F) "\n" // r1 := IRQ bit
+ 395:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  STR     r1,[r0]          \n" // pend the IRQ
+ 396:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI  //--------- QF_USE_BASEPRI
+ 397:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSIE   i                \n" // enable interrupts with PRIMASK
+ 398:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                  //--------- interrupt disabling with PRIMASK
+ 399:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_int_enable_ \n"
+ 400:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // enable interrupts with BASEPRI
+ 401:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- interrupt disabling with PRIMASK
+ 402:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // This code stops here and continues in the IRQ handler
+ 403:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 404:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- use the NMI (default)
+ 405:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=" STRINGIFY(SCB_ICSR) "\n" // Interrupt Control and State
+ 406:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#1            \n"
+ 407:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSL     r1,r1,#31        \n" // r1 := (1 << 31) (NMI bit)
+ 408:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  STR     r1,[r0]          \n" // ICSR[31] := 1 (pend NMI)
+ 409:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: this code stops here and continues in the NMI handler
+ 410:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: PRIMASK remains *disabled*.
+ 411:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 412:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use the NMI
+ 413:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 414:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- ARMv7-M and higher
+ 415:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 416:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // execution should *never* reach here, so the following code
+ 417:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // enters the Q_onError() error handler
+ 418:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_int_disable_ \n"
+ 419:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // call QF_int_disable_()
+ 420:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_port_module_ \n"
+ 421:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#121          \n"
+ 422:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=Q_onError    \n"
+ 423:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      r2               \n"
+ 424:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 425:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 263              		.loc 1 425 1 is_stmt 0 view .LVU23
+ 264              		.thumb
+ 265              		.syntax unified
+ 266              		.cfi_endproc
+ 267              	.LFE22:
+ 269              		.section	.text.NMI_Handler,"ax",%progbits
+ 270              		.align	1
+ 271              		.global	NMI_Handler
+ 272              		.syntax unified
+ 273              		.code	16
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 13
+
+
+ 274              		.thumb_func
+ 276              	NMI_Handler:
+ 277              	.LFB23:
+ 426:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 427:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+ 428:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The following exception handlers are used for returning back to the
+ 429:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // preempted *thread* context.
+ 430:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 431:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QK_USE_IRQ_NUM   //--------- IRQ defined, use the specified IRQ
+ 432:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 433:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: The IRQ Handler is entered with interrupts already ENABLED
+ 434:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked))
+ 435:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void QK_USE_IRQ_HANDLER(void) {
+ 436:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+ 437:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ADD     sp,sp,#(8*4)     \n" // remove one 8-register exception frame
+ 438:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  POP     {r0,pc}          \n" // pop stack aligner and EXC_RETURN to pc
+ 439:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: this causes exception-return to the preempted *thread* context
+ 440:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 441:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 442:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 443:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                   //--------- IRQ NOT defined, use the NMI (default)
+ 444:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 445:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE: The NMI_Handler() is entered with interrupts still DISABLED!
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked))
+ 447:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** void NMI_Handler(void) {
+ 278              		.loc 1 447 24 is_stmt 1 view -0
+ 279              		.cfi_startproc
+ 280              		@ Naked Function: prologue and epilogue provided by programmer.
+ 281              		@ args = 0, pretend = 0, frame = 0
+ 282              		@ frame_needed = 0, uses_anonymous_args = 0
+ 448:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+ 283              		.loc 1 448 1 view .LVU25
+ 284              		.syntax divided
+ 285              	@ 448 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+ 286 0000 08B0     		  ADD     sp,sp,#(8*4)     
+ 287 0002 0148     	  LDR     r0,=QF_int_enable_ 
+ 288 0004 8047     	  BLX     r0               
+ 289 0006 01BD     	  POP     {r0,pc}          
+ 290              	
+ 291              	@ 0 "" 2
+ 449:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ADD     sp,sp,#(8*4)     \n" // remove one 8-register exception frame
+ 450:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 451:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #ifdef QF_USE_BASEPRI  //--------- QF_USE_BASEPRI
+ 452:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: QF_int_enable_() already called
+ 453:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  CPSIE   i                \n" // enable interrupts with PRIMASK
+ 454:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #else                  //--------- interrupt disabling with PRIMASK
+ 455:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r0,=QF_int_enable_ \n"
+ 456:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BLX     r0               \n" // enable interrupts with PRIMASK
+ 457:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 458:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: calling QF_int_enable_() corrupted the lr (EXC_RETURN), but
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // it is NOT used to used to return from the exception. (See POP {r0,pc})
+ 460:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- interrupt disabling with PRIMASK
+ 461:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  POP     {r0,pc}          \n" // pop stack aligner and EXC_RETURN to pc
+ 462:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 463:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     // NOTE: this causes exception-return to the preempted *thread* context
+ 464:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 292              		.loc 1 464 1 is_stmt 0 view .LVU26
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 14
+
+
+ 293              		.thumb
+ 294              		.syntax unified
+ 295              		.cfi_endproc
+ 296              	.LFE23:
+ 298              		.section	.text.QF_qlog2,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	QF_qlog2
+ 301              		.syntax unified
+ 302              		.code	16
+ 303              		.thumb_func
+ 305              	QF_qlog2:
+ 306              	.LVL0:
+ 307              	.LFB24:
+ 465:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 466:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif                  //--------- use the NMI
+ 467:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 468:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** //============================================================================
+ 469:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #if (__ARM_ARCH == 6) // if ARMv6-M...
+ 470:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** 
+ 471:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // hand-optimized quick LOG2 in assembly (no CLZ instruction in ARMv6-M)
+ 472:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // NOTE:
+ 473:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // The inline GNU assembler does not accept mnemonics MOVS, LSRS and ADDS,
+ 474:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // but for ARMv6-M the mnemonics MOV, LSR and ADD always set the condition
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** // flags in the PSR.
+ 476:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __attribute__ ((naked, optimize("-fno-stack-protector")))
+ 477:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** uint_fast8_t QF_qlog2(uint32_t x) {
+ 308              		.loc 1 477 35 is_stmt 1 view -0
+ 309              		.cfi_startproc
+ 310              		@ Naked Function: prologue and epilogue provided by programmer.
+ 311              		@ args = 0, pretend = 0, frame = 0
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 478:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     Q_UNUSED_PAR(x);
+ 313              		.loc 1 478 5 view .LVU28
+ 479:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** __asm volatile (
+ 314              		.loc 1 479 1 view .LVU29
+ 315              		.syntax divided
+ 316              	@ 479 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c" 1
+ 317 0000 0021     		  MOV     r1,#0            
+ 318 0002 020C     	  LSR     r2,r0,#16        
+ 319 0004 01D0     	  BEQ     QF_qlog2_1       
+ 320 0006 1021     	  MOV     r1,#16           
+ 321 0008 101C     	  MOV     r0,r2            
+ 322              	QF_qlog2_1:                
+ 323 000a 020A     	  LSR     r2,r0,#8         
+ 324 000c 01D0     	  BEQ     QF_qlog2_2       
+ 325 000e 0831     	  ADD     r1, r1,#8        
+ 326 0010 101C     	  MOV     r0, r2           
+ 327              	QF_qlog2_2:                
+ 328 0012 0209     	  LSR     r2,r0,#4         
+ 329 0014 01D0     	  BEQ     QF_qlog2_3       
+ 330 0016 0431     	  ADD     r1,r1,#4         
+ 331 0018 101C     	  MOV     r0,r2            
+ 332              	QF_qlog2_3:                
+ 333 001a 064A     	  LDR     r2,=QF_qlog2_LUT 
+ 334 001c 105C     	  LDRB    r0,[r2,r0]       
+ 335 001e 0818     	  ADD     r0,r1,r0         
+ 336 0020 7047     	  BX      lr               
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 15
+
+
+ 337 0022 C046     	  .align                   
+ 338              	QF_qlog2_LUT:              
+ 339 0024 00010202 	  .byte 0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4
+ 339      03030303 
+ 339      04040404 
+ 339      04040404 
+ 340              	@ 0 "" 2
+ 341              	.LVL1:
+ 480:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#0            \n"
+ 481:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #if (QF_MAX_ACTIVE > 16U)
+ 482:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSR     r2,r0,#16        \n"
+ 483:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BEQ     QF_qlog2_1       \n"
+ 484:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r1,#16           \n"
+ 485:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r0,r2            \n"
+ 486:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_qlog2_1:                \n"
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif
+ 488:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #if (QF_MAX_ACTIVE > 8U)
+ 489:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSR     r2,r0,#8         \n"
+ 490:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BEQ     QF_qlog2_2       \n"
+ 491:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ADD     r1, r1,#8        \n"
+ 492:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r0, r2           \n"
+ 493:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_qlog2_2:                \n"
+ 494:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** #endif
+ 495:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LSR     r2,r0,#4         \n"
+ 496:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BEQ     QF_qlog2_3       \n"
+ 497:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ADD     r1,r1,#4         \n"
+ 498:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  MOV     r0,r2            \n"
+ 499:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_qlog2_3:                \n"
+ 500:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDR     r2,=QF_qlog2_LUT \n"
+ 501:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  LDRB    r0,[r2,r0]       \n"
+ 502:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  ADD     r0,r1,r0         \n"
+ 503:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  BX      lr               \n"
+ 504:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  .align                   \n"
+ 505:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "QF_qlog2_LUT:              \n"
+ 506:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     "  .byte 0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4"
+ 507:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c ****     );
+ 508:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/ports/arm-cm/qk/gnu/qk_port.c **** }
+ 342              		.loc 1 508 1 is_stmt 0 view .LVU30
+ 343              		.thumb
+ 344              		.syntax unified
+ 345              		.cfi_endproc
+ 346              	.LFE24:
+ 348              		.global	QF_port_module_
+ 349              		.section	.rodata.QF_port_module_,"a"
+ 350              		.align	2
+ 353              	QF_port_module_:
+ 354 0000 716B5F70 		.ascii	"qk_port\000"
+ 354      6F727400 
+ 355              		.text
+ 356              	.Letext0:
+ 357              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 358              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 359              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccP48cS3.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 qk_port.c
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:18     .text.QF_int_disable_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:24     .text.QF_int_disable_:00000000 QF_int_disable_
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:40     .text.QF_int_disable_:0000000c QF_int_disable_error
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:353    .rodata.QF_port_module_:00000000 QF_port_module_
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:54     .text.QF_int_enable_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:60     .text.QF_int_enable_:00000000 QF_int_enable_
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:75     .text.QF_int_enable_:0000000c QF_int_enable_error
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:89     .text.QF_crit_entry_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:95     .text.QF_crit_entry_:00000000 QF_crit_entry_
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:110    .text.QF_crit_entry_:0000000c QF_crit_entry_error
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:124    .text.QF_crit_exit_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:130    .text.QF_crit_exit_:00000000 QF_crit_exit_
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:145    .text.QF_crit_exit_:0000000c QF_crit_exit_error
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:159    .text.QK_init:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:165    .text.QK_init:00000000 QK_init
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:188    .text.QK_init:00000010 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:193    .text.PendSV_Handler:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:199    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:241    .text.QK_thread_ret:00000000 QK_thread_ret
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:235    .text.QK_thread_ret:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:270    .text.NMI_Handler:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:276    .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:299    .text.QF_qlog2:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:305    .text.QF_qlog2:00000000 QF_qlog2
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:322    .text.QF_qlog2:0000000a QF_qlog2_1
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:327    .text.QF_qlog2:00000012 QF_qlog2_2
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:332    .text.QF_qlog2:0000001a QF_qlog2_3
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:338    .text.QF_qlog2:00000024 QF_qlog2_LUT
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:339    .text.QF_qlog2:00000024 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:350    .rodata.QF_port_module_:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.QF_qlog2:00000034 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.NMI_Handler:00000008 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.QK_thread_ret:00000014 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:234    .text.PendSV_Handler:00000022 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.PendSV_Handler:00000024 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.QF_crit_exit_:00000014 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.QF_crit_entry_:00000014 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.QF_int_enable_:00000014 $d
+C:\Users\main\AppData\Local\Temp\ccP48cS3.s:971    .text.QF_int_disable_:00000014 $d
+
+UNDEFINED SYMBOLS
+Q_onError
+QK_activate_
