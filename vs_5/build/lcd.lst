@@ -1,0 +1,513 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"lcd.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.lcd_print_cmd,"ax",%progbits
+  18              		.align	1
+  19              		.global	lcd_print_cmd
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	lcd_print_cmd:
+  25              	.LVL0:
+  26              	.LFB345:
+  27              		.file 1 "Core/Src/lcd.c"
+   1:Core/Src/lcd.c **** #include "lcd.h"
+   2:Core/Src/lcd.c **** #include "i2c.h"
+   3:Core/Src/lcd.c **** 
+   4:Core/Src/lcd.c **** static I2C_HandleTypeDef *lcd;
+   5:Core/Src/lcd.c **** static uint8_t lcd_addr;
+   6:Core/Src/lcd.c **** 
+   7:Core/Src/lcd.c **** void lcd_print_cmd(char cmd) {
+  28              		.loc 1 7 30 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 7 30 is_stmt 0 view .LVU1
+  33 0000 10B5     		push	{r4, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 14, -4
+  38 0002 84B0     		sub	sp, sp, #16
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 24
+   8:Core/Src/lcd.c ****   uint8_t data_u = (cmd & 0xF0);
+  41              		.loc 1 8 3 is_stmt 1 view .LVU2
+  42              		.loc 1 8 11 is_stmt 0 view .LVU3
+  43 0004 0F23     		movs	r3, #15
+  44 0006 0100     		movs	r1, r0
+  45 0008 9943     		bics	r1, r3
+  46              	.LVL1:
+   9:Core/Src/lcd.c ****   uint8_t data_l = ((cmd << 4) & 0xF0);
+  47              		.loc 1 9 3 is_stmt 1 view .LVU4
+  48              		.loc 1 9 26 is_stmt 0 view .LVU5
+  49 000a 0001     		lsls	r0, r0, #4
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 2
+
+
+  50              	.LVL2:
+  51              		.loc 1 9 11 view .LVU6
+  52 000c C0B2     		uxtb	r0, r0
+  53              	.LVL3:
+  10:Core/Src/lcd.c ****   uint8_t data[4] = {data_u | 0x0C, data_u | 0x08, data_l | 0x0C, data_l | 0x08};
+  54              		.loc 1 10 3 is_stmt 1 view .LVU7
+  55              		.loc 1 10 11 is_stmt 0 view .LVU8
+  56 000e 03AA     		add	r2, sp, #12
+  57 0010 0C23     		movs	r3, #12
+  58 0012 0C00     		movs	r4, r1
+  59 0014 1C43     		orrs	r4, r3
+  60 0016 1470     		strb	r4, [r2]
+  61 0018 0824     		movs	r4, #8
+  62 001a 2143     		orrs	r1, r4
+  63              	.LVL4:
+  64              		.loc 1 10 11 view .LVU9
+  65 001c 5170     		strb	r1, [r2, #1]
+  66 001e 0343     		orrs	r3, r0
+  67 0020 9370     		strb	r3, [r2, #2]
+  68 0022 2043     		orrs	r0, r4
+  69              	.LVL5:
+  70              		.loc 1 10 11 view .LVU10
+  71 0024 D070     		strb	r0, [r2, #3]
+  11:Core/Src/lcd.c ****   HAL_I2C_Master_Transmit(lcd, lcd_addr, data, 4, 10);
+  72              		.loc 1 11 3 is_stmt 1 view .LVU11
+  73 0026 054B     		ldr	r3, .L2
+  74 0028 1978     		ldrb	r1, [r3]
+  75 002a 054B     		ldr	r3, .L2+4
+  76 002c 1868     		ldr	r0, [r3]
+  77 002e 0A23     		movs	r3, #10
+  78 0030 0093     		str	r3, [sp]
+  79 0032 063B     		subs	r3, r3, #6
+  80 0034 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+  81              	.LVL6:
+  12:Core/Src/lcd.c **** }
+  82              		.loc 1 12 1 is_stmt 0 view .LVU12
+  83 0038 04B0     		add	sp, sp, #16
+  84              		@ sp needed
+  85 003a 10BD     		pop	{r4, pc}
+  86              	.L3:
+  87              		.align	2
+  88              	.L2:
+  89 003c 00000000 		.word	.LANCHOR0
+  90 0040 00000000 		.word	.LANCHOR1
+  91              		.cfi_endproc
+  92              	.LFE345:
+  94              		.section	.text.lcd_print_data,"ax",%progbits
+  95              		.align	1
+  96              		.global	lcd_print_data
+  97              		.syntax unified
+  98              		.code	16
+  99              		.thumb_func
+ 101              	lcd_print_data:
+ 102              	.LVL7:
+ 103              	.LFB346:
+  13:Core/Src/lcd.c **** 
+  14:Core/Src/lcd.c **** void lcd_print_data(char data) {
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 3
+
+
+ 104              		.loc 1 14 32 is_stmt 1 view -0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 8
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108              		.loc 1 14 32 is_stmt 0 view .LVU14
+ 109 0000 10B5     		push	{r4, lr}
+ 110              	.LCFI2:
+ 111              		.cfi_def_cfa_offset 8
+ 112              		.cfi_offset 4, -8
+ 113              		.cfi_offset 14, -4
+ 114 0002 84B0     		sub	sp, sp, #16
+ 115              	.LCFI3:
+ 116              		.cfi_def_cfa_offset 24
+  15:Core/Src/lcd.c ****   uint8_t data_u = (data & 0xF0);
+ 117              		.loc 1 15 3 is_stmt 1 view .LVU15
+ 118              		.loc 1 15 11 is_stmt 0 view .LVU16
+ 119 0004 0F23     		movs	r3, #15
+ 120 0006 0100     		movs	r1, r0
+ 121 0008 9943     		bics	r1, r3
+ 122              	.LVL8:
+  16:Core/Src/lcd.c ****   uint8_t data_l = ((data << 4) & 0xF0);
+ 123              		.loc 1 16 3 is_stmt 1 view .LVU17
+ 124              		.loc 1 16 27 is_stmt 0 view .LVU18
+ 125 000a 0001     		lsls	r0, r0, #4
+ 126              	.LVL9:
+ 127              		.loc 1 16 11 view .LVU19
+ 128 000c C0B2     		uxtb	r0, r0
+ 129              	.LVL10:
+  17:Core/Src/lcd.c ****   uint8_t data_arr[4] = {data_u | 0x0D, data_u | 0x09, data_l | 0x0D, data_l | 0x09};
+ 130              		.loc 1 17 3 is_stmt 1 view .LVU20
+ 131              		.loc 1 17 11 is_stmt 0 view .LVU21
+ 132 000e 03AA     		add	r2, sp, #12
+ 133 0010 0D23     		movs	r3, #13
+ 134 0012 0C00     		movs	r4, r1
+ 135 0014 1C43     		orrs	r4, r3
+ 136 0016 1470     		strb	r4, [r2]
+ 137 0018 0924     		movs	r4, #9
+ 138 001a 2143     		orrs	r1, r4
+ 139              	.LVL11:
+ 140              		.loc 1 17 11 view .LVU22
+ 141 001c 5170     		strb	r1, [r2, #1]
+ 142 001e 0343     		orrs	r3, r0
+ 143 0020 9370     		strb	r3, [r2, #2]
+ 144 0022 2043     		orrs	r0, r4
+ 145              	.LVL12:
+ 146              		.loc 1 17 11 view .LVU23
+ 147 0024 D070     		strb	r0, [r2, #3]
+  18:Core/Src/lcd.c ****   HAL_I2C_Master_Transmit(lcd, lcd_addr, data_arr, 4, 10);
+ 148              		.loc 1 18 3 is_stmt 1 view .LVU24
+ 149 0026 054B     		ldr	r3, .L5
+ 150 0028 1978     		ldrb	r1, [r3]
+ 151 002a 054B     		ldr	r3, .L5+4
+ 152 002c 1868     		ldr	r0, [r3]
+ 153 002e 0A23     		movs	r3, #10
+ 154 0030 0093     		str	r3, [sp]
+ 155 0032 063B     		subs	r3, r3, #6
+ 156 0034 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 4
+
+
+ 157              	.LVL13:
+  19:Core/Src/lcd.c **** }
+ 158              		.loc 1 19 1 is_stmt 0 view .LVU25
+ 159 0038 04B0     		add	sp, sp, #16
+ 160              		@ sp needed
+ 161 003a 10BD     		pop	{r4, pc}
+ 162              	.L6:
+ 163              		.align	2
+ 164              	.L5:
+ 165 003c 00000000 		.word	.LANCHOR0
+ 166 0040 00000000 		.word	.LANCHOR1
+ 167              		.cfi_endproc
+ 168              	.LFE346:
+ 170              		.section	.text.lcd_init,"ax",%progbits
+ 171              		.align	1
+ 172              		.global	lcd_init
+ 173              		.syntax unified
+ 174              		.code	16
+ 175              		.thumb_func
+ 177              	lcd_init:
+ 178              	.LVL14:
+ 179              	.LFB347:
+  20:Core/Src/lcd.c **** 
+  21:Core/Src/lcd.c **** void lcd_init(I2C_HandleTypeDef *hi2c, uint8_t addr) {
+ 180              		.loc 1 21 54 is_stmt 1 view -0
+ 181              		.cfi_startproc
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184              		.loc 1 21 54 is_stmt 0 view .LVU27
+ 185 0000 10B5     		push	{r4, lr}
+ 186              	.LCFI4:
+ 187              		.cfi_def_cfa_offset 8
+ 188              		.cfi_offset 4, -8
+ 189              		.cfi_offset 14, -4
+  22:Core/Src/lcd.c ****   lcd = hi2c;
+ 190              		.loc 1 22 3 is_stmt 1 view .LVU28
+ 191              		.loc 1 22 7 is_stmt 0 view .LVU29
+ 192 0002 224B     		ldr	r3, .L10
+ 193 0004 1860     		str	r0, [r3]
+  23:Core/Src/lcd.c ****   lcd_addr = addr << 1;  // Зміщення адреси для HAL
+ 194              		.loc 1 23 3 is_stmt 1 view .LVU30
+ 195              		.loc 1 23 19 is_stmt 0 view .LVU31
+ 196 0006 4900     		lsls	r1, r1, #1
+ 197              	.LVL15:
+ 198              		.loc 1 23 19 view .LVU32
+ 199 0008 C9B2     		uxtb	r1, r1
+ 200              		.loc 1 23 12 view .LVU33
+ 201 000a 214B     		ldr	r3, .L10+4
+ 202 000c 1970     		strb	r1, [r3]
+  24:Core/Src/lcd.c **** 
+  25:Core/Src/lcd.c ****   if (HAL_I2C_IsDeviceReady(lcd, lcd_addr << 1, 3, 100) != HAL_OK) {
+ 203              		.loc 1 25 3 is_stmt 1 view .LVU34
+ 204              		.loc 1 25 7 is_stmt 0 view .LVU35
+ 205 000e 4900     		lsls	r1, r1, #1
+ 206 0010 6423     		movs	r3, #100
+ 207 0012 0322     		movs	r2, #3
+ 208 0014 FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 5
+
+
+ 209              	.LVL16:
+ 210              		.loc 1 25 6 view .LVU36
+ 211 0018 0028     		cmp	r0, #0
+ 212 001a 2ED0     		beq	.L8
+  26:Core/Src/lcd.c ****     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+ 213              		.loc 1 26 5 is_stmt 1 view .LVU37
+ 214 001c 8021     		movs	r1, #128
+ 215 001e A020     		movs	r0, #160
+ 216 0020 0122     		movs	r2, #1
+ 217 0022 4901     		lsls	r1, r1, #5
+ 218 0024 C005     		lsls	r0, r0, #23
+ 219 0026 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 220              	.LVL17:
+ 221              	.L9:
+  27:Core/Src/lcd.c ****   } else {
+  28:Core/Src/lcd.c ****     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+  29:Core/Src/lcd.c ****   }
+  30:Core/Src/lcd.c **** 
+  31:Core/Src/lcd.c ****   HAL_Delay(50);
+ 222              		.loc 1 31 3 view .LVU38
+ 223 002a 3220     		movs	r0, #50
+ 224 002c FFF7FEFF 		bl	HAL_Delay
+ 225              	.LVL18:
+  32:Core/Src/lcd.c ****   lcd_print_cmd(0x03);
+ 226              		.loc 1 32 3 view .LVU39
+ 227 0030 0320     		movs	r0, #3
+ 228 0032 FFF7FEFF 		bl	lcd_print_cmd
+ 229              	.LVL19:
+  33:Core/Src/lcd.c ****   HAL_Delay(5);
+ 230              		.loc 1 33 3 view .LVU40
+ 231 0036 0520     		movs	r0, #5
+ 232 0038 FFF7FEFF 		bl	HAL_Delay
+ 233              	.LVL20:
+  34:Core/Src/lcd.c ****   lcd_print_cmd(0x03);
+ 234              		.loc 1 34 3 view .LVU41
+ 235 003c 0320     		movs	r0, #3
+ 236 003e FFF7FEFF 		bl	lcd_print_cmd
+ 237              	.LVL21:
+  35:Core/Src/lcd.c ****   HAL_Delay(1);
+ 238              		.loc 1 35 3 view .LVU42
+ 239 0042 0120     		movs	r0, #1
+ 240 0044 FFF7FEFF 		bl	HAL_Delay
+ 241              	.LVL22:
+  36:Core/Src/lcd.c ****   lcd_print_cmd(0x03);
+ 242              		.loc 1 36 3 view .LVU43
+ 243 0048 0320     		movs	r0, #3
+ 244 004a FFF7FEFF 		bl	lcd_print_cmd
+ 245              	.LVL23:
+  37:Core/Src/lcd.c ****   HAL_Delay(10);
+ 246              		.loc 1 37 3 view .LVU44
+ 247 004e 0A20     		movs	r0, #10
+ 248 0050 FFF7FEFF 		bl	HAL_Delay
+ 249              	.LVL24:
+  38:Core/Src/lcd.c ****   lcd_print_cmd(0x02);  // 4-бітний режим
+ 250              		.loc 1 38 3 view .LVU45
+ 251 0054 0220     		movs	r0, #2
+ 252 0056 FFF7FEFF 		bl	lcd_print_cmd
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 6
+
+
+ 253              	.LVL25:
+  39:Core/Src/lcd.c **** 
+  40:Core/Src/lcd.c ****   lcd_print_cmd(0x28);  // 2 рядки, 5x8 розмір символу
+ 254              		.loc 1 40 3 view .LVU46
+ 255 005a 2820     		movs	r0, #40
+ 256 005c FFF7FEFF 		bl	lcd_print_cmd
+ 257              	.LVL26:
+  41:Core/Src/lcd.c ****   lcd_print_cmd(0x0C);  // Увімкнути дисплей, вимкнути курсор
+ 258              		.loc 1 41 3 view .LVU47
+ 259 0060 0C20     		movs	r0, #12
+ 260 0062 FFF7FEFF 		bl	lcd_print_cmd
+ 261              	.LVL27:
+  42:Core/Src/lcd.c ****   lcd_print_cmd(0x06);  // Інкремент адреси, без зсуву дисплея
+ 262              		.loc 1 42 3 view .LVU48
+ 263 0066 0620     		movs	r0, #6
+ 264 0068 FFF7FEFF 		bl	lcd_print_cmd
+ 265              	.LVL28:
+  43:Core/Src/lcd.c ****   lcd_print_cmd(0x01);  // Очистити дисплей
+ 266              		.loc 1 43 3 view .LVU49
+ 267 006c 0120     		movs	r0, #1
+ 268 006e FFF7FEFF 		bl	lcd_print_cmd
+ 269              	.LVL29:
+  44:Core/Src/lcd.c ****   HAL_Delay(2);
+ 270              		.loc 1 44 3 view .LVU50
+ 271 0072 0220     		movs	r0, #2
+ 272 0074 FFF7FEFF 		bl	HAL_Delay
+ 273              	.LVL30:
+  45:Core/Src/lcd.c **** }
+ 274              		.loc 1 45 1 is_stmt 0 view .LVU51
+ 275              		@ sp needed
+ 276 0078 10BD     		pop	{r4, pc}
+ 277              	.L8:
+  28:Core/Src/lcd.c ****   }
+ 278              		.loc 1 28 5 is_stmt 1 view .LVU52
+ 279 007a 8021     		movs	r1, #128
+ 280 007c A020     		movs	r0, #160
+ 281 007e 0022     		movs	r2, #0
+ 282 0080 4901     		lsls	r1, r1, #5
+ 283 0082 C005     		lsls	r0, r0, #23
+ 284 0084 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 285              	.LVL31:
+ 286 0088 CFE7     		b	.L9
+ 287              	.L11:
+ 288 008a C046     		.align	2
+ 289              	.L10:
+ 290 008c 00000000 		.word	.LANCHOR1
+ 291 0090 00000000 		.word	.LANCHOR0
+ 292              		.cfi_endproc
+ 293              	.LFE347:
+ 295              		.section	.text.lcd_print_string,"ax",%progbits
+ 296              		.align	1
+ 297              		.global	lcd_print_string
+ 298              		.syntax unified
+ 299              		.code	16
+ 300              		.thumb_func
+ 302              	lcd_print_string:
+ 303              	.LVL32:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 7
+
+
+ 304              	.LFB348:
+  46:Core/Src/lcd.c **** 
+  47:Core/Src/lcd.c **** void lcd_print_string(char *str) {
+ 305              		.loc 1 47 34 view -0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309              		.loc 1 47 34 is_stmt 0 view .LVU54
+ 310 0000 10B5     		push	{r4, lr}
+ 311              	.LCFI5:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 315 0002 0400     		movs	r4, r0
+  48:Core/Src/lcd.c ****   while (*str) {
+ 316              		.loc 1 48 3 is_stmt 1 view .LVU55
+ 317              		.loc 1 48 9 is_stmt 0 view .LVU56
+ 318 0004 02E0     		b	.L13
+ 319              	.LVL33:
+ 320              	.L14:
+  49:Core/Src/lcd.c ****     lcd_print_data(*str++);
+ 321              		.loc 1 49 5 is_stmt 1 view .LVU57
+ 322              		.loc 1 49 24 is_stmt 0 view .LVU58
+ 323 0006 0134     		adds	r4, r4, #1
+ 324              	.LVL34:
+ 325              		.loc 1 49 5 view .LVU59
+ 326 0008 FFF7FEFF 		bl	lcd_print_data
+ 327              	.LVL35:
+ 328              	.L13:
+  48:Core/Src/lcd.c ****   while (*str) {
+ 329              		.loc 1 48 9 is_stmt 1 view .LVU60
+  48:Core/Src/lcd.c ****   while (*str) {
+ 330              		.loc 1 48 10 is_stmt 0 view .LVU61
+ 331 000c 2078     		ldrb	r0, [r4]
+  48:Core/Src/lcd.c ****   while (*str) {
+ 332              		.loc 1 48 9 view .LVU62
+ 333 000e 0028     		cmp	r0, #0
+ 334 0010 F9D1     		bne	.L14
+  50:Core/Src/lcd.c ****   }
+  51:Core/Src/lcd.c **** }
+ 335              		.loc 1 51 1 view .LVU63
+ 336              		@ sp needed
+ 337              	.LVL36:
+ 338              		.loc 1 51 1 view .LVU64
+ 339 0012 10BD     		pop	{r4, pc}
+ 340              		.cfi_endproc
+ 341              	.LFE348:
+ 343              		.section	.text.lcd_print,"ax",%progbits
+ 344              		.align	1
+ 345              		.global	lcd_print
+ 346              		.syntax unified
+ 347              		.code	16
+ 348              		.thumb_func
+ 350              	lcd_print:
+ 351              	.LVL37:
+ 352              	.LFB349:
+  52:Core/Src/lcd.c **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 8
+
+
+  53:Core/Src/lcd.c **** void lcd_print(char *str) {
+ 353              		.loc 1 53 27 is_stmt 1 view -0
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 0
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357              		.loc 1 53 27 is_stmt 0 view .LVU66
+ 358 0000 10B5     		push	{r4, lr}
+ 359              	.LCFI6:
+ 360              		.cfi_def_cfa_offset 8
+ 361              		.cfi_offset 4, -8
+ 362              		.cfi_offset 14, -4
+ 363 0002 0400     		movs	r4, r0
+  54:Core/Src/lcd.c ****   lcd_init(&hi2c1, 0x27);  // 0x27 - стандартна адреса LCD через I2C
+ 364              		.loc 1 54 3 is_stmt 1 view .LVU67
+ 365 0004 2721     		movs	r1, #39
+ 366 0006 0348     		ldr	r0, .L16
+ 367              	.LVL38:
+ 368              		.loc 1 54 3 is_stmt 0 view .LVU68
+ 369 0008 FFF7FEFF 		bl	lcd_init
+ 370              	.LVL39:
+  55:Core/Src/lcd.c ****   lcd_print_string(str);  // Вивід тексту на дисплей
+ 371              		.loc 1 55 3 is_stmt 1 view .LVU69
+ 372 000c 2000     		movs	r0, r4
+ 373 000e FFF7FEFF 		bl	lcd_print_string
+ 374              	.LVL40:
+  56:Core/Src/lcd.c **** }...
+ 375              		.loc 1 56 1 is_stmt 0 view .LVU70
+ 376              		@ sp needed
+ 377              	.LVL41:
+ 378              		.loc 1 56 1 view .LVU71
+ 379 0012 10BD     		pop	{r4, pc}
+ 380              	.L17:
+ 381              		.align	2
+ 382              	.L16:
+ 383 0014 00000000 		.word	hi2c1
+ 384              		.cfi_endproc
+ 385              	.LFE349:
+ 387              		.section	.bss.lcd,"aw",%nobits
+ 388              		.align	2
+ 389              		.set	.LANCHOR1,. + 0
+ 392              	lcd:
+ 393 0000 00000000 		.space	4
+ 394              		.section	.bss.lcd_addr,"aw",%nobits
+ 395              		.set	.LANCHOR0,. + 0
+ 398              	lcd_addr:
+ 399 0000 00       		.space	1
+ 400              		.text
+ 401              	.Letext0:
+ 402              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 403              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 404              		.file 4 "Drivers/CMSIS/Device/ST/STM32C0xx/Include/stm32c031xx.h"
+ 405              		.file 5 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_def.h"
+ 406              		.file 6 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_gpio.h"
+ 407              		.file 7 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_dma.h"
+ 408              		.file 8 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_i2c.h"
+ 409              		.file 9 "Core/Inc/i2c.h"
+ 410              		.file 10 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal.h"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 9
+
+
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccmDnnk2.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lcd.c
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:18     .text.lcd_print_cmd:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:24     .text.lcd_print_cmd:00000000 lcd_print_cmd
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:89     .text.lcd_print_cmd:0000003c $d
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:95     .text.lcd_print_data:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:101    .text.lcd_print_data:00000000 lcd_print_data
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:165    .text.lcd_print_data:0000003c $d
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:171    .text.lcd_init:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:177    .text.lcd_init:00000000 lcd_init
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:290    .text.lcd_init:0000008c $d
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:296    .text.lcd_print_string:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:302    .text.lcd_print_string:00000000 lcd_print_string
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:344    .text.lcd_print:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:350    .text.lcd_print:00000000 lcd_print
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:383    .text.lcd_print:00000014 $d
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:388    .bss.lcd:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:392    .bss.lcd:00000000 lcd
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:398    .bss.lcd_addr:00000000 lcd_addr
+C:\Users\main\AppData\Local\Temp\ccmDnnk2.s:399    .bss.lcd_addr:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_IsDeviceReady
+HAL_GPIO_WritePin
+HAL_Delay
+hi2c1
