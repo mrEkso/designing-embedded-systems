@@ -1,0 +1,1735 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"qf_ps.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.QActive_psInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	QActive_psInit
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	QActive_psInit:
+  25              	.LVL0:
+  26              	.LFB18:
+  27              		.file 1 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #define QP_IMPL           // this is QP implementation
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #include "qp_port.h"      // QP port
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 2
+
+
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #include "qp_pkg.h"       // QP package-scope interface
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #include "qsafe.h"        // QP Functional Safety (FuSa) Subsystem
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #ifdef Q_SPY              // QS software tracing enabled?
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     #include "qs_port.h"  // QS port
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     #include "qs_pkg.h"   // QS facilities for pre-defined trace records
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #else
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     #include "qs_dummy.h" // disable the QS software tracing
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #endif // Q_SPY
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** Q_DEFINE_THIS_MODULE("qf_ps")
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** QSubscrList * QActive_subscrList_;
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** enum_t QActive_maxPubSignal_;
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //............................................................................
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //! @static @public @memberof QActive
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** void QActive_psInit(
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QSubscrList * const subscrSto,
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     enum_t const maxSignal)
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** {
+  28              		.loc 1 51 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 51 1 is_stmt 0 view .LVU1
+  33 0000 10B5     		push	{r4, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 14, -4
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QActive_subscrList_   = subscrSto;
+  38              		.loc 1 52 5 is_stmt 1 view .LVU2
+  39              		.loc 1 52 27 is_stmt 0 view .LVU3
+  40 0002 074B     		ldr	r3, .L4
+  41 0004 1860     		str	r0, [r3]
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QActive_maxPubSignal_ = maxSignal;
+  42              		.loc 1 53 5 is_stmt 1 view .LVU4
+  43              		.loc 1 53 27 is_stmt 0 view .LVU5
+  44 0006 074B     		ldr	r3, .L4+4
+  45 0008 1960     		str	r1, [r3]
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // initialize the subscriber list
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     for (enum_t sig = 0; sig < maxSignal; ++sig) {
+  46              		.loc 1 56 5 is_stmt 1 view .LVU6
+  47              	.LBB27:
+  48              		.loc 1 56 10 view .LVU7
+  49              	.LVL1:
+  50              		.loc 1 56 17 is_stmt 0 view .LVU8
+  51 000a 0023     		movs	r3, #0
+  52              		.loc 1 56 5 view .LVU9
+  53 000c 04E0     		b	.L2
+  54              	.LVL2:
+  55              	.L3:
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QPSet_setEmpty(&subscrSto[sig].set);
+  56              		.loc 1 57 9 is_stmt 1 discriminator 3 view .LVU10
+  57              		.loc 1 57 34 is_stmt 0 discriminator 3 view .LVU11
+  58 000e 9A00     		lsls	r2, r3, #2
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 3
+
+
+  59 0010 8218     		adds	r2, r0, r2
+  60              	.LVL3:
+  61              	.LBB28:
+  62              	.LBI28:
+  63              		.file 2 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QP_H_
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QP_H_
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QP_VERSION_STR "8.0.2"
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QP_VERSION     802U
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // <VER>=802 <DATE>=250120
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QP_RELEASE     0x6AEAB45DU
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // default configuration settings
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @cond INTERNAL
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef Q_SIGNAL_SIZE
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_SIGNAL_SIZE 2U
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QF_MAX_ACTIVE
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QF_MAX_ACTIVE 32U
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE > 64U)
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #error QF_MAX_ACTIVE exceeds the maximum of 64U;
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 4
+
+
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QF_MAX_TICK_RATE
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QF_MAX_TICK_RATE 1U
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_TICK_RATE > 15U)
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #error QF_MAX_TICK_RATE exceeds the maximum of 15U;
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QF_MAX_EPOOL
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QF_MAX_EPOOL 3U
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_EPOOL > 15U)
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #error QF_MAX_EPOOL exceeds the maximum of 15U;
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  71:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QF_TIMEEVT_CTR_SIZE
+  72:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QF_TIMEEVT_CTR_SIZE 4U
+  73:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  74:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  75:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_TIMEEVT_CTR_SIZE > 4U)
+  76:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #error QF_TIMEEVT_CTR_SIZE defined incorrectly, expected 1U, 2U, or 4U;
+  77:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  78:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  79:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QF_EVENT_SIZ_SIZE
+  80:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QF_EVENT_SIZ_SIZE 2U
+  81:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  82:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  83:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_EVENT_SIZ_SIZE > 4U)
+  84:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #error QF_EVENT_SIZ_SIZE defined incorrectly, expected 1U, 2U, or 4U;
+  85:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+  86:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  87:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @endcond
+  88:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  89:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+  90:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // global types/utilities
+  91:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  92:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef int    int_t;
+  93:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef int    enum_t;
+  94:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef float  float32_t;
+  95:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef double float64_t;
+  96:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+  97:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_UNUSED_PAR(par_)  ((void)(par_))
+  98:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_DIM(array_)       (sizeof(array_) / sizeof((array_)[0U]))
+  99:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_UINT2PTR_CAST(type_, uint_) ((type_ *)(uint_))
+ 100:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 101:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 102:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** extern char const QP_versionStr[24];
+ 103:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 104:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // QSignal type
+ 105:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (Q_SIGNAL_SIZE == 1U)
+ 106:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint8_t QSignal;
+ 107:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #elif (Q_SIGNAL_SIZE == 2U)
+ 108:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint16_t QSignal;
+ 109:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #elif (Q_SIGNAL_SIZE == 4U)
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 5
+
+
+ 110:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint32_t QSignal;
+ 111:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 112:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 113:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 114:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @class QEvt
+ 115:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct QEvt {
+ 116:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QSignal sig;              //!< @public @memberof QEvt
+ 117:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint8_t poolNum_;         //!< @private @memberof QEvt
+ 118:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint8_t volatile refCtr_; //!< @private @memberof QEvt
+ 119:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QEvt;
+ 120:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 121:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QEVT_INITIALIZER(sig_) { (QSignal)(sig_), 0x00U, 0xE0U }
+ 122:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QEvt
+ 123:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline void QEvt_ctor(QEvt * const me,
+ 124:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     enum_t const sig)
+ 125:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** {
+ 126:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->sig      = (QSignal)sig;
+ 127:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->poolNum_ = 0x00U;
+ 128:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->refCtr_  = 0xE0U;
+ 129:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 130:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 131:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QEvt
+ 132:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline QEvt * QEvt_init(QEvt * const me,
+ 133:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint8_t const dummy)
+ 134:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** {
+ 135:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     Q_UNUSED_PAR(dummy);
+ 136:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return me;
+ 137:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 138:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 139:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef QEvt const * QEvtPtr;
+ 140:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 141:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QEVT_DYNAMIC           ((uint8_t)0)
+ 142:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_EVT_CAST(class_)     ((class_ const *)(e))
+ 143:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 144:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 145:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // QEP (hierarchical event processor) types
+ 146:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 147:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef uint_fast8_t QState;
+ 148:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef QState (*QStateHandler)(void * const me, QEvt const * const e);
+ 149:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef QState (*QActionHandler)(void * const me);
+ 150:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 151:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** struct QXThread; // forward declarsation
+ 152:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef void (* QXThreadHandler )(struct QXThread * const me);
+ 153:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 154:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct QMState {
+ 155:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     struct QMState const *superstate; //!< @private @memberof QMState
+ 156:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler const stateHandler; //!< @private @memberof QMState
+ 157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QActionHandler const entryAction; //!< @private @memberof QMState
+ 158:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QActionHandler const exitAction;  //!< @private @memberof QMState
+ 159:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QActionHandler const initAction;  //!< @private @memberof QMState
+ 160:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QMState;
+ 161:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 162:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct QMTranActTable {
+ 163:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QMState const *target;        //!< @private @memberof QMTranActTable
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QActionHandler const act[1];  //!< @private @memberof QMTranActTable
+ 165:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QMTranActTable;
+ 166:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 6
+
+
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** union QAsmAttr {
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler   fun;          //!< @private @memberof QAsmAttr
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QActionHandler  act;          //!< @private @memberof QAsmAttr
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QXThreadHandler thr;          //!< @private @memberof QAsmAttr
+ 171:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QMTranActTable  const *tatbl; //!< @private @memberof QAsmAttr
+ 172:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     struct QMState  const *obj;   //!< @private @memberof QAsmAttr
+ 173:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** };
+ 174:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 175:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_STATE_CAST(handler_) ((QStateHandler)(handler_))
+ 176:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_ACTION_CAST(action_) ((QActionHandler)(action_))
+ 177:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_ACTION_NULL          ((QActionHandler)0)
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 179:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 180:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @class QAsm
+ 181:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct {
+ 182:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     struct QAsmVtable const * vptr; //!< @protected @memberof QAsm
+ 183:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     union QAsmAttr state;           //!< @protected @memberof QAsm
+ 184:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     union QAsmAttr temp;            //!< @protected @memberof QAsm
+ 185:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QAsm;
+ 186:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 187:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // All possible values returned from state/action handlers
+ 188:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // NOTE: The ordering is important for algorithmic correctness.
+ 189:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_SUPER     ((QState)0U)
+ 190:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_UNHANDLED ((QState)1U)
+ 191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 192:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // handled and do not need to "bubble up"
+ 193:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_HANDLED   ((QState)2U)
+ 194:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_IGNORED   ((QState)3U)
+ 195:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 196:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // entry/exit
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_ENTRY     ((QState)4U)
+ 198:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_EXIT      ((QState)5U)
+ 199:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // no side effects
+ 201:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_NULL      ((QState)6U)
+ 202:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 203:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // transitions need to execute transition-action table in ::QMsm
+ 204:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_TRAN      ((QState)7U)
+ 205:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_TRAN_INIT ((QState)8U)
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 207:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // transitions that additionally clobber me->state
+ 208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_RET_TRAN_HIST ((QState)9U)
+ 209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // Reserved signals by the QP-framework.
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_EMPTY_SIG     ((QSignal)0U)
+ 212:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_ENTRY_SIG     ((QSignal)1U)
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_EXIT_SIG      ((QSignal)2U)
+ 214:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_INIT_SIG      ((QSignal)3U)
+ 215:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_USER_SIG      ((enum_t)4)
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @protected @memberof QAsm
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline void QAsm_ctor(QAsm * const me) {
+ 219:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->vptr      = (struct QAsmVtable *)0;
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->state.fun = (QStateHandler)0;
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->temp.fun  = (QStateHandler)0;
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 7
+
+
+ 224:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** struct QAsmVtable {
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     void (*init)(QAsm * const me, void const * const e,
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****                  uint_fast8_t const qsId);
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     void (*dispatch)(QAsm * const me, QEvt const * const e,
+ 228:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****                      uint_fast8_t const qsId);
+ 229:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     bool (*isIn)(QAsm * const me, QStateHandler const s);
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifdef Q_SPY
+ 231:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler (*getStateHandler)(QAsm * const me);
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // Q_SPY
+ 233:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** };
+ 234:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 235:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifdef Q_SPY
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QASM_INIT(me_, par_, qsId_) \
+ 237:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (*((QAsm *)(me_))->vptr->init)((QAsm *)(me_), (par_), (qsId_))
+ 238:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QASM_DISPATCH(me_, e_, qsId_) \
+ 239:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (*((QAsm *)(me_))->vptr->dispatch)((QAsm *)(me_), (e_), (qsId_))
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QASM_IS_IN(me_, state_) \
+ 241:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (*((QAsm *)(me_))->vptr->isIn)((QAsm *)(me_), (state_))
+ 242:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 243:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QASM_INIT(me_, par_, dummy) \
+ 244:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (*((QAsm *)(me_))->vptr->init)((QAsm *)(me_), (par_), 0U)
+ 245:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QASM_DISPATCH(me_, e_, dummy) \
+ 246:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (*((QAsm *)(me_))->vptr->dispatch)((QAsm *)(me_), (e_), 0U)
+ 247:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // ndef Q_SPY
+ 248:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 249:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_ASM_UPCAST(ptr_) ((QAsm *)(ptr_))
+ 250:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 251:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 252:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @class QHsm
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @extends QAsm
+ 254:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct {
+ 255:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm super; //!< @protected @memberof QHsm
+ 256:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QHsm;
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @protected @memberof QHsm
+ 259:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** void QHsm_ctor(QHsm * const me,
+ 260:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler const initial);
+ 261:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 262:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QHsm
+ 263:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** void QHsm_init_(
+ 264:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm * const me,
+ 265:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     void const * const e,
+ 266:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const qsId);
+ 267:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 268:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QHsm
+ 269:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** void QHsm_dispatch_(
+ 270:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm * const me,
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QEvt const * const e,
+ 272:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const qsId);
+ 273:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 274:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QHsm
+ 275:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** bool QHsm_isIn_(
+ 276:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm * const me,
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler const state);
+ 278:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifdef Q_SPY
+ 280:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QHsm
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 8
+
+
+ 281:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** QStateHandler QHsm_getStateHandler_(QAsm * const me);
+ 282:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // def Q_SPY
+ 283:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 284:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @protected @memberof QHsm
+ 285:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** QState QHsm_top(QHsm const * const me,
+ 286:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QEvt const * const e);
+ 287:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 288:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QHsm
+ 289:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline QStateHandler QHsm_state(QHsm const * const me) {
+ 290:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return me->super.state.fun;
+ 291:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 292:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 293:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QHsm
+ 294:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** QStateHandler QHsm_childState(QHsm * const me,
+ 295:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler const parent);
+ 296:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 297:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_HSM_UPCAST(ptr_) ((QHsm *)(ptr_))
+ 298:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 299:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_TRAN(target_) \
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     ((Q_ASM_UPCAST(me))->temp.fun = Q_STATE_CAST(target_), \
+ 301:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****      (QState)Q_RET_TRAN)
+ 302:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_TRAN_HIST(hist_) \
+ 303:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     ((Q_ASM_UPCAST(me))->temp.fun = (hist_), \
+ 304:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****      (QState)Q_RET_TRAN_HIST)
+ 305:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_SUPER(super_) \
+ 306:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     ((Q_ASM_UPCAST(me))->temp.fun = Q_STATE_CAST(super_), \
+ 307:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****      (QState)Q_RET_SUPER)
+ 308:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_HANDLED()   ((QState)Q_RET_HANDLED)
+ 309:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_UNHANDLED() ((QState)Q_RET_UNHANDLED)
+ 310:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 311:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 312:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @class QMsm
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @extends QAsm
+ 314:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct {
+ 315:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm super; //!< @protected @memberof QMsm
+ 316:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QMsm;
+ 317:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 318:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @protected @memberof QMsm
+ 319:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** void QMsm_ctor(QMsm * const me,
+ 320:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler const initial);
+ 321:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 322:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QMsm
+ 323:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** void QMsm_init_(
+ 324:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm * const me,
+ 325:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     void const * const e,
+ 326:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const qsId);
+ 327:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 328:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QMsm
+ 329:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** void QMsm_dispatch_(
+ 330:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm * const me,
+ 331:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QEvt const * const e,
+ 332:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const qsId);
+ 333:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 334:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @private @memberof QMsm
+ 335:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** bool QMsm_isIn_(
+ 336:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QAsm * const me,
+ 337:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QStateHandler const state);
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 9
+
+
+ 338:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 339:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifdef Q_SPY
+ 340:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QMsm
+ 341:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** QStateHandler QMsm_getStateHandler_(QAsm * const me);
+ 342:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // def Q_SPY
+ 343:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 344:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QMsm
+ 345:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline QMState const * QMsm_stateObj(QMsm const * const me) {
+ 346:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return me->super.state.obj;
+ 347:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 348:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 349:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QMsm
+ 350:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** QMState const * QMsm_childStateObj(QMsm const * const me,
+ 351:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QMState const * const parent);
+ 352:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 353:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // QEP-macros
+ 354:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 355:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define Q_MSM_UPCAST(ptr_) ((QMsm *)(ptr_))
+ 356:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifdef Q_SPY
+ 357:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QM_ENTRY(state_) \
+ 358:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         ((Q_ASM_UPCAST(me))->temp.obj = (state_), (QState)Q_RET_ENTRY)
+ 359:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QM_EXIT(state_) \
+ 360:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         ((Q_ASM_UPCAST(me))->temp.obj = (state_), (QState)Q_RET_EXIT)
+ 361:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 362:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QM_ENTRY(dummy) ((QState)Q_RET_ENTRY)
+ 363:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     #define QM_EXIT(dummy)  ((QState)Q_RET_EXIT)
+ 364:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // ndef Q_SPY
+ 365:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 366:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_TRAN(tatbl_) ((Q_ASM_UPCAST(me))->temp.tatbl \
+ 367:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     = (struct QMTranActTable const *)(tatbl_), (QState)Q_RET_TRAN)
+ 368:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 369:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_TRAN_INIT(tatbl_) ((Q_ASM_UPCAST(me))->temp.tatbl \
+ 370:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     = (struct QMTranActTable const *)(tatbl_), (QState)Q_RET_TRAN_INIT)
+ 371:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 372:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_TRAN_HIST(history_, tatbl_) \
+ 373:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     ((((Q_ASM_UPCAST(me))->state.obj  = (history_)), \
+ 374:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****       ((Q_ASM_UPCAST(me))->temp.tatbl = \
+ 375:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****           (struct QMTranActTable const *)(tatbl_))), (QState)Q_RET_TRAN_HIST)
+ 376:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 377:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_HANDLED()   ((QState)Q_RET_HANDLED)
+ 378:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_UNHANDLED() ((QState)Q_RET_UNHANDLED)
+ 379:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_SUPER()     ((QState)Q_RET_SUPER)
+ 380:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #define QM_STATE_NULL  ((QMState *)0)
+ 381:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 382:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 383:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** // QF (active object framework) types
+ 384:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 385:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef uint16_t QPrioSpec;
+ 386:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 387:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_TIMEEVT_CTR_SIZE == 1U)
+ 388:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint8_t QTimeEvtCtr;
+ 389:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #elif (QF_TIMEEVT_CTR_SIZE == 2U)
+ 390:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint16_t QTimeEvtCtr;
+ 391:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #elif (QF_TIMEEVT_CTR_SIZE == 4U)
+ 392:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint32_t QTimeEvtCtr;
+ 393:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // (QF_TIMEEVT_CTR_SIZE == 4U)
+ 394:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 10
+
+
+ 395:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 8U)
+ 396:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint8_t QPSetBits;
+ 397:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #elif (8U < QF_MAX_ACTIVE) && (QF_MAX_ACTIVE <= 16U)
+ 398:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint16_t QPSetBits;
+ 399:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #elif (16U < QF_MAX_ACTIVE)
+ 400:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     typedef uint32_t QPSetBits;
+ 401:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // (16U < QF_MAX_ACTIVE)
+ 402:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 403:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #ifndef QF_LOG2
+ 404:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t QF_LOG2(QPSetBits const bitmask);
+ 405:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif // ndef QF_LOG2
+ 406:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 407:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //============================================================================
+ 408:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @class QPSet
+ 409:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** typedef struct {
+ 410:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     //! @private @memberof QPSet
+ 411:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     QPSetBits bits[((QF_MAX_ACTIVE + (8U*sizeof(QPSetBits))) - 1U)
+ 412:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****                    / (8U*sizeof(QPSetBits))];
+ 413:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** } QPSet;
+ 414:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 415:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 416:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline void QPSet_setEmpty(QPSet * const me) {
+  64              		.loc 2 416 20 is_stmt 1 discriminator 3 view .LVU12
+  65              	.LBB29:
+ 417:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->bits[0] = 0U;
+  66              		.loc 2 417 5 discriminator 3 view .LVU13
+  67              		.loc 2 417 17 is_stmt 0 discriminator 3 view .LVU14
+  68 0012 0024     		movs	r4, #0
+  69 0014 1460     		str	r4, [r2]
+  70              	.LVL4:
+  71              		.loc 2 417 17 discriminator 3 view .LVU15
+  72              	.LBE29:
+  73              	.LBE28:
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QPSet_setEmpty(&subscrSto[sig].set);
+  74              		.loc 1 56 43 is_stmt 1 discriminator 3 view .LVU16
+  75 0016 0133     		adds	r3, r3, #1
+  76              	.LVL5:
+  77              	.L2:
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QPSet_setEmpty(&subscrSto[sig].set);
+  78              		.loc 1 56 26 discriminator 1 view .LVU17
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QPSet_setEmpty(&subscrSto[sig].set);
+  79              		.loc 1 56 5 is_stmt 0 discriminator 1 view .LVU18
+  80 0018 8B42     		cmp	r3, r1
+  81 001a F8DB     		blt	.L3
+  82              	.LBE27:
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     }
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** }
+  83              		.loc 1 59 1 view .LVU19
+  84              		@ sp needed
+  85 001c 10BD     		pop	{r4, pc}
+  86              	.L5:
+  87 001e C046     		.align	2
+  88              	.L4:
+  89 0020 00000000 		.word	.LANCHOR0
+  90 0024 00000000 		.word	.LANCHOR1
+  91              		.cfi_endproc
+  92              	.LFE18:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 11
+
+
+  94              		.section	.text.QActive_publish_,"ax",%progbits
+  95              		.align	1
+  96              		.global	QActive_publish_
+  97              		.syntax unified
+  98              		.code	16
+  99              		.thumb_func
+ 101              	QActive_publish_:
+ 102              	.LVL6:
+ 103              	.LFB19:
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //............................................................................
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //! @static @private @memberof QActive
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** void QActive_publish_(
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QEvt const * const e,
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     void const * const sender,
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     uint_fast8_t const qsId)
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** {
+ 104              		.loc 1 67 1 is_stmt 1 view -0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 0
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108              		.loc 1 67 1 is_stmt 0 view .LVU21
+ 109 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 110              	.LCFI1:
+ 111              		.cfi_def_cfa_offset 24
+ 112              		.cfi_offset 3, -24
+ 113              		.cfi_offset 4, -20
+ 114              		.cfi_offset 5, -16
+ 115              		.cfi_offset 6, -12
+ 116              		.cfi_offset 7, -8
+ 117              		.cfi_offset 14, -4
+ 118 0002 0600     		movs	r6, r0
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #ifndef Q_SPY
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     Q_UNUSED_PAR(sender);
+ 119              		.loc 1 69 5 is_stmt 1 view .LVU22
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     Q_UNUSED_PAR(qsId);
+ 120              		.loc 1 70 5 view .LVU23
+  71:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #endif
+  72:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  73:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QSignal const sig = e->sig;
+ 121              		.loc 1 73 5 view .LVU24
+ 122              		.loc 1 73 19 is_stmt 0 view .LVU25
+ 123 0004 0488     		ldrh	r4, [r0]
+ 124              	.LVL7:
+  74:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  75:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_STAT
+  76:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_ENTRY();
+ 125              		.loc 1 76 5 is_stmt 1 view .LVU26
+ 126 0006 FFF7FEFF 		bl	vPortEnterCritical
+ 127              	.LVL8:
+  77:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  78:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     Q_REQUIRE_INCRIT(200, sig < (QSignal)QActive_maxPubSignal_);
+ 128              		.loc 1 78 5 view .LVU27
+ 129 000a 314B     		ldr	r3, .L21
+ 130 000c 1B88     		ldrh	r3, [r3]
+ 131 000e A342     		cmp	r3, r4
+ 132 0010 49D9     		bls	.L16
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 12
+
+
+  79:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  80:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QS_BEGIN_PRE(QS_QF_PUBLISH, qsId)
+ 133              		.loc 1 80 5 view .LVU28
+  81:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_TIME_PRE();          // the timestamp
+ 134              		.loc 1 81 9 view .LVU29
+  82:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_OBJ_PRE(sender);     // the sender object
+ 135              		.loc 1 82 9 view .LVU30
+  83:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_SIG_PRE(sig);        // the signal of the event
+ 136              		.loc 1 83 9 view .LVU31
+  84:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_2U8_PRE(e->poolNum_, e->refCtr_);
+ 137              		.loc 1 84 9 view .LVU32
+  85:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QS_END_PRE()
+  86:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  87:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // is it a mutable event?
+  88:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     if (e->poolNum_ != 0U) {
+ 138              		.loc 1 88 5 view .LVU33
+ 139              		.loc 1 88 10 is_stmt 0 view .LVU34
+ 140 0012 B378     		ldrb	r3, [r6, #2]
+ 141              		.loc 1 88 8 view .LVU35
+ 142 0014 002B     		cmp	r3, #0
+ 143 0016 07D0     		beq	.L8
+  89:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // NOTE: The reference counter of a mutable event is incremented to
+  90:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // prevent premature recycling of the event while the multicasting
+  91:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // is still in progress. At the end of the function, the garbage
+  92:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // collector step (QF_gc()) decrements the reference counter and
+  93:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // recycles the event if the counter drops to zero. This covers the
+  94:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // case when the event was published without any subscribers.
+  95:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         Q_ASSERT_INCRIT(205, e->refCtr_ < (2U * QF_MAX_ACTIVE));
+ 144              		.loc 1 95 9 is_stmt 1 view .LVU36
+ 145 0018 F378     		ldrb	r3, [r6, #3]
+ 146 001a DBB2     		uxtb	r3, r3
+ 147 001c 3F2B     		cmp	r3, #63
+ 148 001e 46D8     		bhi	.L17
+  96:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QEvt_refCtr_inc_(e);
+ 149              		.loc 1 96 9 view .LVU37
+ 150              	.LVL9:
+ 151              	.LBB30:
+ 152              	.LBI30:
+ 153              		.file 3 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Plagiarizing this software to sidestep the license obligations is illegal.
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 13
+
+
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #ifndef QP_PKG_H_
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QP_PKG_H_
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QACTIVE_CAST_(ptr_)    ((QActive *)(ptr_))
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define Q_PTR2UINT_CAST_(ptr_) ((uintptr_t)(ptr_))
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** typedef struct {
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #if (QF_MAX_EPOOL > 0U)
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     QF_EPOOL_TYPE_ ePool_[QF_MAX_EPOOL]; //!< @private @memberof QF_Attr
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint_fast8_t maxPool_;               //!< @private @memberof QF_Attr
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #else
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint8_t dummy;                       //!< @private @memberof QF_Attr
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #endif //  (QF_MAX_EPOOL == 0U)
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** } QF_Attr;
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** extern QF_Attr QF_priv_; //!< @static @private @memberof QF
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //! @static @private @memberof QF
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** void QF_bzero_(
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     void * const start,
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint_fast16_t const len);
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** // Bitmasks are for the QTimeEvt::flags attribute
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QTE_FLAG_IS_LINKED      (1U << 7U)
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** #define QTE_FLAG_WAS_DISARMED   (1U << 6U)
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** 
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //============================================================================
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** //! @private @memberof QEvt
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h **** static inline void QEvt_refCtr_inc_(QEvt const * const me) {
+ 154              		.loc 3 61 20 view .LVU38
+ 155              	.LBB31:
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     // NOTE: this function must be called inside a critical section
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     uint8_t const rc = me->refCtr_ + 1U;
+ 156              		.loc 3 63 5 view .LVU39
+ 157              		.loc 3 63 26 is_stmt 0 view .LVU40
+ 158 0020 F378     		ldrb	r3, [r6, #3]
+ 159              		.loc 3 63 19 view .LVU41
+ 160 0022 0133     		adds	r3, r3, #1
+ 161 0024 DBB2     		uxtb	r3, r3
+ 162              	.LVL10:
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp_pkg.h ****     ((QEvt *)me)->refCtr_ = rc; // cast away 'const'
+ 163              		.loc 3 64 5 is_stmt 1 view .LVU42
+ 164              		.loc 3 64 27 is_stmt 0 view .LVU43
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 14
+
+
+ 165 0026 F370     		strb	r3, [r6, #3]
+ 166              	.LVL11:
+ 167              	.L8:
+ 168              		.loc 3 64 27 view .LVU44
+ 169              	.LBE31:
+ 170              	.LBE30:
+  97:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     }
+  98:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+  99:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // make a local, modifiable copy of the subscriber set
+ 100:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QPSet subscrSet = QActive_subscrList_[sig].set;
+ 171              		.loc 1 100 5 is_stmt 1 view .LVU45
+ 172              		.loc 1 100 42 is_stmt 0 view .LVU46
+ 173 0028 A400     		lsls	r4, r4, #2
+ 174              	.LVL12:
+ 175              		.loc 1 100 42 view .LVU47
+ 176 002a 2A4B     		ldr	r3, .L21+4
+ 177 002c 1B68     		ldr	r3, [r3]
+ 178              		.loc 1 100 11 view .LVU48
+ 179 002e 1D59     		ldr	r5, [r3, r4]
+ 180              	.LVL13:
+ 101:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 102:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_EXIT();
+ 181              		.loc 1 102 5 is_stmt 1 view .LVU49
+ 182 0030 FFF7FEFF 		bl	vPortExitCritical
+ 183              	.LVL14:
+ 103:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 104:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     if (QPSet_notEmpty(&subscrSet)) { // any subscribers?
+ 184              		.loc 1 104 5 view .LVU50
+ 185              	.LBB32:
+ 186              	.LBI32:
+ 418:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE > 32)
+ 419:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->bits[1] = 0U;
+ 420:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 421:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 422:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 423:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 424:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline bool QPSet_isEmpty(QPSet const * const me) {
+ 425:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 426:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return (me->bits[0] == 0U);
+ 427:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 428:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return (me->bits[0] == 0U) ? (me->bits[1] == 0U) : false;
+ 429:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 430:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 431:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 432:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 433:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline bool QPSet_notEmpty(QPSet const * const me) {
+ 187              		.loc 2 433 20 view .LVU51
+ 188              	.LBB33:
+ 434:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 435:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return (me->bits[0] != 0U);
+ 189              		.loc 2 435 5 view .LVU52
+ 190              		.loc 2 435 5 is_stmt 0 view .LVU53
+ 191              	.LBE33:
+ 192              	.LBE32:
+ 193              		.loc 1 104 8 view .LVU54
+ 194 0034 002D     		cmp	r5, #0
+ 195 0036 32D0     		beq	.L10
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 15
+
+
+ 196              	.LBB34:
+ 105:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // highest-prio subscriber
+ 106:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         uint_fast8_t p = QPSet_findMax(&subscrSet);
+ 197              		.loc 1 106 9 is_stmt 1 view .LVU55
+ 198              	.LVL15:
+ 199              	.LBB35:
+ 200              	.LBI35:
+ 436:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 437:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return (me->bits[0] != 0U) ? true : (me->bits[1] != 0U);
+ 438:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 439:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 440:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 441:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 442:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline bool QPSet_hasElement(QPSet const * const me,
+ 443:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 444:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** {
+ 445:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return (me->bits[0] & ((QPSetBits)1U << (n - 1U))) != 0U;
+ 447:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 448:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return (n <= 32U)
+ 449:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         ? ((me->bits[0] & ((QPSetBits)1U << (n - 1U)))  != 0U)
+ 450:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         : ((me->bits[1] & ((QPSetBits)1U << (n - 33U))) != 0U);
+ 451:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 452:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 453:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 454:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 455:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline void QPSet_insert(QPSet * const me,
+ 456:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 457:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** {
+ 458:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->bits[0] = (me->bits[0] | ((QPSetBits)1U << (n - 1U)));
+ 460:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 461:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     if (n <= 32U) {
+ 462:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         me->bits[0] = (me->bits[0] | ((QPSetBits)1U << (n - 1U)));
+ 463:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     }
+ 464:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     else {
+ 465:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         me->bits[1] = (me->bits[1] | ((QPSetBits)1U << (n - 33U)));
+ 466:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     }
+ 467:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 468:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 469:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 470:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 471:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline void QPSet_remove(QPSet * const me,
+ 472:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 473:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** {
+ 474:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     me->bits[0] = (me->bits[0] & (QPSetBits)(~((QPSetBits)1U << (n - 1U))));
+ 476:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 477:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     if (n <= 32U) {
+ 478:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (me->bits[0] = (me->bits[0] & ~((QPSetBits)1U << (n - 1U))));
+ 479:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     }
+ 480:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     else {
+ 481:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****         (me->bits[1] = (me->bits[1] & ~((QPSetBits)1U << (n - 33U))));
+ 482:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     }
+ 483:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #endif
+ 484:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** }
+ 485:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 16
+
+
+ 486:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** //! @public @memberof QPSet
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** static inline uint_fast8_t QPSet_findMax(QPSet const * const me) {
+ 201              		.loc 2 487 28 view .LVU56
+ 202              	.LBB36:
+ 488:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 489:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     return QF_LOG2(me->bits[0]);
+ 203              		.loc 2 489 5 view .LVU57
+ 204              		.loc 2 489 12 is_stmt 0 view .LVU58
+ 205 0038 2800     		movs	r0, r5
+ 206 003a FFF7FEFF 		bl	QF_LOG2
+ 207              	.LVL16:
+ 208 003e 0400     		movs	r4, r0
+ 209              	.LVL17:
+ 210              		.loc 2 489 12 view .LVU59
+ 211              	.LBE36:
+ 212              	.LBE35:
+ 107:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 108:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_ENTRY();
+ 213              		.loc 1 108 9 is_stmt 1 view .LVU60
+ 214 0040 FFF7FEFF 		bl	vPortEnterCritical
+ 215              	.LVL18:
+ 109:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 110:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QActive *a = QActive_registry_[p];
+ 216              		.loc 1 110 9 view .LVU61
+ 217              		.loc 1 110 18 is_stmt 0 view .LVU62
+ 218 0044 A200     		lsls	r2, r4, #2
+ 219 0046 244B     		ldr	r3, .L21+8
+ 220 0048 D758     		ldr	r7, [r2, r3]
+ 221              	.LVL19:
+ 111:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         // the AO must be registered with the framework
+ 112:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         Q_ASSERT_INCRIT(210, a != (QActive *)0);
+ 222              		.loc 1 112 9 is_stmt 1 view .LVU63
+ 223 004a 002F     		cmp	r7, #0
+ 224 004c 33D0     		beq	.L18
+ 113:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 114:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_EXIT();
+ 225              		.loc 1 114 9 view .LVU64
+ 226 004e FFF7FEFF 		bl	vPortExitCritical
+ 227              	.LVL20:
+ 115:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 116:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_SCHED_STAT_
+ 117:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_SCHED_LOCK_(p); // lock the scheduler up to AO's prio
+ 228              		.loc 1 117 9 view .LVU65
+ 229 0052 FFF7FEFF 		bl	vTaskSuspendAll
+ 230              	.LVL21:
+ 231              	.L14:
+ 118:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         do { // loop over all subscribers
+ 232              		.loc 1 118 9 view .LVU66
+ 119:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             // QACTIVE_POST() asserts internally if the queue overflows
+ 120:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QACTIVE_POST(a, e, sender);
+ 233              		.loc 1 120 13 view .LVU67
+ 234 0056 0023     		movs	r3, #0
+ 235 0058 204A     		ldr	r2, .L21+12
+ 236 005a 3100     		movs	r1, r6
+ 237 005c 3800     		movs	r0, r7
+ 238 005e FFF7FEFF 		bl	QActive_post_
+ 239              	.LVL22:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 17
+
+
+ 121:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 122:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QPSet_remove(&subscrSet, p); // remove the handled subscriber
+ 240              		.loc 1 122 13 view .LVU68
+ 241              	.LBB37:
+ 242              	.LBI37:
+ 471:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 243              		.loc 2 471 20 view .LVU69
+ 244              	.LBB38:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 245              		.loc 2 475 5 view .LVU70
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 246              		.loc 2 475 68 is_stmt 0 view .LVU71
+ 247 0062 013C     		subs	r4, r4, #1
+ 248              	.LVL23:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 249              		.loc 2 475 62 view .LVU72
+ 250 0064 0123     		movs	r3, #1
+ 251 0066 A340     		lsls	r3, r3, r4
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 252              		.loc 2 475 32 view .LVU73
+ 253 0068 2C00     		movs	r4, r5
+ 254              	.LVL24:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 255              		.loc 2 475 32 view .LVU74
+ 256 006a 9C43     		bics	r4, r3
+ 257              	.LVL25:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 258              		.loc 2 475 17 view .LVU75
+ 259 006c 251E     		subs	r5, r4, #0
+ 260              	.LVL26:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 261              		.loc 2 475 17 view .LVU76
+ 262              	.LBE38:
+ 263              	.LBE37:
+ 123:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             if (QPSet_notEmpty(&subscrSet)) {  // still more subscribers?
+ 264              		.loc 1 123 13 is_stmt 1 view .LVU77
+ 265              		.loc 1 123 13 is_stmt 0 view .LVU78
+ 266              	.LBE34:
+ 435:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 267              		.loc 2 435 5 is_stmt 1 view .LVU79
+ 268              	.LBB41:
+ 269              		.loc 1 123 16 is_stmt 0 view .LVU80
+ 270 006e 0ED0     		beq	.L12
+ 124:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 p = QPSet_findMax(&subscrSet); // highest-prio subscriber
+ 271              		.loc 1 124 17 is_stmt 1 view .LVU81
+ 272              	.LVL27:
+ 273              	.LBB39:
+ 274              	.LBI39:
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #if (QF_MAX_ACTIVE <= 32U)
+ 275              		.loc 2 487 28 view .LVU82
+ 276              	.LBB40:
+ 277              		.loc 2 489 5 view .LVU83
+ 278              		.loc 2 489 12 is_stmt 0 view .LVU84
+ 279 0070 2000     		movs	r0, r4
+ 280 0072 FFF7FEFF 		bl	QF_LOG2
+ 281              	.LVL28:
+ 282 0076 0400     		movs	r4, r0
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 18
+
+
+ 283              	.LVL29:
+ 284              		.loc 2 489 12 view .LVU85
+ 285              	.LBE40:
+ 286              	.LBE39:
+ 125:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 126:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 QF_CRIT_ENTRY();
+ 287              		.loc 1 126 17 is_stmt 1 view .LVU86
+ 288 0078 FFF7FEFF 		bl	vPortEnterCritical
+ 289              	.LVL30:
+ 127:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 128:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 a = QActive_registry_[p];
+ 290              		.loc 1 128 17 view .LVU87
+ 291              		.loc 1 128 19 is_stmt 0 view .LVU88
+ 292 007c A200     		lsls	r2, r4, #2
+ 293 007e 164B     		ldr	r3, .L21+8
+ 294 0080 D758     		ldr	r7, [r2, r3]
+ 295              	.LVL31:
+ 129:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 // the AO must be registered with the framework
+ 130:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 Q_ASSERT_INCRIT(220, a != (QActive *)0);
+ 296              		.loc 1 130 17 is_stmt 1 view .LVU89
+ 297 0082 002F     		cmp	r7, #0
+ 298 0084 1BD0     		beq	.L19
+ 131:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 132:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 QF_CRIT_EXIT();
+ 299              		.loc 1 132 17 view .LVU90
+ 300 0086 FFF7FEFF 		bl	vPortExitCritical
+ 301              	.LVL32:
+ 133:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             }
+ 134:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             else {
+ 135:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 p = 0U; // no more subscribers
+ 136:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             }
+ 137:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         } while (p != 0U);
+ 302              		.loc 1 137 17 view .LVU91
+ 303              		.loc 1 137 9 is_stmt 0 view .LVU92
+ 304 008a 002C     		cmp	r4, #0
+ 305 008c E3D1     		bne	.L14
+ 306              	.LVL33:
+ 307              	.L12:
+ 138:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 139:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_ENTRY();
+ 308              		.loc 1 139 9 is_stmt 1 view .LVU93
+ 309 008e FFF7FEFF 		bl	vPortEnterCritical
+ 310              	.LVL34:
+ 140:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         Q_ASSERT_INCRIT(290, p == 0U); // all subscribers processed
+ 311              		.loc 1 140 9 view .LVU94
+ 312 0092 002C     		cmp	r4, #0
+ 313 0094 17D1     		bne	.L20
+ 141:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_EXIT();
+ 314              		.loc 1 141 9 view .LVU95
+ 315 0096 FFF7FEFF 		bl	vPortExitCritical
+ 316              	.LVL35:
+ 142:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 143:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_SCHED_UNLOCK_(); // unlock the scheduler
+ 317              		.loc 1 143 9 view .LVU96
+ 318 009a FFF7FEFF 		bl	xTaskResumeAll
+ 319              	.LVL36:
+ 320              	.L10:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 19
+
+
+ 321              		.loc 1 143 9 is_stmt 0 view .LVU97
+ 322              	.LBE41:
+ 144:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     }
+ 145:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 146:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #if (QF_MAX_EPOOL > 0U)
+ 147:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // The following garbage collection step decrements the reference counter
+ 148:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // and recycles the event if the counter drops to zero. This covers both
+ 149:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // cases when the event was published with or without any subscribers.
+ 150:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_gc(e); // recycle the event to avoid a leak
+ 323              		.loc 1 150 5 is_stmt 1 view .LVU98
+ 324 009e 3000     		movs	r0, r6
+ 325 00a0 FFF7FEFF 		bl	QF_gc
+ 326              	.LVL37:
+ 151:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** #endif
+ 152:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** }
+ 327              		.loc 1 152 1 is_stmt 0 view .LVU99
+ 328              		@ sp needed
+ 329              	.LVL38:
+ 330              	.LVL39:
+ 331              		.loc 1 152 1 view .LVU100
+ 332 00a4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 333              	.LVL40:
+ 334              	.L16:
+  78:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 335              		.loc 1 78 5 discriminator 1 view .LVU101
+ 336 00a6 C821     		movs	r1, #200
+ 337 00a8 0D48     		ldr	r0, .L21+16
+ 338 00aa FFF7FEFF 		bl	Q_onError
+ 339              	.LVL41:
+ 340              	.L17:
+  95:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QEvt_refCtr_inc_(e);
+ 341              		.loc 1 95 9 discriminator 1 view .LVU102
+ 342 00ae CD21     		movs	r1, #205
+ 343 00b0 0B48     		ldr	r0, .L21+16
+ 344 00b2 FFF7FEFF 		bl	Q_onError
+ 345              	.LVL42:
+ 346              	.L18:
+ 347              	.LBB42:
+ 112:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 348              		.loc 1 112 9 discriminator 1 view .LVU103
+ 349 00b6 D221     		movs	r1, #210
+ 350 00b8 0948     		ldr	r0, .L21+16
+ 351 00ba FFF7FEFF 		bl	Q_onError
+ 352              	.LVL43:
+ 353              	.L19:
+ 130:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 354              		.loc 1 130 17 discriminator 1 view .LVU104
+ 355 00be DC21     		movs	r1, #220
+ 356 00c0 0748     		ldr	r0, .L21+16
+ 357 00c2 FFF7FEFF 		bl	Q_onError
+ 358              	.LVL44:
+ 359              	.L20:
+ 140:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_EXIT();
+ 360              		.loc 1 140 9 discriminator 1 view .LVU105
+ 361 00c6 9121     		movs	r1, #145
+ 362 00c8 4900     		lsls	r1, r1, #1
+ 363 00ca 0548     		ldr	r0, .L21+16
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 20
+
+
+ 364 00cc FFF7FEFF 		bl	Q_onError
+ 365              	.LVL45:
+ 366              	.L22:
+ 367              		.align	2
+ 368              	.L21:
+ 369 00d0 00000000 		.word	.LANCHOR1
+ 370 00d4 00000000 		.word	.LANCHOR0
+ 371 00d8 00000000 		.word	QActive_registry_
+ 372 00dc FFFF0000 		.word	65535
+ 373 00e0 00000000 		.word	.LANCHOR2
+ 374              	.LBE42:
+ 375              		.cfi_endproc
+ 376              	.LFE19:
+ 378              		.section	.text.QActive_subscribe,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	QActive_subscribe
+ 381              		.syntax unified
+ 382              		.code	16
+ 383              		.thumb_func
+ 385              	QActive_subscribe:
+ 386              	.LVL46:
+ 387              	.LFB20:
+ 153:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 154:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //............................................................................
+ 155:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //! @protected @memberof QActive
+ 156:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** void QActive_subscribe(QActive const * const me,
+ 157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     enum_t const sig)
+ 158:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** {
+ 388              		.loc 1 158 1 is_stmt 1 view -0
+ 389              		.cfi_startproc
+ 390              		@ args = 0, pretend = 0, frame = 0
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 392              		.loc 1 158 1 is_stmt 0 view .LVU107
+ 393 0000 70B5     		push	{r4, r5, r6, lr}
+ 394              	.LCFI2:
+ 395              		.cfi_def_cfa_offset 16
+ 396              		.cfi_offset 4, -16
+ 397              		.cfi_offset 5, -12
+ 398              		.cfi_offset 6, -8
+ 399              		.cfi_offset 14, -4
+ 400 0002 0600     		movs	r6, r0
+ 401 0004 0C00     		movs	r4, r1
+ 159:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     uint_fast8_t const p = (uint_fast8_t)me->prio;
+ 402              		.loc 1 159 5 is_stmt 1 view .LVU108
+ 403              		.loc 1 159 44 is_stmt 0 view .LVU109
+ 404 0006 057B     		ldrb	r5, [r0, #12]
+ 405              	.LVL47:
+ 160:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 161:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_STAT
+ 162:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_ENTRY();
+ 406              		.loc 1 162 5 is_stmt 1 view .LVU110
+ 407 0008 FFF7FEFF 		bl	vPortEnterCritical
+ 408              	.LVL48:
+ 163:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     Q_REQUIRE_INCRIT(300, (Q_USER_SIG <= sig)
+ 409              		.loc 1 164 5 view .LVU111
+ 410 000c 032C     		cmp	r4, #3
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 21
+
+
+ 411 000e 19DD     		ble	.L24
+ 412              		.loc 1 164 5 is_stmt 0 discriminator 2 view .LVU112
+ 413 0010 0F4B     		ldr	r3, .L26
+ 414 0012 1B68     		ldr	r3, [r3]
+ 415 0014 A342     		cmp	r3, r4
+ 416 0016 15DD     		ble	.L24
+ 417              		.loc 1 164 5 discriminator 4 view .LVU113
+ 418 0018 002D     		cmp	r5, #0
+ 419 001a 13D0     		beq	.L24
+ 420              		.loc 1 164 5 discriminator 6 view .LVU114
+ 421 001c 202D     		cmp	r5, #32
+ 422 001e 11D8     		bhi	.L24
+ 423              		.loc 1 164 5 discriminator 8 view .LVU115
+ 424 0020 AB00     		lsls	r3, r5, #2
+ 425 0022 0C4A     		ldr	r2, .L26+4
+ 426 0024 9B58     		ldr	r3, [r3, r2]
+ 427 0026 B342     		cmp	r3, r6
+ 428 0028 0CD1     		bne	.L24
+ 165:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (sig < QActive_maxPubSignal_)
+ 166:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (0U < p) && (p <= QF_MAX_ACTIVE)
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (QActive_registry_[p] == me));
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QS_BEGIN_PRE(QS_QF_ACTIVE_SUBSCRIBE, p)
+ 429              		.loc 1 169 5 is_stmt 1 view .LVU116
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_TIME_PRE();    // timestamp
+ 430              		.loc 1 170 9 view .LVU117
+ 171:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_SIG_PRE(sig);  // the signal of this event
+ 431              		.loc 1 171 9 view .LVU118
+ 172:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_OBJ_PRE(me);   // this active object
+ 432              		.loc 1 172 9 view .LVU119
+ 173:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QS_END_PRE()
+ 174:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 175:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // insert the prio. into the subscriber set
+ 176:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QPSet_insert(&QActive_subscrList_[sig].set, p);
+ 433              		.loc 1 176 5 view .LVU120
+ 434              		.loc 1 176 38 is_stmt 0 view .LVU121
+ 435 002a A400     		lsls	r4, r4, #2
+ 436              	.LVL49:
+ 437              		.loc 1 176 38 view .LVU122
+ 438 002c 0A4B     		ldr	r3, .L26+8
+ 439 002e 1968     		ldr	r1, [r3]
+ 440 0030 0C19     		adds	r4, r1, r4
+ 441              	.LVL50:
+ 442              	.LBB43:
+ 443              	.LBI43:
+ 455:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 444              		.loc 2 455 20 is_stmt 1 view .LVU123
+ 445              	.LBB44:
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 446              		.loc 2 459 5 view .LVU124
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 447              		.loc 2 459 55 is_stmt 0 view .LVU125
+ 448 0032 013D     		subs	r5, r5, #1
+ 449              	.LVL51:
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 450              		.loc 2 459 49 view .LVU126
+ 451 0034 0123     		movs	r3, #1
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 22
+
+
+ 452 0036 AB40     		lsls	r3, r3, r5
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 453              		.loc 2 459 32 view .LVU127
+ 454 0038 2268     		ldr	r2, [r4]
+ 455 003a 1343     		orrs	r3, r2
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 456              		.loc 2 459 17 view .LVU128
+ 457 003c 2360     		str	r3, [r4]
+ 458              	.LVL52:
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 459              		.loc 2 459 17 view .LVU129
+ 460              	.LBE44:
+ 461              	.LBE43:
+ 177:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_EXIT();
+ 462              		.loc 1 178 5 is_stmt 1 view .LVU130
+ 463 003e FFF7FEFF 		bl	vPortExitCritical
+ 464              	.LVL53:
+ 179:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** }
+ 465              		.loc 1 179 1 is_stmt 0 view .LVU131
+ 466              		@ sp needed
+ 467              	.LVL54:
+ 468              	.LVL55:
+ 469              		.loc 1 179 1 view .LVU132
+ 470 0042 70BD     		pop	{r4, r5, r6, pc}
+ 471              	.LVL56:
+ 472              	.L24:
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (sig < QActive_maxPubSignal_)
+ 473              		.loc 1 164 5 discriminator 9 view .LVU133
+ 474 0044 9621     		movs	r1, #150
+ 475 0046 4900     		lsls	r1, r1, #1
+ 476 0048 0448     		ldr	r0, .L26+12
+ 477 004a FFF7FEFF 		bl	Q_onError
+ 478              	.LVL57:
+ 479              	.L27:
+ 480 004e C046     		.align	2
+ 481              	.L26:
+ 482 0050 00000000 		.word	.LANCHOR1
+ 483 0054 00000000 		.word	QActive_registry_
+ 484 0058 00000000 		.word	.LANCHOR0
+ 485 005c 00000000 		.word	.LANCHOR2
+ 486              		.cfi_endproc
+ 487              	.LFE20:
+ 489              		.section	.text.QActive_unsubscribe,"ax",%progbits
+ 490              		.align	1
+ 491              		.global	QActive_unsubscribe
+ 492              		.syntax unified
+ 493              		.code	16
+ 494              		.thumb_func
+ 496              	QActive_unsubscribe:
+ 497              	.LVL58:
+ 498              	.LFB21:
+ 180:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 181:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //............................................................................
+ 182:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //! @protected @memberof QActive
+ 183:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** void QActive_unsubscribe(QActive const * const me,
+ 184:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     enum_t const sig)
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 23
+
+
+ 185:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** {
+ 499              		.loc 1 185 1 is_stmt 1 view -0
+ 500              		.cfi_startproc
+ 501              		@ args = 0, pretend = 0, frame = 0
+ 502              		@ frame_needed = 0, uses_anonymous_args = 0
+ 503              		.loc 1 185 1 is_stmt 0 view .LVU135
+ 504 0000 70B5     		push	{r4, r5, r6, lr}
+ 505              	.LCFI3:
+ 506              		.cfi_def_cfa_offset 16
+ 507              		.cfi_offset 4, -16
+ 508              		.cfi_offset 5, -12
+ 509              		.cfi_offset 6, -8
+ 510              		.cfi_offset 14, -4
+ 511 0002 0600     		movs	r6, r0
+ 512 0004 0C00     		movs	r4, r1
+ 186:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     uint_fast8_t const p = (uint_fast8_t)me->prio;
+ 513              		.loc 1 186 5 is_stmt 1 view .LVU136
+ 514              		.loc 1 186 44 is_stmt 0 view .LVU137
+ 515 0006 057B     		ldrb	r5, [r0, #12]
+ 516              	.LVL59:
+ 187:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 188:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_STAT
+ 189:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_ENTRY();
+ 517              		.loc 1 189 5 is_stmt 1 view .LVU138
+ 518 0008 FFF7FEFF 		bl	vPortEnterCritical
+ 519              	.LVL60:
+ 190:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     Q_REQUIRE_INCRIT(400, (Q_USER_SIG <= sig)
+ 520              		.loc 1 191 5 view .LVU139
+ 521 000c 032C     		cmp	r4, #3
+ 522 000e 19DD     		ble	.L29
+ 523              		.loc 1 191 5 is_stmt 0 discriminator 2 view .LVU140
+ 524 0010 0F4B     		ldr	r3, .L31
+ 525 0012 1B68     		ldr	r3, [r3]
+ 526 0014 A342     		cmp	r3, r4
+ 527 0016 15DD     		ble	.L29
+ 528              		.loc 1 191 5 discriminator 4 view .LVU141
+ 529 0018 002D     		cmp	r5, #0
+ 530 001a 13D0     		beq	.L29
+ 531              		.loc 1 191 5 discriminator 6 view .LVU142
+ 532 001c 202D     		cmp	r5, #32
+ 533 001e 11D8     		bhi	.L29
+ 534              		.loc 1 191 5 discriminator 8 view .LVU143
+ 535 0020 AB00     		lsls	r3, r5, #2
+ 536 0022 0C4A     		ldr	r2, .L31+4
+ 537 0024 9B58     		ldr	r3, [r3, r2]
+ 538 0026 B342     		cmp	r3, r6
+ 539 0028 0CD1     		bne	.L29
+ 192:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (sig < QActive_maxPubSignal_)
+ 193:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (0U < p) && (p <= QF_MAX_ACTIVE)
+ 194:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (QActive_registry_[p] == me));
+ 195:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 196:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QS_BEGIN_PRE(QS_QF_ACTIVE_UNSUBSCRIBE, p)
+ 540              		.loc 1 196 5 is_stmt 1 view .LVU144
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_TIME_PRE();    // timestamp
+ 541              		.loc 1 197 9 view .LVU145
+ 198:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_SIG_PRE(sig);  // the signal of this event
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 24
+
+
+ 542              		.loc 1 198 9 view .LVU146
+ 199:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QS_OBJ_PRE(me);   // this active object
+ 543              		.loc 1 199 9 view .LVU147
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QS_END_PRE()
+ 201:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 202:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     // remove the prio. from the subscriber set
+ 203:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QPSet_remove(&QActive_subscrList_[sig].set, p);
+ 544              		.loc 1 203 5 view .LVU148
+ 545              		.loc 1 203 38 is_stmt 0 view .LVU149
+ 546 002a A400     		lsls	r4, r4, #2
+ 547              	.LVL61:
+ 548              		.loc 1 203 38 view .LVU150
+ 549 002c 0A4B     		ldr	r3, .L31+8
+ 550 002e 1968     		ldr	r1, [r3]
+ 551 0030 0C19     		adds	r4, r1, r4
+ 552              	.LVL62:
+ 553              	.LBB45:
+ 554              	.LBI45:
+ 471:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 555              		.loc 2 471 20 is_stmt 1 view .LVU151
+ 556              	.LBB46:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 557              		.loc 2 475 5 view .LVU152
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 558              		.loc 2 475 68 is_stmt 0 view .LVU153
+ 559 0032 013D     		subs	r5, r5, #1
+ 560              	.LVL63:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 561              		.loc 2 475 62 view .LVU154
+ 562 0034 0122     		movs	r2, #1
+ 563 0036 AA40     		lsls	r2, r2, r5
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 564              		.loc 2 475 32 view .LVU155
+ 565 0038 2368     		ldr	r3, [r4]
+ 566 003a 9343     		bics	r3, r2
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 567              		.loc 2 475 17 view .LVU156
+ 568 003c 2360     		str	r3, [r4]
+ 569              	.LVL64:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 570              		.loc 2 475 17 view .LVU157
+ 571              	.LBE46:
+ 572              	.LBE45:
+ 204:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 205:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_EXIT();
+ 573              		.loc 1 205 5 is_stmt 1 view .LVU158
+ 574 003e FFF7FEFF 		bl	vPortExitCritical
+ 575              	.LVL65:
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** }
+ 576              		.loc 1 206 1 is_stmt 0 view .LVU159
+ 577              		@ sp needed
+ 578              	.LVL66:
+ 579              	.LVL67:
+ 580              		.loc 1 206 1 view .LVU160
+ 581 0042 70BD     		pop	{r4, r5, r6, pc}
+ 582              	.LVL68:
+ 583              	.L29:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 25
+
+
+ 191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         && (sig < QActive_maxPubSignal_)
+ 584              		.loc 1 191 5 discriminator 9 view .LVU161
+ 585 0044 C821     		movs	r1, #200
+ 586 0046 4900     		lsls	r1, r1, #1
+ 587 0048 0448     		ldr	r0, .L31+12
+ 588 004a FFF7FEFF 		bl	Q_onError
+ 589              	.LVL69:
+ 590              	.L32:
+ 591 004e C046     		.align	2
+ 592              	.L31:
+ 593 0050 00000000 		.word	.LANCHOR1
+ 594 0054 00000000 		.word	QActive_registry_
+ 595 0058 00000000 		.word	.LANCHOR0
+ 596 005c 00000000 		.word	.LANCHOR2
+ 597              		.cfi_endproc
+ 598              	.LFE21:
+ 600              		.section	.text.QActive_unsubscribeAll,"ax",%progbits
+ 601              		.align	1
+ 602              		.global	QActive_unsubscribeAll
+ 603              		.syntax unified
+ 604              		.code	16
+ 605              		.thumb_func
+ 607              	QActive_unsubscribeAll:
+ 608              	.LVL70:
+ 609              	.LFB22:
+ 207:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //............................................................................
+ 209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** //! @protected @memberof QActive
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** void QActive_unsubscribeAll(QActive const * const me) {
+ 610              		.loc 1 210 55 is_stmt 1 view -0
+ 611              		.cfi_startproc
+ 612              		@ args = 0, pretend = 0, frame = 0
+ 613              		@ frame_needed = 0, uses_anonymous_args = 0
+ 614              		.loc 1 210 55 is_stmt 0 view .LVU163
+ 615 0000 70B5     		push	{r4, r5, r6, lr}
+ 616              	.LCFI4:
+ 617              		.cfi_def_cfa_offset 16
+ 618              		.cfi_offset 4, -16
+ 619              		.cfi_offset 5, -12
+ 620              		.cfi_offset 6, -8
+ 621              		.cfi_offset 14, -4
+ 622 0002 0400     		movs	r4, r0
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_STAT
+ 212:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_ENTRY();
+ 623              		.loc 1 212 5 is_stmt 1 view .LVU164
+ 624 0004 FFF7FEFF 		bl	vPortEnterCritical
+ 625              	.LVL71:
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 214:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     uint_fast8_t const p = (uint_fast8_t)me->prio;
+ 626              		.loc 1 214 5 view .LVU165
+ 627              		.loc 1 214 44 is_stmt 0 view .LVU166
+ 628 0008 237B     		ldrb	r3, [r4, #12]
+ 629              	.LVL72:
+ 215:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     Q_REQUIRE_INCRIT(500, (0U < p) && (p <= QF_MAX_ACTIVE)
+ 630              		.loc 1 216 5 is_stmt 1 view .LVU167
+ 631 000a 5D1E     		subs	r5, r3, #1
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 26
+
+
+ 632 000c 1F2D     		cmp	r5, #31
+ 633 000e 0AD8     		bhi	.L34
+ 634              		.loc 1 216 5 is_stmt 0 discriminator 2 view .LVU168
+ 635 0010 9B00     		lsls	r3, r3, #2
+ 636 0012 124A     		ldr	r2, .L40
+ 637 0014 9B58     		ldr	r3, [r3, r2]
+ 638 0016 A342     		cmp	r3, r4
+ 639 0018 05D1     		bne	.L34
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                            && (QActive_registry_[p] == me));
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     enum_t const maxPubSig = QActive_maxPubSignal_;
+ 640              		.loc 1 218 5 is_stmt 1 view .LVU169
+ 641              		.loc 1 218 18 is_stmt 0 view .LVU170
+ 642 001a 114B     		ldr	r3, .L40+4
+ 643 001c 1E68     		ldr	r6, [r3]
+ 644              	.LVL73:
+ 219:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     QF_CRIT_EXIT();
+ 645              		.loc 1 220 5 is_stmt 1 view .LVU171
+ 646 001e FFF7FEFF 		bl	vPortExitCritical
+ 647              	.LVL74:
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     for (enum_t sig = Q_USER_SIG; sig < maxPubSig; ++sig) {
+ 648              		.loc 1 222 5 view .LVU172
+ 649              	.LBB47:
+ 650              		.loc 1 222 10 view .LVU173
+ 651              		.loc 1 222 17 is_stmt 0 view .LVU174
+ 652 0022 0424     		movs	r4, #4
+ 653              	.LVL75:
+ 654              		.loc 1 222 5 view .LVU175
+ 655 0024 07E0     		b	.L36
+ 656              	.LVL76:
+ 657              	.L34:
+ 658              		.loc 1 222 5 view .LVU176
+ 659              	.LBE47:
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                            && (QActive_registry_[p] == me));
+ 660              		.loc 1 216 5 discriminator 3 view .LVU177
+ 661 0026 FA21     		movs	r1, #250
+ 662 0028 4900     		lsls	r1, r1, #1
+ 663 002a 0E48     		ldr	r0, .L40+8
+ 664 002c FFF7FEFF 		bl	Q_onError
+ 665              	.LVL77:
+ 666              	.L37:
+ 667              	.LBB52:
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_ENTRY();
+ 224:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         if (QPSet_hasElement(&QActive_subscrList_[sig].set, p)) {
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QPSet_remove(&QActive_subscrList_[sig].set, p);
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 228:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QS_BEGIN_PRE(QS_QF_ACTIVE_UNSUBSCRIBE, p)
+ 229:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 QS_TIME_PRE();    // timestamp
+ 668              		.loc 1 229 17 is_stmt 1 discriminator 2 view .LVU178
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 QS_SIG_PRE(sig);  // the signal of this event
+ 669              		.loc 1 230 17 discriminator 2 view .LVU179
+ 231:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****                 QS_OBJ_PRE(me);   // this active object
+ 670              		.loc 1 231 17 discriminator 2 view .LVU180
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QS_END_PRE()
+ 233:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         }
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 27
+
+
+ 234:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_EXIT();
+ 671              		.loc 1 234 9 discriminator 2 view .LVU181
+ 672 0030 FFF7FEFF 		bl	vPortExitCritical
+ 673              	.LVL78:
+ 235:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_EXIT_NOP(); // prevent merging critical sections
+ 674              		.loc 1 236 9 discriminator 2 view .LVU182
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_ENTRY();
+ 675              		.loc 1 222 52 discriminator 2 view .LVU183
+ 676 0034 0134     		adds	r4, r4, #1
+ 677              	.LVL79:
+ 678              	.L36:
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_ENTRY();
+ 679              		.loc 1 222 35 discriminator 1 view .LVU184
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****         QF_CRIT_ENTRY();
+ 680              		.loc 1 222 5 is_stmt 0 discriminator 1 view .LVU185
+ 681 0036 B442     		cmp	r4, r6
+ 682 0038 0FDA     		bge	.L39
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 683              		.loc 1 223 9 is_stmt 1 view .LVU186
+ 684 003a FFF7FEFF 		bl	vPortEnterCritical
+ 685              	.LVL80:
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QPSet_remove(&QActive_subscrList_[sig].set, p);
+ 686              		.loc 1 225 9 view .LVU187
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QPSet_remove(&QActive_subscrList_[sig].set, p);
+ 687              		.loc 1 225 50 is_stmt 0 view .LVU188
+ 688 003e A200     		lsls	r2, r4, #2
+ 689 0040 094B     		ldr	r3, .L40+12
+ 690 0042 1B68     		ldr	r3, [r3]
+ 691 0044 9B18     		adds	r3, r3, r2
+ 692              	.LVL81:
+ 693              	.LBB48:
+ 694              	.LBI48:
+ 442:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 695              		.loc 2 442 20 is_stmt 1 view .LVU189
+ 696              	.LBB49:
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 697              		.loc 2 446 5 view .LVU190
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 698              		.loc 2 446 21 is_stmt 0 view .LVU191
+ 699 0046 1A68     		ldr	r2, [r3]
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 700              		.loc 2 446 56 view .LVU192
+ 701 0048 1100     		movs	r1, r2
+ 702 004a E940     		lsrs	r1, r1, r5
+ 703              	.LVL82:
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 704              		.loc 2 446 56 view .LVU193
+ 705              	.LBE49:
+ 706              	.LBE48:
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****             QPSet_remove(&QActive_subscrList_[sig].set, p);
+ 707              		.loc 1 225 12 view .LVU194
+ 708 004c C907     		lsls	r1, r1, #31
+ 709 004e EFD5     		bpl	.L37
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** 
+ 710              		.loc 1 226 13 is_stmt 1 view .LVU195
+ 711              	.LVL83:
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 28
+
+
+ 712              	.LBB50:
+ 713              	.LBI50:
+ 471:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h ****     uint_fast8_t const n)
+ 714              		.loc 2 471 20 view .LVU196
+ 715              	.LBB51:
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 716              		.loc 2 475 5 view .LVU197
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 717              		.loc 2 475 62 is_stmt 0 view .LVU198
+ 718 0050 0121     		movs	r1, #1
+ 719 0052 A940     		lsls	r1, r1, r5
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 720              		.loc 2 475 32 view .LVU199
+ 721 0054 8A43     		bics	r2, r1
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** #else
+ 722              		.loc 2 475 17 view .LVU200
+ 723 0056 1A60     		str	r2, [r3]
+ 484:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 724              		.loc 2 484 1 view .LVU201
+ 725 0058 EAE7     		b	.L37
+ 726              	.LVL84:
+ 727              	.L39:
+ 484:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h **** 
+ 728              		.loc 2 484 1 view .LVU202
+ 729              	.LBE51:
+ 730              	.LBE50:
+ 731              	.LBE52:
+ 237:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c ****     }
+ 238:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qf_ps.c **** }
+ 732              		.loc 1 238 1 view .LVU203
+ 733              		@ sp needed
+ 734              	.LVL85:
+ 735              	.LVL86:
+ 736              		.loc 1 238 1 view .LVU204
+ 737 005a 70BD     		pop	{r4, r5, r6, pc}
+ 738              	.L41:
+ 739              		.align	2
+ 740              	.L40:
+ 741 005c 00000000 		.word	QActive_registry_
+ 742 0060 00000000 		.word	.LANCHOR1
+ 743 0064 00000000 		.word	.LANCHOR2
+ 744 0068 00000000 		.word	.LANCHOR0
+ 745              		.cfi_endproc
+ 746              	.LFE22:
+ 748              		.global	QActive_maxPubSignal_
+ 749              		.global	QActive_subscrList_
+ 750              		.section	.bss.QActive_maxPubSignal_,"aw",%nobits
+ 751              		.align	2
+ 752              		.set	.LANCHOR1,. + 0
+ 755              	QActive_maxPubSignal_:
+ 756 0000 00000000 		.space	4
+ 757              		.section	.bss.QActive_subscrList_,"aw",%nobits
+ 758              		.align	2
+ 759              		.set	.LANCHOR0,. + 0
+ 762              	QActive_subscrList_:
+ 763 0000 00000000 		.space	4
+ 764              		.section	.rodata.Q_this_module_,"a"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 29
+
+
+ 765              		.align	2
+ 766              		.set	.LANCHOR2,. + 0
+ 769              	Q_this_module_:
+ 770 0000 71665F70 		.ascii	"qf_ps\000"
+ 770      7300
+ 771              		.text
+ 772              	.Letext0:
+ 773              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 774              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 775              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 776              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h"
+ 777              		.file 8 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ 778              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
+ 779              		.file 10 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qsafe.h"
+ 780              		.file 11 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 qf_ps.c
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:18     .text.QActive_psInit:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:24     .text.QActive_psInit:00000000 QActive_psInit
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:89     .text.QActive_psInit:00000020 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:95     .text.QActive_publish_:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:101    .text.QActive_publish_:00000000 QActive_publish_
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:369    .text.QActive_publish_:000000d0 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:379    .text.QActive_subscribe:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:385    .text.QActive_subscribe:00000000 QActive_subscribe
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:482    .text.QActive_subscribe:00000050 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:490    .text.QActive_unsubscribe:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:496    .text.QActive_unsubscribe:00000000 QActive_unsubscribe
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:593    .text.QActive_unsubscribe:00000050 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:601    .text.QActive_unsubscribeAll:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:607    .text.QActive_unsubscribeAll:00000000 QActive_unsubscribeAll
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:741    .text.QActive_unsubscribeAll:0000005c $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:755    .bss.QActive_maxPubSignal_:00000000 QActive_maxPubSignal_
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:762    .bss.QActive_subscrList_:00000000 QActive_subscrList_
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:751    .bss.QActive_maxPubSignal_:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:758    .bss.QActive_subscrList_:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:765    .rodata.Q_this_module_:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccIcTjfQ.s:769    .rodata.Q_this_module_:00000000 Q_this_module_
+
+UNDEFINED SYMBOLS
+vPortEnterCritical
+vPortExitCritical
+QF_LOG2
+vTaskSuspendAll
+QActive_post_
+xTaskResumeAll
+QF_gc
+Q_onError
+QActive_registry_
