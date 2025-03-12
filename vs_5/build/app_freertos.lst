@@ -1,0 +1,753 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"app_freertos.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.StartDefaultTask,"ax",%progbits
+  18              		.align	1
+  19              		.global	StartDefaultTask
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	StartDefaultTask:
+  25              	.LFB348:
+  26              		.file 1 "Core/Src/app_freertos.c"
+   1:Core/Src/app_freertos.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/app_freertos.c **** /**
+   3:Core/Src/app_freertos.c ****   ******************************************************************************
+   4:Core/Src/app_freertos.c ****   * File Name          : app_freertos.c
+   5:Core/Src/app_freertos.c ****   * Description        : FreeRTOS applicative file
+   6:Core/Src/app_freertos.c ****   ******************************************************************************
+   7:Core/Src/app_freertos.c ****   * @attention
+   8:Core/Src/app_freertos.c ****   *
+   9:Core/Src/app_freertos.c ****   * Copyright (c) 2025 STMicroelectronics.
+  10:Core/Src/app_freertos.c ****   * All rights reserved.
+  11:Core/Src/app_freertos.c ****   *
+  12:Core/Src/app_freertos.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/app_freertos.c ****   * in the root directory of this software component.
+  14:Core/Src/app_freertos.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/app_freertos.c ****   *
+  16:Core/Src/app_freertos.c ****   ******************************************************************************
+  17:Core/Src/app_freertos.c ****   */
+  18:Core/Src/app_freertos.c **** /* USER CODE END Header */
+  19:Core/Src/app_freertos.c **** 
+  20:Core/Src/app_freertos.c **** /* Includes ------------------------------------------------------------------*/
+  21:Core/Src/app_freertos.c **** #include "app_freertos.h"
+  22:Core/Src/app_freertos.c **** 
+  23:Core/Src/app_freertos.c **** /* Private includes ----------------------------------------------------------*/
+  24:Core/Src/app_freertos.c **** /* USER CODE BEGIN Includes */
+  25:Core/Src/app_freertos.c **** #include "adc.h"
+  26:Core/Src/app_freertos.c **** #include "lcd.h"
+  27:Core/Src/app_freertos.c **** /* USER CODE END Includes */
+  28:Core/Src/app_freertos.c **** 
+  29:Core/Src/app_freertos.c **** /* Private typedef -----------------------------------------------------------*/
+  30:Core/Src/app_freertos.c **** /* USER CODE BEGIN PTD */
+  31:Core/Src/app_freertos.c **** 
+  32:Core/Src/app_freertos.c **** /* USER CODE END PTD */
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 2
+
+
+  33:Core/Src/app_freertos.c **** 
+  34:Core/Src/app_freertos.c **** /* Private define ------------------------------------------------------------*/
+  35:Core/Src/app_freertos.c **** /* USER CODE BEGIN PD */
+  36:Core/Src/app_freertos.c **** 
+  37:Core/Src/app_freertos.c **** /* USER CODE END PD */
+  38:Core/Src/app_freertos.c **** 
+  39:Core/Src/app_freertos.c **** /* Private macro -------------------------------------------------------------*/
+  40:Core/Src/app_freertos.c **** /* USER CODE BEGIN PM */
+  41:Core/Src/app_freertos.c **** 
+  42:Core/Src/app_freertos.c **** /* USER CODE END PM */
+  43:Core/Src/app_freertos.c **** 
+  44:Core/Src/app_freertos.c **** /* Private variables ---------------------------------------------------------*/
+  45:Core/Src/app_freertos.c **** /* USER CODE BEGIN Variables */
+  46:Core/Src/app_freertos.c **** 
+  47:Core/Src/app_freertos.c **** /* USER CODE END Variables */
+  48:Core/Src/app_freertos.c **** /* Definitions for defaultTask */
+  49:Core/Src/app_freertos.c **** osThreadId_t defaultTaskHandle;
+  50:Core/Src/app_freertos.c **** const osThreadAttr_t defaultTask_attributes = {
+  51:Core/Src/app_freertos.c ****   .name = "defaultTask",
+  52:Core/Src/app_freertos.c ****   .priority = (osPriority_t) osPriorityNormal,
+  53:Core/Src/app_freertos.c ****   .stack_size = 128 * 4
+  54:Core/Src/app_freertos.c **** };
+  55:Core/Src/app_freertos.c **** /* Definitions for myTask02 */
+  56:Core/Src/app_freertos.c **** osThreadId_t myTask02Handle;
+  57:Core/Src/app_freertos.c **** const osThreadAttr_t myTask02_attributes = {
+  58:Core/Src/app_freertos.c ****   .name = "myTask02",
+  59:Core/Src/app_freertos.c ****   .priority = (osPriority_t) osPriorityLow,
+  60:Core/Src/app_freertos.c ****   .stack_size = 128 * 4
+  61:Core/Src/app_freertos.c **** };
+  62:Core/Src/app_freertos.c **** /* Definitions for myTask03 */
+  63:Core/Src/app_freertos.c **** osThreadId_t myTask03Handle;
+  64:Core/Src/app_freertos.c **** const osThreadAttr_t myTask03_attributes = {
+  65:Core/Src/app_freertos.c ****   .name = "myTask03",
+  66:Core/Src/app_freertos.c ****   .priority = (osPriority_t) osPriorityLow,
+  67:Core/Src/app_freertos.c ****   .stack_size = 128 * 4
+  68:Core/Src/app_freertos.c **** };
+  69:Core/Src/app_freertos.c **** 
+  70:Core/Src/app_freertos.c **** /* Private function prototypes -----------------------------------------------*/
+  71:Core/Src/app_freertos.c **** /* USER CODE BEGIN FunctionPrototypes */
+  72:Core/Src/app_freertos.c **** uint16_t lightValue;  // Значення від фоторезистора
+  73:Core/Src/app_freertos.c **** 
+  74:Core/Src/app_freertos.c **** long map(long x, long in_min, long in_max, long out_min, long out_max)
+  75:Core/Src/app_freertos.c **** {
+  76:Core/Src/app_freertos.c ****   return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
+  77:Core/Src/app_freertos.c **** }
+  78:Core/Src/app_freertos.c **** /* USER CODE END FunctionPrototypes */
+  79:Core/Src/app_freertos.c **** 
+  80:Core/Src/app_freertos.c **** /**
+  81:Core/Src/app_freertos.c ****   * @brief  FreeRTOS initialization
+  82:Core/Src/app_freertos.c ****   * @param  None
+  83:Core/Src/app_freertos.c ****   * @retval None
+  84:Core/Src/app_freertos.c ****   */
+  85:Core/Src/app_freertos.c **** void MX_FREERTOS_Init(void) {
+  86:Core/Src/app_freertos.c ****   /* USER CODE BEGIN Init */
+  87:Core/Src/app_freertos.c **** 
+  88:Core/Src/app_freertos.c ****   /* USER CODE END Init */
+  89:Core/Src/app_freertos.c **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 3
+
+
+  90:Core/Src/app_freertos.c ****   /* USER CODE BEGIN RTOS_MUTEX */
+  91:Core/Src/app_freertos.c ****   /* add mutexes, ... */
+  92:Core/Src/app_freertos.c ****   /* USER CODE END RTOS_MUTEX */
+  93:Core/Src/app_freertos.c **** 
+  94:Core/Src/app_freertos.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+  95:Core/Src/app_freertos.c ****   /* add semaphores, ... */
+  96:Core/Src/app_freertos.c ****   /* USER CODE END RTOS_SEMAPHORES */
+  97:Core/Src/app_freertos.c **** 
+  98:Core/Src/app_freertos.c ****   /* USER CODE BEGIN RTOS_TIMERS */
+  99:Core/Src/app_freertos.c ****   /* start timers, add new ones, ... */
+ 100:Core/Src/app_freertos.c ****   /* USER CODE END RTOS_TIMERS */
+ 101:Core/Src/app_freertos.c **** 
+ 102:Core/Src/app_freertos.c ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 103:Core/Src/app_freertos.c ****   /* add queues, ... */
+ 104:Core/Src/app_freertos.c ****   /* USER CODE END RTOS_QUEUES */
+ 105:Core/Src/app_freertos.c ****   /* creation of defaultTask */
+ 106:Core/Src/app_freertos.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+ 107:Core/Src/app_freertos.c **** 
+ 108:Core/Src/app_freertos.c ****   /* creation of myTask02 */
+ 109:Core/Src/app_freertos.c ****   myTask02Handle = osThreadNew(StartTask02, NULL, &myTask02_attributes);
+ 110:Core/Src/app_freertos.c **** 
+ 111:Core/Src/app_freertos.c ****   /* creation of myTask03 */
+ 112:Core/Src/app_freertos.c ****   myTask03Handle = osThreadNew(StartTask03, NULL, &myTask03_attributes);
+ 113:Core/Src/app_freertos.c **** 
+ 114:Core/Src/app_freertos.c ****   /* USER CODE BEGIN RTOS_THREADS */
+ 115:Core/Src/app_freertos.c ****   /* add threads, ... */
+ 116:Core/Src/app_freertos.c ****   /* USER CODE END RTOS_THREADS */
+ 117:Core/Src/app_freertos.c **** 
+ 118:Core/Src/app_freertos.c ****   /* USER CODE BEGIN RTOS_EVENTS */
+ 119:Core/Src/app_freertos.c ****   /* add events, ... */
+ 120:Core/Src/app_freertos.c ****   /* USER CODE END RTOS_EVENTS */
+ 121:Core/Src/app_freertos.c **** 
+ 122:Core/Src/app_freertos.c **** }
+ 123:Core/Src/app_freertos.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+ 124:Core/Src/app_freertos.c **** /**
+ 125:Core/Src/app_freertos.c **** * @brief Function implementing the defaultTask thread.
+ 126:Core/Src/app_freertos.c **** * @param argument: Not used
+ 127:Core/Src/app_freertos.c **** * @retval None
+ 128:Core/Src/app_freertos.c **** */
+ 129:Core/Src/app_freertos.c **** /* USER CODE END Header_StartDefaultTask */
+ 130:Core/Src/app_freertos.c **** void StartDefaultTask(void *argument)
+ 131:Core/Src/app_freertos.c **** {
+  27              		.loc 1 131 1 view -0
+  28              		.cfi_startproc
+  29              		@ Volatile: function does not return.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33              		.loc 1 131 1 is_stmt 0 view .LVU1
+  34 0000 10B5     		push	{r4, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  39              	.LVL1:
+  40              	.L2:
+ 132:Core/Src/app_freertos.c ****   /* USER CODE BEGIN defaultTask */
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 4
+
+
+ 133:Core/Src/app_freertos.c ****   /* Infinite loop */
+ 134:Core/Src/app_freertos.c ****   for(;;)
+  41              		.loc 1 134 3 is_stmt 1 discriminator 1 view .LVU2
+ 135:Core/Src/app_freertos.c ****   {
+ 136:Core/Src/app_freertos.c ****     osDelay(1000);
+  42              		.loc 1 136 5 discriminator 1 view .LVU3
+  43 0002 FA20     		movs	r0, #250
+  44 0004 8000     		lsls	r0, r0, #2
+  45 0006 FFF7FEFF 		bl	osDelay
+  46              	.LVL2:
+ 134:Core/Src/app_freertos.c ****   {
+  47              		.loc 1 134 8 discriminator 1 view .LVU4
+  48 000a FAE7     		b	.L2
+  49              		.cfi_endproc
+  50              	.LFE348:
+  52              		.section	.text.StartTask03,"ax",%progbits
+  53              		.align	1
+  54              		.global	StartTask03
+  55              		.syntax unified
+  56              		.code	16
+  57              		.thumb_func
+  59              	StartTask03:
+  60              	.LFB350:
+ 137:Core/Src/app_freertos.c ****   }
+ 138:Core/Src/app_freertos.c ****   /* USER CODE END defaultTask */
+ 139:Core/Src/app_freertos.c **** }
+ 140:Core/Src/app_freertos.c **** 
+ 141:Core/Src/app_freertos.c **** /* USER CODE BEGIN Header_StartTask02 */
+ 142:Core/Src/app_freertos.c **** /**
+ 143:Core/Src/app_freertos.c **** * @brief Function implementing the myTask02 thread.
+ 144:Core/Src/app_freertos.c **** * @param argument: Not used
+ 145:Core/Src/app_freertos.c **** * @retval None
+ 146:Core/Src/app_freertos.c **** */
+ 147:Core/Src/app_freertos.c **** /* USER CODE END Header_StartTask02 */
+ 148:Core/Src/app_freertos.c **** void StartTask02(void *argument)
+ 149:Core/Src/app_freertos.c **** {
+ 150:Core/Src/app_freertos.c ****   /* USER CODE BEGIN myTask02 */
+ 151:Core/Src/app_freertos.c ****   char buffer[15];  // Буфер для рядка
+ 152:Core/Src/app_freertos.c ****   /* Infinite loop */
+ 153:Core/Src/app_freertos.c ****   for(;;)
+ 154:Core/Src/app_freertos.c ****   {
+ 155:Core/Src/app_freertos.c ****     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+ 156:Core/Src/app_freertos.c ****     HAL_ADC_Start(&hadc1);
+ 157:Core/Src/app_freertos.c ****     HAL_ADC_PollForConversion(&hadc1, 100);
+ 158:Core/Src/app_freertos.c ****     lightValue = HAL_ADC_GetValue(&hadc1);
+ 159:Core/Src/app_freertos.c ****     HAL_ADC_Stop(&hadc1);
+ 160:Core/Src/app_freertos.c ****     int lightPercent = map(lightValue, 4096, 0, 0, 100);
+ 161:Core/Src/app_freertos.c ****     sprintf(buffer, "%d", lightPercent);  // Конвертуємо int у рядок
+ 162:Core/Src/app_freertos.c ****     if (lightPercent < 20) {
+ 163:Core/Src/app_freertos.c ****       lcd_print("Dark");
+ 164:Core/Src/app_freertos.c ****   } else {
+ 165:Core/Src/app_freertos.c ****       lcd_print("Light");
+ 166:Core/Src/app_freertos.c ****   }
+ 167:Core/Src/app_freertos.c ****     vTaskDelay(100 / portTICK_PERIOD_MS);
+ 168:Core/Src/app_freertos.c ****     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+ 169:Core/Src/app_freertos.c ****     vTaskDelay(100 / portTICK_PERIOD_MS);
+ 170:Core/Src/app_freertos.c ****   }
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 5
+
+
+ 171:Core/Src/app_freertos.c ****   /* USER CODE END myTask02 */
+ 172:Core/Src/app_freertos.c **** }
+ 173:Core/Src/app_freertos.c **** 
+ 174:Core/Src/app_freertos.c **** /* USER CODE BEGIN Header_StartTask03 */
+ 175:Core/Src/app_freertos.c **** /**
+ 176:Core/Src/app_freertos.c **** * @brief Function implementing the myTask03 thread.
+ 177:Core/Src/app_freertos.c **** * @param argument: Not used
+ 178:Core/Src/app_freertos.c **** * @retval None
+ 179:Core/Src/app_freertos.c **** */
+ 180:Core/Src/app_freertos.c **** /* USER CODE END Header_StartTask03 */
+ 181:Core/Src/app_freertos.c **** void StartTask03(void *argument)
+ 182:Core/Src/app_freertos.c **** {
+  61              		.loc 1 182 1 view -0
+  62              		.cfi_startproc
+  63              		@ Volatile: function does not return.
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              	.LVL3:
+  67              		.loc 1 182 1 is_stmt 0 view .LVU6
+  68 0000 10B5     		push	{r4, lr}
+  69              	.LCFI1:
+  70              		.cfi_def_cfa_offset 8
+  71              		.cfi_offset 4, -8
+  72              		.cfi_offset 14, -4
+  73              	.LVL4:
+  74              	.L4:
+ 183:Core/Src/app_freertos.c ****   /* USER CODE BEGIN myTask03 */
+ 184:Core/Src/app_freertos.c ****   /* Infinite loop */
+ 185:Core/Src/app_freertos.c ****   for(;;)
+  75              		.loc 1 185 3 is_stmt 1 discriminator 1 view .LVU7
+ 186:Core/Src/app_freertos.c ****   {
+ 187:Core/Src/app_freertos.c ****     osDelay(1000);
+  76              		.loc 1 187 5 discriminator 1 view .LVU8
+  77 0002 FA20     		movs	r0, #250
+  78 0004 8000     		lsls	r0, r0, #2
+  79 0006 FFF7FEFF 		bl	osDelay
+  80              	.LVL5:
+ 185:Core/Src/app_freertos.c ****   {
+  81              		.loc 1 185 8 discriminator 1 view .LVU9
+  82 000a FAE7     		b	.L4
+  83              		.cfi_endproc
+  84              	.LFE350:
+  86              		.global	__aeabi_idiv
+  87              		.section	.text.map,"ax",%progbits
+  88              		.align	1
+  89              		.global	map
+  90              		.syntax unified
+  91              		.code	16
+  92              		.thumb_func
+  94              	map:
+  95              	.LVL6:
+  96              	.LFB346:
+  75:Core/Src/app_freertos.c ****   return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
+  97              		.loc 1 75 1 view -0
+  98              		.cfi_startproc
+  99              		@ args = 4, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 6
+
+
+  75:Core/Src/app_freertos.c ****   return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
+ 101              		.loc 1 75 1 is_stmt 0 view .LVU11
+ 102 0000 10B5     		push	{r4, lr}
+ 103              	.LCFI2:
+ 104              		.cfi_def_cfa_offset 8
+ 105              		.cfi_offset 4, -8
+ 106              		.cfi_offset 14, -4
+ 107 0002 1C00     		movs	r4, r3
+  76:Core/Src/app_freertos.c **** }
+ 108              		.loc 1 76 3 is_stmt 1 view .LVU12
+  76:Core/Src/app_freertos.c **** }
+ 109              		.loc 1 76 13 is_stmt 0 view .LVU13
+ 110 0004 431A     		subs	r3, r0, r1
+ 111              	.LVL7:
+  76:Core/Src/app_freertos.c **** }
+ 112              		.loc 1 76 34 view .LVU14
+ 113 0006 0298     		ldr	r0, [sp, #8]
+ 114              	.LVL8:
+  76:Core/Src/app_freertos.c **** }
+ 115              		.loc 1 76 34 view .LVU15
+ 116 0008 001B     		subs	r0, r0, r4
+  76:Core/Src/app_freertos.c **** }
+ 117              		.loc 1 76 44 view .LVU16
+ 118 000a 0130     		adds	r0, r0, #1
+  76:Core/Src/app_freertos.c **** }
+ 119              		.loc 1 76 23 view .LVU17
+ 120 000c 5843     		muls	r0, r3
+  76:Core/Src/app_freertos.c **** }
+ 121              		.loc 1 76 59 view .LVU18
+ 122 000e 511A     		subs	r1, r2, r1
+ 123              	.LVL9:
+  76:Core/Src/app_freertos.c **** }
+ 124              		.loc 1 76 68 view .LVU19
+ 125 0010 0131     		adds	r1, r1, #1
+  76:Core/Src/app_freertos.c **** }
+ 126              		.loc 1 76 49 view .LVU20
+ 127 0012 FFF7FEFF 		bl	__aeabi_idiv
+ 128              	.LVL10:
+  76:Core/Src/app_freertos.c **** }
+ 129              		.loc 1 76 73 view .LVU21
+ 130 0016 0019     		adds	r0, r0, r4
+  77:Core/Src/app_freertos.c **** /* USER CODE END FunctionPrototypes */
+ 131              		.loc 1 77 1 view .LVU22
+ 132              		@ sp needed
+ 133              	.LVL11:
+  77:Core/Src/app_freertos.c **** /* USER CODE END FunctionPrototypes */
+ 134              		.loc 1 77 1 view .LVU23
+ 135 0018 10BD     		pop	{r4, pc}
+ 136              		.cfi_endproc
+ 137              	.LFE346:
+ 139              		.section	.rodata.StartTask02.str1.4,"aMS",%progbits,1
+ 140              		.align	2
+ 141              	.LC2:
+ 142 0000 256400   		.ascii	"%d\000"
+ 143 0003 00       		.align	2
+ 144              	.LC4:
+ 145 0004 4461726B 		.ascii	"Dark\000"
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 7
+
+
+ 145      00
+ 146 0009 000000   		.align	2
+ 147              	.LC6:
+ 148 000c 4C696768 		.ascii	"Light\000"
+ 148      7400
+ 149              		.section	.text.StartTask02,"ax",%progbits
+ 150              		.align	1
+ 151              		.global	StartTask02
+ 152              		.syntax unified
+ 153              		.code	16
+ 154              		.thumb_func
+ 156              	StartTask02:
+ 157              	.LFB349:
+ 149:Core/Src/app_freertos.c ****   /* USER CODE BEGIN myTask02 */
+ 158              		.loc 1 149 1 is_stmt 1 view -0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 16
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              	.LVL12:
+ 149:Core/Src/app_freertos.c ****   /* USER CODE BEGIN myTask02 */
+ 163              		.loc 1 149 1 is_stmt 0 view .LVU25
+ 164 0000 70B5     		push	{r4, r5, r6, lr}
+ 165              	.LCFI3:
+ 166              		.cfi_def_cfa_offset 16
+ 167              		.cfi_offset 4, -16
+ 168              		.cfi_offset 5, -12
+ 169              		.cfi_offset 6, -8
+ 170              		.cfi_offset 14, -4
+ 171 0002 86B0     		sub	sp, sp, #24
+ 172              	.LCFI4:
+ 173              		.cfi_def_cfa_offset 40
+ 174 0004 0FE0     		b	.L9
+ 175              	.LVL13:
+ 176              	.L10:
+ 177              	.LBB2:
+ 163:Core/Src/app_freertos.c ****   } else {
+ 178              		.loc 1 163 7 is_stmt 1 view .LVU26
+ 179 0006 1E48     		ldr	r0, .L11
+ 180 0008 FFF7FEFF 		bl	lcd_print
+ 181              	.LVL14:
+ 182              	.L8:
+ 167:Core/Src/app_freertos.c ****     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+ 183              		.loc 1 167 5 view .LVU27
+ 184 000c 6420     		movs	r0, #100
+ 185 000e FFF7FEFF 		bl	vTaskDelay
+ 186              	.LVL15:
+ 168:Core/Src/app_freertos.c ****     vTaskDelay(100 / portTICK_PERIOD_MS);
+ 187              		.loc 1 168 5 view .LVU28
+ 188 0012 8021     		movs	r1, #128
+ 189 0014 A020     		movs	r0, #160
+ 190 0016 0022     		movs	r2, #0
+ 191 0018 4901     		lsls	r1, r1, #5
+ 192 001a C005     		lsls	r0, r0, #23
+ 193 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 194              	.LVL16:
+ 169:Core/Src/app_freertos.c ****   }
+ 195              		.loc 1 169 5 view .LVU29
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 8
+
+
+ 196 0020 6420     		movs	r0, #100
+ 197 0022 FFF7FEFF 		bl	vTaskDelay
+ 198              	.LVL17:
+ 199              	.LBE2:
+ 153:Core/Src/app_freertos.c ****   {
+ 200              		.loc 1 153 8 view .LVU30
+ 201              	.L9:
+ 151:Core/Src/app_freertos.c ****   /* Infinite loop */
+ 202              		.loc 1 151 3 view .LVU31
+ 153:Core/Src/app_freertos.c ****   {
+ 203              		.loc 1 153 3 view .LVU32
+ 204              	.LBB3:
+ 155:Core/Src/app_freertos.c ****     HAL_ADC_Start(&hadc1);
+ 205              		.loc 1 155 5 view .LVU33
+ 206 0026 8025     		movs	r5, #128
+ 207 0028 6D01     		lsls	r5, r5, #5
+ 208 002a A020     		movs	r0, #160
+ 209 002c 0122     		movs	r2, #1
+ 210 002e 2900     		movs	r1, r5
+ 211 0030 C005     		lsls	r0, r0, #23
+ 212 0032 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 213              	.LVL18:
+ 156:Core/Src/app_freertos.c ****     HAL_ADC_PollForConversion(&hadc1, 100);
+ 214              		.loc 1 156 5 view .LVU34
+ 215 0036 134C     		ldr	r4, .L11+4
+ 216 0038 2000     		movs	r0, r4
+ 217 003a FFF7FEFF 		bl	HAL_ADC_Start
+ 218              	.LVL19:
+ 157:Core/Src/app_freertos.c ****     lightValue = HAL_ADC_GetValue(&hadc1);
+ 219              		.loc 1 157 5 view .LVU35
+ 220 003e 6421     		movs	r1, #100
+ 221 0040 2000     		movs	r0, r4
+ 222 0042 FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 223              	.LVL20:
+ 158:Core/Src/app_freertos.c ****     HAL_ADC_Stop(&hadc1);
+ 224              		.loc 1 158 5 view .LVU36
+ 158:Core/Src/app_freertos.c ****     HAL_ADC_Stop(&hadc1);
+ 225              		.loc 1 158 18 is_stmt 0 view .LVU37
+ 226 0046 2000     		movs	r0, r4
+ 227 0048 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 228              	.LVL21:
+ 158:Core/Src/app_freertos.c ****     HAL_ADC_Stop(&hadc1);
+ 229              		.loc 1 158 16 view .LVU38
+ 230 004c 0E4E     		ldr	r6, .L11+8
+ 231 004e 3080     		strh	r0, [r6]
+ 159:Core/Src/app_freertos.c ****     int lightPercent = map(lightValue, 4096, 0, 0, 100);
+ 232              		.loc 1 159 5 is_stmt 1 view .LVU39
+ 233 0050 2000     		movs	r0, r4
+ 234 0052 FFF7FEFF 		bl	HAL_ADC_Stop
+ 235              	.LVL22:
+ 160:Core/Src/app_freertos.c ****     sprintf(buffer, "%d", lightPercent);  // Конвертуємо int у рядок
+ 236              		.loc 1 160 5 view .LVU40
+ 160:Core/Src/app_freertos.c ****     sprintf(buffer, "%d", lightPercent);  // Конвертуємо int у рядок
+ 237              		.loc 1 160 24 is_stmt 0 view .LVU41
+ 238 0056 3088     		ldrh	r0, [r6]
+ 239 0058 6423     		movs	r3, #100
+ 240 005a 0093     		str	r3, [sp]
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 9
+
+
+ 241 005c 0023     		movs	r3, #0
+ 242 005e 0022     		movs	r2, #0
+ 243 0060 2900     		movs	r1, r5
+ 244 0062 FFF7FEFF 		bl	map
+ 245              	.LVL23:
+ 246 0066 0400     		movs	r4, r0
+ 247              	.LVL24:
+ 161:Core/Src/app_freertos.c ****     if (lightPercent < 20) {
+ 248              		.loc 1 161 5 is_stmt 1 view .LVU42
+ 249 0068 0200     		movs	r2, r0
+ 250 006a 0849     		ldr	r1, .L11+12
+ 251 006c 02A8     		add	r0, sp, #8
+ 252              	.LVL25:
+ 161:Core/Src/app_freertos.c ****     if (lightPercent < 20) {
+ 253              		.loc 1 161 5 is_stmt 0 view .LVU43
+ 254 006e FFF7FEFF 		bl	sprintf
+ 255              	.LVL26:
+ 162:Core/Src/app_freertos.c ****       lcd_print("Dark");
+ 256              		.loc 1 162 5 is_stmt 1 view .LVU44
+ 162:Core/Src/app_freertos.c ****       lcd_print("Dark");
+ 257              		.loc 1 162 8 is_stmt 0 view .LVU45
+ 258 0072 132C     		cmp	r4, #19
+ 259 0074 C7DD     		ble	.L10
+ 165:Core/Src/app_freertos.c ****   }
+ 260              		.loc 1 165 7 is_stmt 1 view .LVU46
+ 261 0076 0648     		ldr	r0, .L11+16
+ 262 0078 FFF7FEFF 		bl	lcd_print
+ 263              	.LVL27:
+ 264 007c C6E7     		b	.L8
+ 265              	.L12:
+ 266 007e C046     		.align	2
+ 267              	.L11:
+ 268 0080 04000000 		.word	.LC4
+ 269 0084 00000000 		.word	hadc1
+ 270 0088 00000000 		.word	.LANCHOR0
+ 271 008c 00000000 		.word	.LC2
+ 272 0090 0C000000 		.word	.LC6
+ 273              	.LBE3:
+ 274              		.cfi_endproc
+ 275              	.LFE349:
+ 277              		.section	.text.MX_FREERTOS_Init,"ax",%progbits
+ 278              		.align	1
+ 279              		.global	MX_FREERTOS_Init
+ 280              		.syntax unified
+ 281              		.code	16
+ 282              		.thumb_func
+ 284              	MX_FREERTOS_Init:
+ 285              	.LFB347:
+  85:Core/Src/app_freertos.c ****   /* USER CODE BEGIN Init */
+ 286              		.loc 1 85 29 view -0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 0
+ 289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 290 0000 10B5     		push	{r4, lr}
+ 291              	.LCFI5:
+ 292              		.cfi_def_cfa_offset 8
+ 293              		.cfi_offset 4, -8
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 10
+
+
+ 294              		.cfi_offset 14, -4
+ 106:Core/Src/app_freertos.c **** 
+ 295              		.loc 1 106 3 view .LVU48
+ 106:Core/Src/app_freertos.c **** 
+ 296              		.loc 1 106 23 is_stmt 0 view .LVU49
+ 297 0002 0B4A     		ldr	r2, .L14
+ 298 0004 0021     		movs	r1, #0
+ 299 0006 0B48     		ldr	r0, .L14+4
+ 300 0008 FFF7FEFF 		bl	osThreadNew
+ 301              	.LVL28:
+ 106:Core/Src/app_freertos.c **** 
+ 302              		.loc 1 106 21 view .LVU50
+ 303 000c 0A4B     		ldr	r3, .L14+8
+ 304 000e 1860     		str	r0, [r3]
+ 109:Core/Src/app_freertos.c **** 
+ 305              		.loc 1 109 3 is_stmt 1 view .LVU51
+ 109:Core/Src/app_freertos.c **** 
+ 306              		.loc 1 109 20 is_stmt 0 view .LVU52
+ 307 0010 0A4A     		ldr	r2, .L14+12
+ 308 0012 0021     		movs	r1, #0
+ 309 0014 0A48     		ldr	r0, .L14+16
+ 310 0016 FFF7FEFF 		bl	osThreadNew
+ 311              	.LVL29:
+ 109:Core/Src/app_freertos.c **** 
+ 312              		.loc 1 109 18 view .LVU53
+ 313 001a 0A4B     		ldr	r3, .L14+20
+ 314 001c 1860     		str	r0, [r3]
+ 112:Core/Src/app_freertos.c **** 
+ 315              		.loc 1 112 3 is_stmt 1 view .LVU54
+ 112:Core/Src/app_freertos.c **** 
+ 316              		.loc 1 112 20 is_stmt 0 view .LVU55
+ 317 001e 0A4A     		ldr	r2, .L14+24
+ 318 0020 0021     		movs	r1, #0
+ 319 0022 0A48     		ldr	r0, .L14+28
+ 320 0024 FFF7FEFF 		bl	osThreadNew
+ 321              	.LVL30:
+ 112:Core/Src/app_freertos.c **** 
+ 322              		.loc 1 112 18 view .LVU56
+ 323 0028 094B     		ldr	r3, .L14+32
+ 324 002a 1860     		str	r0, [r3]
+ 122:Core/Src/app_freertos.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+ 325              		.loc 1 122 1 view .LVU57
+ 326              		@ sp needed
+ 327 002c 10BD     		pop	{r4, pc}
+ 328              	.L15:
+ 329 002e C046     		.align	2
+ 330              	.L14:
+ 331 0030 00000000 		.word	.LANCHOR1
+ 332 0034 00000000 		.word	StartDefaultTask
+ 333 0038 00000000 		.word	.LANCHOR2
+ 334 003c 00000000 		.word	.LANCHOR3
+ 335 0040 00000000 		.word	StartTask02
+ 336 0044 00000000 		.word	.LANCHOR4
+ 337 0048 00000000 		.word	.LANCHOR5
+ 338 004c 00000000 		.word	StartTask03
+ 339 0050 00000000 		.word	.LANCHOR6
+ 340              		.cfi_endproc
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 11
+
+
+ 341              	.LFE347:
+ 343              		.global	lightValue
+ 344              		.global	myTask03_attributes
+ 345              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 346              		.align	2
+ 347              	.LC17:
+ 348 0000 6D795461 		.ascii	"myTask03\000"
+ 348      736B3033 
+ 348      00
+ 349              		.global	myTask03Handle
+ 350              		.global	myTask02_attributes
+ 351 0009 000000   		.align	2
+ 352              	.LC18:
+ 353 000c 6D795461 		.ascii	"myTask02\000"
+ 353      736B3032 
+ 353      00
+ 354              		.global	myTask02Handle
+ 355              		.global	defaultTask_attributes
+ 356 0015 000000   		.align	2
+ 357              	.LC19:
+ 358 0018 64656661 		.ascii	"defaultTask\000"
+ 358      756C7454 
+ 358      61736B00 
+ 359              		.global	defaultTaskHandle
+ 360              		.section	.bss.defaultTaskHandle,"aw",%nobits
+ 361              		.align	2
+ 362              		.set	.LANCHOR2,. + 0
+ 365              	defaultTaskHandle:
+ 366 0000 00000000 		.space	4
+ 367              		.section	.bss.lightValue,"aw",%nobits
+ 368              		.align	1
+ 369              		.set	.LANCHOR0,. + 0
+ 372              	lightValue:
+ 373 0000 0000     		.space	2
+ 374              		.section	.bss.myTask02Handle,"aw",%nobits
+ 375              		.align	2
+ 376              		.set	.LANCHOR4,. + 0
+ 379              	myTask02Handle:
+ 380 0000 00000000 		.space	4
+ 381              		.section	.bss.myTask03Handle,"aw",%nobits
+ 382              		.align	2
+ 383              		.set	.LANCHOR6,. + 0
+ 386              	myTask03Handle:
+ 387 0000 00000000 		.space	4
+ 388              		.section	.rodata.defaultTask_attributes,"a"
+ 389              		.align	2
+ 390              		.set	.LANCHOR1,. + 0
+ 393              	defaultTask_attributes:
+ 394 0000 18000000 		.word	.LC19
+ 395 0004 00000000 		.space	16
+ 395      00000000 
+ 395      00000000 
+ 395      00000000 
+ 396 0014 00020000 		.word	512
+ 397 0018 18000000 		.word	24
+ 398 001c 00000000 		.space	8
+ 398      00000000 
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 12
+
+
+ 399              		.section	.rodata.myTask02_attributes,"a"
+ 400              		.align	2
+ 401              		.set	.LANCHOR3,. + 0
+ 404              	myTask02_attributes:
+ 405 0000 0C000000 		.word	.LC18
+ 406 0004 00000000 		.space	16
+ 406      00000000 
+ 406      00000000 
+ 406      00000000 
+ 407 0014 00020000 		.word	512
+ 408 0018 08000000 		.word	8
+ 409 001c 00000000 		.space	8
+ 409      00000000 
+ 410              		.section	.rodata.myTask03_attributes,"a"
+ 411              		.align	2
+ 412              		.set	.LANCHOR5,. + 0
+ 415              	myTask03_attributes:
+ 416 0000 00000000 		.word	.LC17
+ 417 0004 00000000 		.space	16
+ 417      00000000 
+ 417      00000000 
+ 417      00000000 
+ 418 0014 00020000 		.word	512
+ 419 0018 08000000 		.word	8
+ 420 001c 00000000 		.space	8
+ 420      00000000 
+ 421              		.text
+ 422              	.Letext0:
+ 423              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 424              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 425              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h"
+ 426              		.file 5 "Drivers/CMSIS/Device/ST/STM32C0xx/Include/stm32c031xx.h"
+ 427              		.file 6 "Drivers/CMSIS/Device/ST/STM32C0xx/Include/stm32c0xx.h"
+ 428              		.file 7 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_def.h"
+ 429              		.file 8 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_gpio.h"
+ 430              		.file 9 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_dma.h"
+ 431              		.file 10 "Drivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal_adc.h"
+ 432              		.file 11 "Middlewares/Third_Party/CMSIS/RTOS2/Include/cmsis_os2.h"
+ 433              		.file 12 "Core/Inc/app_freertos.h"
+ 434              		.file 13 "Core/Inc/adc.h"
+ 435              		.file 14 "Core/Inc/lcd.h"
+ 436              		.file 15 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ 437              		.file 16 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\
+ARM GAS  C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 app_freertos.c
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:18     .text.StartDefaultTask:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:24     .text.StartDefaultTask:00000000 StartDefaultTask
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:53     .text.StartTask03:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:59     .text.StartTask03:00000000 StartTask03
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:88     .text.map:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:94     .text.map:00000000 map
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:140    .rodata.StartTask02.str1.4:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:150    .text.StartTask02:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:156    .text.StartTask02:00000000 StartTask02
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:268    .text.StartTask02:00000080 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:278    .text.MX_FREERTOS_Init:00000000 $t
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:284    .text.MX_FREERTOS_Init:00000000 MX_FREERTOS_Init
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:331    .text.MX_FREERTOS_Init:00000030 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:372    .bss.lightValue:00000000 lightValue
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:415    .rodata.myTask03_attributes:00000000 myTask03_attributes
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:346    .rodata.str1.4:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:386    .bss.myTask03Handle:00000000 myTask03Handle
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:404    .rodata.myTask02_attributes:00000000 myTask02_attributes
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:379    .bss.myTask02Handle:00000000 myTask02Handle
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:393    .rodata.defaultTask_attributes:00000000 defaultTask_attributes
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:365    .bss.defaultTaskHandle:00000000 defaultTaskHandle
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:361    .bss.defaultTaskHandle:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:368    .bss.lightValue:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:375    .bss.myTask02Handle:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:382    .bss.myTask03Handle:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:389    .rodata.defaultTask_attributes:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:400    .rodata.myTask02_attributes:00000000 $d
+C:\Users\main\AppData\Local\Temp\ccJZI2Vg.s:411    .rodata.myTask03_attributes:00000000 $d
+
+UNDEFINED SYMBOLS
+osDelay
+__aeabi_idiv
+lcd_print
+vTaskDelay
+HAL_GPIO_WritePin
+HAL_ADC_Start
+HAL_ADC_PollForConversion
+HAL_ADC_GetValue
+HAL_ADC_Stop
+sprintf
+hadc1
+osThreadNew

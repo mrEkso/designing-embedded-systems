@@ -1,0 +1,2450 @@
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"qep_hsm.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.QHsm_isIn_,"ax",%progbits
+  18              		.align	1
+  19              		.global	QHsm_isIn_
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	QHsm_isIn_:
+  25              	.LVL0:
+  26              	.LFB19:
+  27              		.file 1 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c"
+   1:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //============================================================================
+   2:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // QP/C Real-Time Embedded Framework (RTEF)
+   3:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // Version 8.0.2
+   4:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+   5:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // Copyright (C) 2005 Quantum Leaps, LLC. All rights reserved.
+   6:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+   7:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //                    Q u a n t u m  L e a P s
+   8:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //                    ------------------------
+   9:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //                    Modern Embedded Software
+  10:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+  11:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-QL-commercial
+  12:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+  13:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // This software is dual-licensed under the terms of the open-source GNU
+  14:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // General Public License (GPL) or under the terms of one of the closed-
+  15:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // source Quantum Leaps commercial licenses.
+  16:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+  17:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // Redistributions in source code must retain this top-level comment block.
+  18:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // Plagiarizing this software to sidestep the license obligations is illegal.
+  19:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+  20:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // NOTE:
+  21:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // The GPL does NOT permit the incorporation of this code into proprietary
+  22:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // programs. Please contact Quantum Leaps for commercial licensing options,
+  23:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // which expressly supersede the GPL and are designed explicitly for
+  24:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // closed-source distribution.
+  25:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //
+  26:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // Quantum Leaps contact information:
+  27:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // <www.state-machine.com/licensing>
+  28:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // <info@state-machine.com>
+  29:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //============================================================================
+  30:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QP_IMPL           // this is QP implementation
+  31:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #include "qp_port.h"      // QP port
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 2
+
+
+  32:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #include "qsafe.h"        // QP Functional Safety (FuSa) Subsystem
+  33:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY              // QS software tracing enabled?
+  34:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     #include "qs_port.h"  // QS port
+  35:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     #include "qs_pkg.h"   // QS facilities for pre-defined trace records
+  36:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #else
+  37:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     #include "qs_dummy.h" // disable the QS software tracing
+  38:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // Q_SPY
+  39:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  40:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** Q_DEFINE_THIS_MODULE("qep_hsm")
+  41:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  42:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // maximum depth of state nesting in a QHsm (including the top level),
+  43:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // must be >= 3
+  44:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QHSM_MAX_NEST_DEPTH_  6
+  45:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  46:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static QEvt const l_reservedEvt_[4] = {
+  47:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QEVT_INITIALIZER(Q_EMPTY_SIG),
+  48:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QEVT_INITIALIZER(Q_ENTRY_SIG),
+  49:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QEVT_INITIALIZER(Q_EXIT_SIG),
+  50:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QEVT_INITIALIZER(Q_INIT_SIG)
+  51:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** };
+  52:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  53:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //============================================================================
+  54:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @cond INTERNAL
+  55:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  56:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // internal helper macro to pass a reserved event into the state handler
+  57:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QHSM_RESERVED_EVT_(state_, sig_) \
+  58:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     ((*(state_))(me, &l_reservedEvt_[(sig_)]))
+  59:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  60:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+  61:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // helper macro to trace state action (entry/exit)
+  62:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_STATE_ACT_(rec_, state_)    \
+  63:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();                   \
+  64:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_BEGIN_PRE((rec_), qsId)         \
+  65:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_OBJ_PRE(me);                \
+  66:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(state_);            \
+  67:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_END_PRE()                       \
+  68:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT()
+  69:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  70:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // internal helper macro to top-most init
+  71:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TOP_INIT_(rec_, trg_)       \
+  72:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();                   \
+  73:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_BEGIN_PRE((rec_), qsId)         \
+  74:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TIME_PRE();                 \
+  75:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_OBJ_PRE(me);                \
+  76:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(trg_);              \
+  77:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_END_PRE()                       \
+  78:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT()
+  79:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  80:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // internal helper macro to trace transition segment
+  81:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN_SEG_(rec_, src_, trg_) \
+  82:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();                   \
+  83:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_BEGIN_PRE((rec_), qsId)         \
+  84:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_OBJ_PRE(me);                \
+  85:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(src_);              \
+  86:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(trg_);              \
+  87:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_END_PRE()                       \
+  88:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT()
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 3
+
+
+  89:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  90:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // internal helper macro to trace transition action
+  91:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN_ACT_(rec_, state_)     \
+  92:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();                   \
+  93:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_BEGIN_PRE((rec_), qsId)         \
+  94:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_SIG_PRE(e->sig);            \
+  95:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_OBJ_PRE(me);                \
+  96:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(state_);            \
+  97:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_END_PRE()                       \
+  98:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT()
+  99:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 100:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // internal helper macro to trace transition begin/end
+ 101:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN0_(rec_, trg_)          \
+ 102:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();                   \
+ 103:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_BEGIN_PRE((rec_), qsId)         \
+ 104:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TIME_PRE();                 \
+ 105:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_SIG_PRE(e->sig);            \
+ 106:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_OBJ_PRE(me);                \
+ 107:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(trg_);              \
+ 108:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_END_PRE()                       \
+ 109:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT()
+ 110:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 111:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** // internal helper macro to trace regulsr transition
+ 112:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN_END_(rec_, src_, trg_) \
+ 113:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();                   \
+ 114:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_BEGIN_PRE((rec_), qsId)         \
+ 115:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TIME_PRE();                 \
+ 116:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_SIG_PRE(e->sig);            \
+ 117:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_OBJ_PRE(me);                \
+ 118:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(src_);              \
+ 119:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_PRE(trg_);              \
+ 120:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_END_PRE()                       \
+ 121:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT()
+ 122:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 123:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #else
+ 124:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_STATE_ACT_(rec_, state_)     ((void)0)
+ 125:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TOP_INIT_(rec_, trg_)        ((void)0)
+ 126:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN_SEG_(rec_, src_, trg_)  ((void)0)
+ 127:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN_ACT_(rec_, state_)      ((void)0)
+ 128:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN0_(rec_, trg_)           ((void)0)
+ 129:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #define QS_TRAN_END_(rec_, src_, trg_)  ((void)0)
+ 130:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 131:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 132:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @endcond
+ 133:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 134:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 135:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static int_fast8_t QHsm_tran_simple_(
+ 136:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 137:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler * const path,
+ 138:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId);
+ 139:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 140:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 141:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static int_fast8_t QHsm_tran_complex_(
+ 142:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 143:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler * const path,
+ 144:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId);
+ 145:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 4
+
+
+ 146:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 147:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static void QHsm_enter_target_(
+ 148:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 149:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler * const path,
+ 150:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t const depth,
+ 151:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId);
+ 152:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 153:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 154:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @protected @memberof QHsm
+ 155:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** void QHsm_ctor(QHsm * const me,
+ 156:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const initial)
+ 157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 158:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     static struct QAsmVtable const vtable = { // QAsm virtual table
+ 159:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         &QHsm_init_,
+ 160:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         &QHsm_dispatch_,
+ 161:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         &QHsm_isIn_
+ 162:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 163:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ,&QHsm_getStateHandler_
+ 164:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 165:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     };
+ 166:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // do not call the QAsm_ctor() here
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.vptr      = &vtable;
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.state.fun = Q_STATE_CAST(&QHsm_top);
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.temp.fun  = initial;
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 171:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 172:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 173:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 174:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** void QHsm_init_(
+ 175:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 176:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     void const * const e,
+ 177:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId)
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 179:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 180:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 181:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // produce QS dictionary for QHsm_top()
+ 182:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 183:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_ENTRY();
+ 184:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     bool isDone = true;
+ 185:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     if ((QS_priv_.flags & 0x01U) == 0U) {
+ 186:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_priv_.flags |= 0x01U;
+ 187:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         isDone = false;
+ 188:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 189:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_EXIT();
+ 190:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     if (!isDone) {
+ 191:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_FUN_DICTIONARY(&QHsm_top);
+ 192:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 193:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #else
+ 194:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(qsId);
+ 195:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // def Q_SPY
+ 196:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = me->state.fun;
+ 198:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 199:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_REQUIRE_INCRIT(200, (me->vptr != (struct QAsmVtable *)0)
+ 201:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (me->temp.fun != Q_STATE_CAST(0))
+ 202:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (t == Q_STATE_CAST(&QHsm_top)));
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 5
+
+
+ 203:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 204:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 205:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // execute the top-most initial tran.
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState const r = (*me->temp.fun)(me, Q_EVT_CAST(QEvt));
+ 207:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 209:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // the top-most initial tran. must be taken
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_ASSERT_INCRIT(210, r == Q_RET_TRAN);
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 212:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_TRAN_SEG_(QS_QEP_STATE_INIT, t, me->temp.fun);
+ 214:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 215:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // drill down into the state hierarchy with initial transitions...
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler path[QHSM_MAX_NEST_DEPTH_]; // tran. entry path array
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     path[0] = me->temp.fun;
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 219:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = 1; // tran. entry path index (also the loop bound)
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     for (; (me->temp.fun != t) && (ip < QHSM_MAX_NEST_DEPTH_); ++ip) {
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 224:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 226:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // must NOT be too many state nesting levels or "malformed" HSM
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_ASSERT_INCRIT(220, ip <= QHSM_MAX_NEST_DEPTH_);
+ 228:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 229:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->temp.fun = path[0];
+ 231:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QHsm_enter_target_(me, &path[0], ip - 1, qsId);
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     t = path[0];
+ 233:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 234:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_TOP_INIT_(QS_QEP_INIT_TRAN, t);
+ 235:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->state.fun = t; // change the current active state
+ 237:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_UNSAFE
+ 238:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(r);
+ 239:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 241:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 242:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 243:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 244:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** void QHsm_dispatch_(
+ 245:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 246:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QEvt const * const e,
+ 247:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId)
+ 248:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 249:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 250:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(qsId);
+ 251:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 252:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler s = me->state.fun;
+ 254:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = s;
+ 255:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 256:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_REQUIRE_INCRIT(300,
+ 259:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (e != (QEvt *)0)
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 6
+
+
+ 260:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (s != Q_STATE_CAST(0)));
+ 261:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 262:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 263:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_TRAN0_(QS_QEP_DISPATCH, s);
+ 264:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 265:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = Q_RET_SUPER;
+ 266:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 267:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // process the event hierarchically...
+ 268:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->temp.fun = s;
+ 269:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = QHSM_MAX_NEST_DEPTH_;
+ 270:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // NOTE: ip is the fixed loop upper bound
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     for (; ip > 0; --ip) {
+ 272:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+ 273:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = (*s)(me, e); // invoke state handler s
+ 274:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 275:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (r == Q_RET_UNHANDLED) { // unhandled due to a guard?
+ 276:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_TRAN_ACT_(QS_QEP_UNHANDLED, s);
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             r = QHSM_RESERVED_EVT_(s, Q_EMPTY_SIG); // superstate of s
+ 278:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (r != Q_RET_SUPER) { // event NOT "bubbled up"
+ 280:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break;
+ 281:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 282:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 283:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 284:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_ASSERT_INCRIT(310, ip > 0);
+ 285:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 286:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 287:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     if (r >= Q_RET_TRAN) { // tran. (regular or history) taken?
+ 288:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 289:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (r == Q_RET_TRAN_HIST) { // tran. to history?
+ 290:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_TRAN_SEG_(QS_QEP_TRAN_HIST, s, me->temp.fun);
+ 291:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 292:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // Q_SPY
+ 293:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 294:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QStateHandler path[QHSM_MAX_NEST_DEPTH_];
+ 295:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[0] = me->temp.fun; // tran. target
+ 296:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[1] = t; // current state
+ 297:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[2] = s; // tran. source
+ 298:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 299:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // exit current state to tran. source s...
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         while (t != s) {
+ 301:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // exit from t
+ 302:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             if (QHSM_RESERVED_EVT_(t, Q_EXIT_SIG) == Q_RET_HANDLED) {
+ 303:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 304:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 // find superstate of t
+ 305:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 (void)QHSM_RESERVED_EVT_(t, Q_EMPTY_SIG);
+ 306:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 307:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             t = me->temp.fun;
+ 308:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 309:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 310:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // take the tran...
+ 311:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ip = QHsm_tran_simple_(me, &path[0], qsId);
+ 312:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (ip < -1) { // not a simple tran.?
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ip = QHsm_tran_complex_(me, &path[0], qsId);
+ 314:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 315:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 316:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QHsm_enter_target_(me, &path[0], ip, qsId);
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 7
+
+
+ 317:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         t = path[0];
+ 318:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TRAN_END_(QS_QEP_TRAN, s, t);
+ 319:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 320:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 321:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     else if (r == Q_RET_HANDLED) {
+ 322:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TRAN0_(QS_QEP_INTERN_TRAN, s);
+ 323:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 324:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     else {
+ 325:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TRAN0_(QS_QEP_IGNORED, me->state.fun);
+ 326:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 327:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // Q_SPY
+ 328:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 329:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->state.fun = t; // change the current active state
+ 330:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 331:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 332:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 333:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 334:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** bool QHsm_isIn_(
+ 335:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 336:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const state)
+ 337:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+  28              		.loc 1 337 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 337 1 is_stmt 0 view .LVU1
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0400     		movs	r4, r0
+  41 0004 0D00     		movs	r5, r1
+ 338:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     bool inState = false; // assume that this HSM is not in 'state'
+  42              		.loc 1 338 5 is_stmt 1 view .LVU2
+  43              	.LVL1:
+ 339:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 340:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // scan the state hierarchy bottom-up
+ 341:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler s = me->state.fun;
+  44              		.loc 1 341 5 view .LVU3
+  45              		.loc 1 341 19 is_stmt 0 view .LVU4
+  46 0006 4368     		ldr	r3, [r0, #4]
+  47              	.LVL2:
+ 342:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = Q_RET_SUPER;
+  48              		.loc 1 342 5 is_stmt 1 view .LVU5
+ 343:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while (r != Q_RET_IGNORED) {
+  49              		.loc 1 343 5 view .LVU6
+ 342:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = Q_RET_SUPER;
+  50              		.loc 1 342 12 is_stmt 0 view .LVU7
+  51 0008 0020     		movs	r0, #0
+  52              	.LVL3:
+  53              		.loc 1 343 11 view .LVU8
+  54 000a 03E0     		b	.L2
+  55              	.LVL4:
+  56              	.L7:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 8
+
+
+ 344:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (s == state) { // do the states match?
+ 345:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             inState = true;  // 'true' means that match found
+ 346:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break; // break out of the for-loop
+ 347:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 348:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = QHSM_RESERVED_EVT_(s, Q_EMPTY_SIG);
+  57              		.loc 1 348 9 is_stmt 1 view .LVU9
+  58              		.loc 1 348 13 is_stmt 0 view .LVU10
+  59 000c 0549     		ldr	r1, .L8
+  60 000e 2000     		movs	r0, r4
+  61              	.LVL5:
+  62              		.loc 1 348 13 view .LVU11
+  63 0010 9847     		blx	r3
+  64              	.LVL6:
+ 349:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+  65              		.loc 1 349 9 is_stmt 1 view .LVU12
+  66              		.loc 1 349 11 is_stmt 0 view .LVU13
+  67 0012 A368     		ldr	r3, [r4, #8]
+  68              	.LVL7:
+  69              	.L2:
+ 343:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while (r != Q_RET_IGNORED) {
+  70              		.loc 1 343 11 is_stmt 1 view .LVU14
+  71 0014 0328     		cmp	r0, #3
+  72 0016 03D0     		beq	.L6
+ 344:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (s == state) { // do the states match?
+  73              		.loc 1 344 9 view .LVU15
+ 344:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (s == state) { // do the states match?
+  74              		.loc 1 344 12 is_stmt 0 view .LVU16
+  75 0018 AB42     		cmp	r3, r5
+  76 001a F7D1     		bne	.L7
+ 345:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break; // break out of the for-loop
+  77              		.loc 1 345 21 view .LVU17
+  78 001c 0120     		movs	r0, #1
+  79              	.LVL8:
+ 345:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break; // break out of the for-loop
+  80              		.loc 1 345 21 view .LVU18
+  81 001e 00E0     		b	.L3
+  82              	.LVL9:
+  83              	.L6:
+ 338:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+  84              		.loc 1 338 10 view .LVU19
+  85 0020 0020     		movs	r0, #0
+  86              	.LVL10:
+  87              	.L3:
+ 350:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 351:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     return inState; // return the status
+  88              		.loc 1 351 5 is_stmt 1 view .LVU20
+ 352:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+  89              		.loc 1 352 1 is_stmt 0 view .LVU21
+  90              		@ sp needed
+  91              	.LVL11:
+  92              	.LVL12:
+  93              		.loc 1 352 1 view .LVU22
+  94 0022 70BD     		pop	{r4, r5, r6, pc}
+  95              	.L9:
+  96              		.align	2
+  97              	.L8:
+  98 0024 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 9
+
+
+  99              		.cfi_endproc
+ 100              	.LFE19:
+ 102              		.section	.text.QHsm_top,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	QHsm_top
+ 105              		.syntax unified
+ 106              		.code	16
+ 107              		.thumb_func
+ 109              	QHsm_top:
+ 110              	.LVL13:
+ 111              	.LFB20:
+ 353:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 354:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 355:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 356:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 357:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** QStateHandler QHsm_getStateHandler_(QAsm * const me) {
+ 358:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     return me->state.fun;
+ 359:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 360:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // def Q_SPY
+ 361:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 362:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 363:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @protected @memberof QHsm
+ 364:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** QState QHsm_top(QHsm const * const me,
+ 365:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QEvt const * const e)
+ 366:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 112              		.loc 1 366 1 is_stmt 1 view -0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116              		@ link register save eliminated.
+ 367:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(me);
+ 117              		.loc 1 367 5 view .LVU24
+ 368:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(e);
+ 118              		.loc 1 368 5 view .LVU25
+ 369:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     return Q_RET_IGNORED; // the top state ignores all events
+ 119              		.loc 1 369 5 view .LVU26
+ 370:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 120              		.loc 1 370 1 is_stmt 0 view .LVU27
+ 121 0000 0320     		movs	r0, #3
+ 122              	.LVL14:
+ 123              		.loc 1 370 1 view .LVU28
+ 124              		@ sp needed
+ 125 0002 7047     		bx	lr
+ 126              		.cfi_endproc
+ 127              	.LFE20:
+ 129              		.section	.text.QHsm_tran_simple_,"ax",%progbits
+ 130              		.align	1
+ 131              		.syntax unified
+ 132              		.code	16
+ 133              		.thumb_func
+ 135              	QHsm_tran_simple_:
+ 136              	.LVL15:
+ 137              	.LFB22:
+ 371:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 372:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 373:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @public @memberof QHsm
+ 374:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** QStateHandler QHsm_childState(QHsm * const me,
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 10
+
+
+ 375:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const parent)
+ 376:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 377:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 378:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     bool isFound = false; // assume the child state NOT found
+ 379:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 380:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 381:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler child = me->super.state.fun; // start with current state
+ 382:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.temp.fun = child; // establish stable state configuration
+ 383:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = Q_RET_SUPER;
+ 384:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while (r != Q_RET_IGNORED) {
+ 385:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // have the parent of the current child?
+ 386:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (me->super.temp.fun == parent) {
+ 387:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 388:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             isFound = true; // indicate that child state was found
+ 389:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 390:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break;
+ 391:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 392:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         child = me->super.temp.fun;
+ 393:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = QHSM_RESERVED_EVT_(child, Q_EMPTY_SIG);
+ 394:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 395:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 396:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 397:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_ASSERT_INCRIT(590, isFound);
+ 398:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 399:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 400:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     return child;
+ 401:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 402:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 403:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 404:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 405:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static int_fast8_t QHsm_tran_simple_(
+ 406:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 407:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler * const path,
+ 408:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId)
+ 409:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 138              		.loc 1 409 1 is_stmt 1 view -0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		.loc 1 409 1 is_stmt 0 view .LVU30
+ 143 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 144              	.LCFI1:
+ 145              		.cfi_def_cfa_offset 24
+ 146              		.cfi_offset 3, -24
+ 147              		.cfi_offset 4, -20
+ 148              		.cfi_offset 5, -16
+ 149              		.cfi_offset 6, -12
+ 150              		.cfi_offset 7, -8
+ 151              		.cfi_offset 14, -4
+ 152 0002 0400     		movs	r4, r0
+ 153 0004 0D00     		movs	r5, r1
+ 410:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 411:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(qsId);
+ 154              		.loc 1 411 5 is_stmt 1 view .LVU31
+ 412:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 413:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 414:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = path[0];
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 11
+
+
+ 155              		.loc 1 414 5 view .LVU32
+ 156              		.loc 1 414 19 is_stmt 0 view .LVU33
+ 157 0006 0B68     		ldr	r3, [r1]
+ 158              	.LVL16:
+ 415:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const s = path[2];
+ 159              		.loc 1 415 5 is_stmt 1 view .LVU34
+ 160              		.loc 1 415 25 is_stmt 0 view .LVU35
+ 161 0008 8E68     		ldr	r6, [r1, #8]
+ 162              	.LVL17:
+ 416:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = 0; // tran. entry path index
+ 163              		.loc 1 416 5 is_stmt 1 view .LVU36
+ 417:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QS_CRIT_STAT
+ 418:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 419:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // (a) check source==target (tran. to self)...
+ 420:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     if (s == t) {
+ 164              		.loc 1 420 5 view .LVU37
+ 165              		.loc 1 420 8 is_stmt 0 view .LVU38
+ 166 000a B342     		cmp	r3, r6
+ 167 000c 11D0     		beq	.L17
+ 421:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // exit source s
+ 422:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (QHSM_RESERVED_EVT_(s, Q_EXIT_SIG) == Q_RET_HANDLED) {
+ 423:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 424:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 425:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ip = 0; // enter the target
+ 426:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 427:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     else {
+ 428:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // find superstate of target
+ 429:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (void)QHSM_RESERVED_EVT_(t, Q_EMPTY_SIG);
+ 168              		.loc 1 429 9 is_stmt 1 view .LVU39
+ 169              		.loc 1 429 15 is_stmt 0 view .LVU40
+ 170 000e 1349     		ldr	r1, .L20
+ 171              	.LVL18:
+ 172              		.loc 1 429 15 view .LVU41
+ 173 0010 9847     		blx	r3
+ 174              	.LVL19:
+ 430:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 431:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         t = me->temp.fun;
+ 175              		.loc 1 431 9 is_stmt 1 view .LVU42
+ 176              		.loc 1 431 11 is_stmt 0 view .LVU43
+ 177 0012 A768     		ldr	r7, [r4, #8]
+ 178              	.LVL20:
+ 432:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 433:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // (b) check source==target->super...
+ 434:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (s == t) {
+ 179              		.loc 1 434 9 is_stmt 1 view .LVU44
+ 180              		.loc 1 434 12 is_stmt 0 view .LVU45
+ 181 0014 BE42     		cmp	r6, r7
+ 182 0016 1ED0     		beq	.L16
+ 435:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ip = 0; // enter the target
+ 436:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 437:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         else {
+ 438:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // find superstate of src
+ 439:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             (void)QHSM_RESERVED_EVT_(s, Q_EMPTY_SIG);
+ 183              		.loc 1 439 13 is_stmt 1 view .LVU46
+ 184              		.loc 1 439 19 is_stmt 0 view .LVU47
+ 185 0018 1049     		ldr	r1, .L20
+ 186 001a 2000     		movs	r0, r4
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 12
+
+
+ 187 001c B047     		blx	r6
+ 188              	.LVL21:
+ 440:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 441:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // (c) check source->super==target->super...
+ 442:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             if (me->temp.fun == t) {
+ 189              		.loc 1 442 13 is_stmt 1 view .LVU48
+ 190              		.loc 1 442 25 is_stmt 0 view .LVU49
+ 191 001e A368     		ldr	r3, [r4, #8]
+ 192              		.loc 1 442 16 view .LVU50
+ 193 0020 BB42     		cmp	r3, r7
+ 194 0022 0BD0     		beq	.L18
+ 443:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 // exit source s
+ 444:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 if (QHSM_RESERVED_EVT_(s, Q_EXIT_SIG) == Q_RET_HANDLED) {
+ 445:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 446:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 447:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 ip = 0; // enter the target
+ 448:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 449:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // (d) check source->super==target...
+ 450:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             else if (me->temp.fun == path[0]) {
+ 195              		.loc 1 450 18 is_stmt 1 view .LVU51
+ 196              		.loc 1 450 21 is_stmt 0 view .LVU52
+ 197 0024 2A68     		ldr	r2, [r5]
+ 198 0026 9342     		cmp	r3, r2
+ 199 0028 0ED0     		beq	.L19
+ 451:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 // exit source s
+ 452:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 if (QHSM_RESERVED_EVT_(s, Q_EXIT_SIG) == Q_RET_HANDLED) {
+ 453:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 454:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 455:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 ip = -1; // do not enter the target
+ 456:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 457:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             else {
+ 458:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 path[1] = t; // save the superstate of target
+ 200              		.loc 1 458 17 is_stmt 1 view .LVU53
+ 201              		.loc 1 458 25 is_stmt 0 view .LVU54
+ 202 002a 6F60     		str	r7, [r5, #4]
+ 459:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 ip = -2; // cause execution of complex tran.
+ 203              		.loc 1 459 17 is_stmt 1 view .LVU55
+ 204              	.LVL22:
+ 205              		.loc 1 459 20 is_stmt 0 view .LVU56
+ 206 002c 0220     		movs	r0, #2
+ 207 002e 4042     		rsbs	r0, r0, #0
+ 208 0030 03E0     		b	.L11
+ 209              	.LVL23:
+ 210              	.L17:
+ 422:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 211              		.loc 1 422 9 is_stmt 1 view .LVU57
+ 422:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 212              		.loc 1 422 13 is_stmt 0 view .LVU58
+ 213 0032 0A49     		ldr	r1, .L20
+ 214              	.LVL24:
+ 422:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 215              		.loc 1 422 13 view .LVU59
+ 216 0034 0831     		adds	r1, r1, #8
+ 217 0036 B047     		blx	r6
+ 218              	.LVL25:
+ 423:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 219              		.loc 1 423 13 is_stmt 1 view .LVU60
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 13
+
+
+ 425:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 220              		.loc 1 425 9 view .LVU61
+ 425:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 221              		.loc 1 425 12 is_stmt 0 view .LVU62
+ 222 0038 0020     		movs	r0, #0
+ 223              	.LVL26:
+ 224              	.L11:
+ 460:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 461:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 462:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 463:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     return ip;
+ 464:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 225              		.loc 1 464 1 view .LVU63
+ 226              		@ sp needed
+ 227              	.LVL27:
+ 228              	.LVL28:
+ 229              	.LVL29:
+ 230              		.loc 1 464 1 view .LVU64
+ 231 003a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 232              	.LVL30:
+ 233              	.L18:
+ 444:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 234              		.loc 1 444 17 is_stmt 1 view .LVU65
+ 444:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 235              		.loc 1 444 21 is_stmt 0 view .LVU66
+ 236 003c 0749     		ldr	r1, .L20
+ 237 003e 0831     		adds	r1, r1, #8
+ 238 0040 2000     		movs	r0, r4
+ 239 0042 B047     		blx	r6
+ 240              	.LVL31:
+ 445:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 241              		.loc 1 445 21 is_stmt 1 view .LVU67
+ 447:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 242              		.loc 1 447 17 view .LVU68
+ 447:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 243              		.loc 1 447 20 is_stmt 0 view .LVU69
+ 244 0044 0020     		movs	r0, #0
+ 245 0046 F8E7     		b	.L11
+ 246              	.L19:
+ 452:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 247              		.loc 1 452 17 is_stmt 1 view .LVU70
+ 452:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 248              		.loc 1 452 21 is_stmt 0 view .LVU71
+ 249 0048 0449     		ldr	r1, .L20
+ 250 004a 0831     		adds	r1, r1, #8
+ 251 004c 2000     		movs	r0, r4
+ 252 004e B047     		blx	r6
+ 253              	.LVL32:
+ 453:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 254              		.loc 1 453 21 is_stmt 1 view .LVU72
+ 455:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 255              		.loc 1 455 17 view .LVU73
+ 455:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 256              		.loc 1 455 20 is_stmt 0 view .LVU74
+ 257 0050 0120     		movs	r0, #1
+ 258 0052 4042     		rsbs	r0, r0, #0
+ 259 0054 F1E7     		b	.L11
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 14
+
+
+ 260              	.LVL33:
+ 261              	.L16:
+ 435:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 262              		.loc 1 435 16 view .LVU75
+ 263 0056 0020     		movs	r0, #0
+ 463:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 264              		.loc 1 463 5 is_stmt 1 view .LVU76
+ 463:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 265              		.loc 1 463 12 is_stmt 0 view .LVU77
+ 266 0058 EFE7     		b	.L11
+ 267              	.L21:
+ 268 005a C046     		.align	2
+ 269              	.L20:
+ 270 005c 00000000 		.word	.LANCHOR0
+ 271              		.cfi_endproc
+ 272              	.LFE22:
+ 274              		.section	.text.QHsm_enter_target_,"ax",%progbits
+ 275              		.align	1
+ 276              		.syntax unified
+ 277              		.code	16
+ 278              		.thumb_func
+ 280              	QHsm_enter_target_:
+ 281              	.LVL34:
+ 282              	.LFB24:
+ 465:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 466:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 467:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 468:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static int_fast8_t QHsm_tran_complex_(
+ 469:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 470:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler * const path,
+ 471:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId)
+ 472:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 473:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 474:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(qsId);
+ 475:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 476:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 477:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // (e) check rest of source==target->super->super..
+ 478:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // and store the entry path along the way
+ 479:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t iq = 0; // indicate that LCA was found
+ 480:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = 1; // enter target and its superstate
+ 481:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const s = path[2]; // source state
+ 482:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = me->temp.fun;  // source->super
+ 483:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 484:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 485:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // find target->super->super...
+ 486:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // note: ip is the fixed upper loop bound
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = QHSM_RESERVED_EVT_(path[1], Q_EMPTY_SIG);
+ 488:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while ((r == Q_RET_SUPER) && (ip < (QHSM_MAX_NEST_DEPTH_ - 1))) {
+ 489:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ++ip;
+ 490:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun; // store the entry path
+ 491:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (me->temp.fun == s) { // is it the source?
+ 492:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             iq = 1; // indicate that the LCA found
+ 493:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             --ip;   // do not enter the source
+ 494:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break;  // terminate the loop
+ 495:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 496:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 497:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 15
+
+
+ 498:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 499:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_INVARIANT_INCRIT(711, ip < (QHSM_MAX_NEST_DEPTH_ - 1));
+ 500:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 501:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 502:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // the LCA not found yet?
+ 503:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     if (iq == 0) {
+ 504:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 505:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // exit source s
+ 506:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 507:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (void)QHSM_RESERVED_EVT_(s, Q_EXIT_SIG);
+ 508:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #else
+ 509:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (QHSM_RESERVED_EVT_(s, Q_EXIT_SIG) == Q_RET_HANDLED) {
+ 510:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_STATE_ACT_(QS_QEP_STATE_EXIT, s);
+ 511:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 512:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // def Q_SPY
+ 513:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 514:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // (f) check the rest of
+ 515:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // source->super == target->super->super...
+ 516:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         iq = ip;
+ 517:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = Q_RET_IGNORED; // indicate that the LCA NOT found
+ 518:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // note: iq is the fixed upper loop bound
+ 519:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         do {
+ 520:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             if (t == path[iq]) { // is this the LCA?
+ 521:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 r = Q_RET_HANDLED; // indicate the LCA found
+ 522:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 ip = iq - 1; // do not enter the LCA
+ 523:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 break; // terminate the loop
+ 524:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 525:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             --iq; // try lower superstate of target
+ 526:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         } while (iq >= 0);
+ 527:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 528:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (r != Q_RET_HANDLED) { // the LCA still not found?
+ 529:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // (g) check each source->super->...
+ 530:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // for each target->super...
+ 531:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             r = Q_RET_SUPER; // keep looping
+ 532:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             while (r != Q_RET_HANDLED) {
+ 533:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 // exit from t
+ 534:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 if (QHSM_RESERVED_EVT_(t, Q_EXIT_SIG) == Q_RET_HANDLED) {
+ 535:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 536:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     // find superstate of t
+ 537:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     (void)QHSM_RESERVED_EVT_(t, Q_EMPTY_SIG);
+ 538:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 539:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 t = me->temp.fun; // set to super of t
+ 540:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 iq = ip;
+ 541:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 do {
+ 542:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     if (t == path[iq]) { // is this the LCA?
+ 543:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         ip = iq - 1; // do not enter the LCA
+ 544:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         r = Q_RET_HANDLED; // break outer loop
+ 545:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         break;  // terminate the inner loop
+ 546:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     }
+ 547:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     --iq; // try lower superstate of target
+ 548:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 } while (iq >= 0);
+ 549:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 550:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 551:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 552:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     return ip;
+ 553:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 554:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 16
+
+
+ 555:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //............................................................................
+ 556:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** //! @private @memberof QHsm
+ 557:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** static void QHsm_enter_target_(
+ 558:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QAsm * const me,
+ 559:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler * const path,
+ 560:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t const depth,
+ 561:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     uint_fast8_t const qsId)
+ 562:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** {
+ 283              		.loc 1 562 1 is_stmt 1 view -0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 0
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287              		.loc 1 562 1 is_stmt 0 view .LVU79
+ 288 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 289              	.LCFI2:
+ 290              		.cfi_def_cfa_offset 24
+ 291              		.cfi_offset 3, -24
+ 292              		.cfi_offset 4, -20
+ 293              		.cfi_offset 5, -16
+ 294              		.cfi_offset 6, -12
+ 295              		.cfi_offset 7, -8
+ 296              		.cfi_offset 14, -4
+ 297 0002 0500     		movs	r5, r0
+ 298 0004 0E00     		movs	r6, r1
+ 299 0006 1400     		movs	r4, r2
+ 563:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 564:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_UNUSED_PAR(qsId);
+ 300              		.loc 1 564 5 is_stmt 1 view .LVU80
+ 565:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 566:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 567:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 568:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 569:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_ENTRY();
+ 301              		.loc 1 569 5 view .LVU81
+ 302 0008 FFF7FEFF 		bl	vPortEnterCritical
+ 303              	.LVL35:
+ 570:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_REQUIRE_INCRIT(800, depth < QHSM_MAX_NEST_DEPTH_);
+ 304              		.loc 1 570 5 view .LVU82
+ 305 000c 052C     		cmp	r4, #5
+ 306 000e 02DC     		bgt	.L33
+ 571:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 307              		.loc 1 571 5 view .LVU83
+ 308 0010 FFF7FEFF 		bl	vPortExitCritical
+ 309              	.LVL36:
+ 572:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 573:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = depth;
+ 310              		.loc 1 573 5 view .LVU84
+ 574:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // execute state entry actions in the desired order...
+ 575:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // NOTE: ip is the fixed upper loop bound
+ 576:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     for (; ip >= 0; --ip) {
+ 311              		.loc 1 576 5 view .LVU85
+ 312 0014 0BE0     		b	.L24
+ 313              	.LVL37:
+ 314              	.L33:
+ 570:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 315              		.loc 1 570 5 is_stmt 0 discriminator 1 view .LVU86
+ 316 0016 C821     		movs	r1, #200
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 17
+
+
+ 317 0018 8900     		lsls	r1, r1, #2
+ 318 001a 1E48     		ldr	r0, .L36
+ 319 001c FFF7FEFF 		bl	Q_onError
+ 320              	.LVL38:
+ 321              	.L25:
+ 577:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // enter path[ip]
+ 578:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (QHSM_RESERVED_EVT_(path[ip], Q_ENTRY_SIG)
+ 322              		.loc 1 578 9 is_stmt 1 view .LVU87
+ 323              		.loc 1 578 13 is_stmt 0 view .LVU88
+ 324 0020 A300     		lsls	r3, r4, #2
+ 325 0022 1D49     		ldr	r1, .L36+4
+ 326 0024 F358     		ldr	r3, [r6, r3]
+ 327 0026 0431     		adds	r1, r1, #4
+ 328 0028 2800     		movs	r0, r5
+ 329 002a 9847     		blx	r3
+ 330              	.LVL39:
+ 579:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             == Q_RET_HANDLED)
+ 580:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         {
+ 581:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_STATE_ACT_(QS_QEP_STATE_ENTRY, path[ip]);
+ 331              		.loc 1 581 13 is_stmt 1 view .LVU89
+ 576:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // enter path[ip]
+ 332              		.loc 1 576 21 view .LVU90
+ 333 002c 013C     		subs	r4, r4, #1
+ 334              	.LVL40:
+ 335              	.L24:
+ 576:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // enter path[ip]
+ 336              		.loc 1 576 12 discriminator 1 view .LVU91
+ 576:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // enter path[ip]
+ 337              		.loc 1 576 5 is_stmt 0 discriminator 1 view .LVU92
+ 338 002e 002C     		cmp	r4, #0
+ 339 0030 F6DA     		bge	.L25
+ 582:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 583:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 584:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = path[0];
+ 340              		.loc 1 584 5 is_stmt 1 view .LVU93
+ 341              		.loc 1 584 19 is_stmt 0 view .LVU94
+ 342 0032 3768     		ldr	r7, [r6]
+ 343              	.LVL41:
+ 585:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->temp.fun = t; // update the next state
+ 344              		.loc 1 585 5 is_stmt 1 view .LVU95
+ 345              		.loc 1 585 18 is_stmt 0 view .LVU96
+ 346 0034 AF60     		str	r7, [r5, #8]
+ 586:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 587:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // drill into the target hierarchy...
+ 588:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while (QHSM_RESERVED_EVT_(t, Q_INIT_SIG) == Q_RET_TRAN) {
+ 347              		.loc 1 588 5 is_stmt 1 view .LVU97
+ 348              		.loc 1 588 11 is_stmt 0 view .LVU98
+ 349 0036 1BE0     		b	.L26
+ 350              	.L29:
+ 589:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 590:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TRAN_SEG_(QS_QEP_STATE_INIT, t, me->temp.fun);
+ 591:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 592:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ip = 0;
+ 593:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[0] = me->temp.fun;
+ 594:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 595:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // find superstate
+ 596:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 18
+
+
+ 597:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 598:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // note: ip is the fixed upper loop bound
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         while ((me->temp.fun != t) && (ip < (QHSM_MAX_NEST_DEPTH_ - 1))) {
+ 600:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 351              		.loc 1 600 13 is_stmt 1 view .LVU99
+ 352 0038 0134     		adds	r4, r4, #1
+ 353              	.LVL42:
+ 601:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             path[ip] = me->temp.fun;
+ 354              		.loc 1 601 13 view .LVU100
+ 355              		.loc 1 601 17 is_stmt 0 view .LVU101
+ 356 003a A200     		lsls	r2, r4, #2
+ 357              		.loc 1 601 22 view .LVU102
+ 358 003c B350     		str	r3, [r6, r2]
+ 602:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // find superstate
+ 603:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 359              		.loc 1 603 13 is_stmt 1 view .LVU103
+ 360              		.loc 1 603 19 is_stmt 0 view .LVU104
+ 361 003e 1649     		ldr	r1, .L36+4
+ 362 0040 2800     		movs	r0, r5
+ 363 0042 9847     		blx	r3
+ 364              	.LVL43:
+ 365              	.L27:
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 366              		.loc 1 599 15 is_stmt 1 view .LVU105
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 367              		.loc 1 599 25 is_stmt 0 view .LVU106
+ 368 0044 AB68     		ldr	r3, [r5, #8]
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 369              		.loc 1 599 15 view .LVU107
+ 370 0046 BB42     		cmp	r3, r7
+ 371 0048 01D0     		beq	.L28
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 372              		.loc 1 599 36 discriminator 1 view .LVU108
+ 373 004a 042C     		cmp	r4, #4
+ 374 004c F4DD     		ble	.L29
+ 375              	.L28:
+ 604:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 605:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QF_CRIT_ENTRY();
+ 376              		.loc 1 605 9 is_stmt 1 view .LVU109
+ 377 004e FFF7FEFF 		bl	vPortEnterCritical
+ 378              	.LVL44:
+ 606:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // too many state nesting levels or "malformed" HSM
+ 607:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         Q_INVARIANT_INCRIT(891, ip < QHSM_MAX_NEST_DEPTH_);
+ 379              		.loc 1 607 9 view .LVU110
+ 380 0052 052C     		cmp	r4, #5
+ 381 0054 19DC     		bgt	.L34
+ 608:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QF_CRIT_EXIT();
+ 382              		.loc 1 608 9 view .LVU111
+ 383 0056 FFF7FEFF 		bl	vPortExitCritical
+ 384              	.LVL45:
+ 609:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 610:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         me->temp.fun = path[0];
+ 385              		.loc 1 610 9 view .LVU112
+ 386              		.loc 1 610 22 is_stmt 0 view .LVU113
+ 387 005a 3368     		ldr	r3, [r6]
+ 388 005c AB60     		str	r3, [r5, #8]
+ 389              	.L31:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 19
+
+
+ 611:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 612:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // retrace the entry path in reverse (correct) order...
+ 613:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // note: ip is the fixed upper loop bound
+ 614:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         do {
+ 390              		.loc 1 614 9 is_stmt 1 view .LVU114
+ 615:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // enter path[ip]
+ 616:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             if (QHSM_RESERVED_EVT_(path[ip], Q_ENTRY_SIG) == Q_RET_HANDLED) {
+ 391              		.loc 1 616 13 view .LVU115
+ 392              		.loc 1 616 17 is_stmt 0 view .LVU116
+ 393 005e A300     		lsls	r3, r4, #2
+ 394 0060 0D49     		ldr	r1, .L36+4
+ 395 0062 F358     		ldr	r3, [r6, r3]
+ 396 0064 0431     		adds	r1, r1, #4
+ 397 0066 2800     		movs	r0, r5
+ 398 0068 9847     		blx	r3
+ 399              	.LVL46:
+ 617:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 QS_STATE_ACT_(QS_QEP_STATE_ENTRY, path[ip]);
+ 400              		.loc 1 617 17 is_stmt 1 view .LVU117
+ 618:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 619:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             --ip;
+ 401              		.loc 1 619 13 view .LVU118
+ 620:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         } while (ip >= 0);
+ 402              		.loc 1 620 17 view .LVU119
+ 403              		.loc 1 620 9 is_stmt 0 view .LVU120
+ 404 006a 013C     		subs	r4, r4, #1
+ 405 006c F7D5     		bpl	.L31
+ 406              	.LVL47:
+ 621:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 622:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         t = path[0]; // current state becomes the new source
+ 407              		.loc 1 622 9 is_stmt 1 view .LVU121
+ 408              		.loc 1 622 11 is_stmt 0 view .LVU122
+ 409 006e 3768     		ldr	r7, [r6]
+ 410              	.LVL48:
+ 411              	.L26:
+ 588:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 412              		.loc 1 588 11 is_stmt 1 view .LVU123
+ 588:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 413              		.loc 1 588 12 is_stmt 0 view .LVU124
+ 414 0070 0949     		ldr	r1, .L36+4
+ 415 0072 0C31     		adds	r1, r1, #12
+ 416 0074 2800     		movs	r0, r5
+ 417 0076 B847     		blx	r7
+ 418              	.LVL49:
+ 588:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 419              		.loc 1 588 11 view .LVU125
+ 420 0078 0728     		cmp	r0, #7
+ 421 007a 0AD1     		bne	.L35
+ 590:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 422              		.loc 1 590 9 is_stmt 1 view .LVU126
+ 592:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[0] = me->temp.fun;
+ 423              		.loc 1 592 9 view .LVU127
+ 424              	.LVL50:
+ 593:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 425              		.loc 1 593 9 view .LVU128
+ 593:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 426              		.loc 1 593 27 is_stmt 0 view .LVU129
+ 427 007c AB68     		ldr	r3, [r5, #8]
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 20
+
+
+ 593:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 428              		.loc 1 593 17 view .LVU130
+ 429 007e 3360     		str	r3, [r6]
+ 596:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 430              		.loc 1 596 9 is_stmt 1 view .LVU131
+ 596:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 431              		.loc 1 596 15 is_stmt 0 view .LVU132
+ 432 0080 0549     		ldr	r1, .L36+4
+ 433 0082 2800     		movs	r0, r5
+ 434 0084 9847     		blx	r3
+ 435              	.LVL51:
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 436              		.loc 1 599 9 is_stmt 1 view .LVU133
+ 592:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[0] = me->temp.fun;
+ 437              		.loc 1 592 12 is_stmt 0 view .LVU134
+ 438 0086 0024     		movs	r4, #0
+ 599:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ++ip;
+ 439              		.loc 1 599 15 view .LVU135
+ 440 0088 DCE7     		b	.L27
+ 441              	.LVL52:
+ 442              	.L34:
+ 607:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QF_CRIT_EXIT();
+ 443              		.loc 1 607 9 discriminator 1 view .LVU136
+ 444 008a 0449     		ldr	r1, .L36+8
+ 445 008c 0148     		ldr	r0, .L36
+ 446 008e FFF7FEFF 		bl	Q_onError
+ 447              	.LVL53:
+ 448              	.L35:
+ 623:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 624:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 449              		.loc 1 624 1 view .LVU137
+ 450              		@ sp needed
+ 451              	.LVL54:
+ 452              	.LVL55:
+ 453              	.LVL56:
+ 454              	.LVL57:
+ 455              		.loc 1 624 1 view .LVU138
+ 456 0092 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 457              	.L37:
+ 458              		.align	2
+ 459              	.L36:
+ 460 0094 00000000 		.word	.LANCHOR1
+ 461 0098 00000000 		.word	.LANCHOR0
+ 462 009c 7B030000 		.word	891
+ 463              		.cfi_endproc
+ 464              	.LFE24:
+ 466              		.section	.text.QHsm_init_,"ax",%progbits
+ 467              		.align	1
+ 468              		.global	QHsm_init_
+ 469              		.syntax unified
+ 470              		.code	16
+ 471              		.thumb_func
+ 473              	QHsm_init_:
+ 474              	.LVL58:
+ 475              	.LFB17:
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 476              		.loc 1 178 1 is_stmt 1 view -0
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 21
+
+
+ 477              		.cfi_startproc
+ 478              		@ args = 0, pretend = 0, frame = 24
+ 479              		@ frame_needed = 0, uses_anonymous_args = 0
+ 178:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 480              		.loc 1 178 1 is_stmt 0 view .LVU140
+ 481 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 482              	.LCFI3:
+ 483              		.cfi_def_cfa_offset 20
+ 484              		.cfi_offset 4, -20
+ 485              		.cfi_offset 5, -16
+ 486              		.cfi_offset 6, -12
+ 487              		.cfi_offset 7, -8
+ 488              		.cfi_offset 14, -4
+ 489 0002 C646     		mov	lr, r8
+ 490 0004 00B5     		push	{lr}
+ 491              	.LCFI4:
+ 492              		.cfi_def_cfa_offset 24
+ 493              		.cfi_offset 8, -24
+ 494 0006 86B0     		sub	sp, sp, #24
+ 495              	.LCFI5:
+ 496              		.cfi_def_cfa_offset 48
+ 497 0008 0400     		movs	r4, r0
+ 498 000a 0D00     		movs	r5, r1
+ 499 000c 9046     		mov	r8, r2
+ 194:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif // def Q_SPY
+ 500              		.loc 1 194 5 is_stmt 1 view .LVU141
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 501              		.loc 1 197 5 view .LVU142
+ 197:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 502              		.loc 1 197 19 is_stmt 0 view .LVU143
+ 503 000e 4768     		ldr	r7, [r0, #4]
+ 504              	.LVL59:
+ 199:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_REQUIRE_INCRIT(200, (me->vptr != (struct QAsmVtable *)0)
+ 505              		.loc 1 199 5 is_stmt 1 view .LVU144
+ 506 0010 FFF7FEFF 		bl	vPortEnterCritical
+ 507              	.LVL60:
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (me->temp.fun != Q_STATE_CAST(0))
+ 508              		.loc 1 200 5 view .LVU145
+ 509 0014 2368     		ldr	r3, [r4]
+ 510 0016 002B     		cmp	r3, #0
+ 511 0018 19D0     		beq	.L39
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (me->temp.fun != Q_STATE_CAST(0))
+ 512              		.loc 1 200 5 is_stmt 0 discriminator 2 view .LVU146
+ 513 001a A368     		ldr	r3, [r4, #8]
+ 514 001c 002B     		cmp	r3, #0
+ 515 001e 16D0     		beq	.L39
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (me->temp.fun != Q_STATE_CAST(0))
+ 516              		.loc 1 200 5 discriminator 4 view .LVU147
+ 517 0020 214B     		ldr	r3, .L48
+ 518 0022 9F42     		cmp	r7, r3
+ 519 0024 13D1     		bne	.L39
+ 203:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 520              		.loc 1 203 5 is_stmt 1 view .LVU148
+ 521 0026 FFF7FEFF 		bl	vPortExitCritical
+ 522              	.LVL61:
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 523              		.loc 1 206 5 view .LVU149
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 22
+
+
+ 206:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 524              		.loc 1 206 23 is_stmt 0 view .LVU150
+ 525 002a 2900     		movs	r1, r5
+ 526 002c 2000     		movs	r0, r4
+ 527 002e A368     		ldr	r3, [r4, #8]
+ 528 0030 9847     		blx	r3
+ 529              	.LVL62:
+ 530 0032 0500     		movs	r5, r0
+ 531              	.LVL63:
+ 208:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // the top-most initial tran. must be taken
+ 532              		.loc 1 208 5 is_stmt 1 view .LVU151
+ 533 0034 FFF7FEFF 		bl	vPortEnterCritical
+ 534              	.LVL64:
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 535              		.loc 1 210 5 view .LVU152
+ 536 0038 072D     		cmp	r5, #7
+ 537 003a 0CD1     		bne	.L46
+ 211:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 538              		.loc 1 211 5 view .LVU153
+ 539 003c FFF7FEFF 		bl	vPortExitCritical
+ 540              	.LVL65:
+ 213:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 541              		.loc 1 213 5 view .LVU154
+ 216:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     path[0] = me->temp.fun;
+ 542              		.loc 1 216 5 view .LVU155
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 543              		.loc 1 217 5 view .LVU156
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 544              		.loc 1 217 23 is_stmt 0 view .LVU157
+ 545 0040 A368     		ldr	r3, [r4, #8]
+ 217:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 546              		.loc 1 217 13 view .LVU158
+ 547 0042 0093     		str	r3, [sp]
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 548              		.loc 1 218 5 is_stmt 1 view .LVU159
+ 218:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 549              		.loc 1 218 11 is_stmt 0 view .LVU160
+ 550 0044 1949     		ldr	r1, .L48+4
+ 551 0046 2000     		movs	r0, r4
+ 552 0048 9847     		blx	r3
+ 553              	.LVL66:
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     for (; (me->temp.fun != t) && (ip < QHSM_MAX_NEST_DEPTH_); ++ip) {
+ 554              		.loc 1 220 5 is_stmt 1 view .LVU161
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 555              		.loc 1 221 5 view .LVU162
+ 220:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     for (; (me->temp.fun != t) && (ip < QHSM_MAX_NEST_DEPTH_); ++ip) {
+ 556              		.loc 1 220 17 is_stmt 0 view .LVU163
+ 557 004a 0125     		movs	r5, #1
+ 558              	.LVL67:
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 559              		.loc 1 221 5 view .LVU164
+ 560 004c 0EE0     		b	.L42
+ 561              	.LVL68:
+ 562              	.L39:
+ 200:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         && (me->temp.fun != Q_STATE_CAST(0))
+ 563              		.loc 1 200 5 discriminator 5 view .LVU165
+ 564 004e C821     		movs	r1, #200
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 23
+
+
+ 565 0050 1748     		ldr	r0, .L48+8
+ 566 0052 FFF7FEFF 		bl	Q_onError
+ 567              	.LVL69:
+ 568              	.L46:
+ 210:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 569              		.loc 1 210 5 discriminator 1 view .LVU166
+ 570 0056 D221     		movs	r1, #210
+ 571 0058 1548     		ldr	r0, .L48+8
+ 572 005a FFF7FEFF 		bl	Q_onError
+ 573              	.LVL70:
+ 574              	.L44:
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 575              		.loc 1 222 9 is_stmt 1 discriminator 3 view .LVU167
+ 222:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (void)QHSM_RESERVED_EVT_(me->temp.fun, Q_EMPTY_SIG);
+ 576              		.loc 1 222 18 is_stmt 0 discriminator 3 view .LVU168
+ 577 005e A900     		lsls	r1, r5, #2
+ 578 0060 6B46     		mov	r3, sp
+ 579 0062 CE50     		str	r6, [r1, r3]
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 580              		.loc 1 223 9 is_stmt 1 discriminator 3 view .LVU169
+ 223:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 581              		.loc 1 223 15 is_stmt 0 discriminator 3 view .LVU170
+ 582 0064 1149     		ldr	r1, .L48+4
+ 583 0066 2000     		movs	r0, r4
+ 584 0068 B047     		blx	r6
+ 585              	.LVL71:
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 586              		.loc 1 221 64 is_stmt 1 discriminator 3 view .LVU171
+ 587 006a 0135     		adds	r5, r5, #1
+ 588              	.LVL72:
+ 589              	.L42:
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 590              		.loc 1 221 12 discriminator 1 view .LVU172
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 591              		.loc 1 221 21 is_stmt 0 discriminator 1 view .LVU173
+ 592 006c A668     		ldr	r6, [r4, #8]
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 593              		.loc 1 221 5 discriminator 1 view .LVU174
+ 594 006e BE42     		cmp	r6, r7
+ 595 0070 01D0     		beq	.L43
+ 221:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun;
+ 596              		.loc 1 221 32 discriminator 2 view .LVU175
+ 597 0072 052D     		cmp	r5, #5
+ 598 0074 F3DD     		ble	.L44
+ 599              	.L43:
+ 225:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // must NOT be too many state nesting levels or "malformed" HSM
+ 600              		.loc 1 225 5 is_stmt 1 view .LVU176
+ 601 0076 FFF7FEFF 		bl	vPortEnterCritical
+ 602              	.LVL73:
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 603              		.loc 1 227 5 view .LVU177
+ 604 007a 062D     		cmp	r5, #6
+ 605 007c 0FDC     		bgt	.L47
+ 228:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 606              		.loc 1 228 5 view .LVU178
+ 607 007e FFF7FEFF 		bl	vPortExitCritical
+ 608              	.LVL74:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 24
+
+
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QHsm_enter_target_(me, &path[0], ip - 1, qsId);
+ 609              		.loc 1 230 5 view .LVU179
+ 230:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QHsm_enter_target_(me, &path[0], ip - 1, qsId);
+ 610              		.loc 1 230 18 is_stmt 0 view .LVU180
+ 611 0082 009B     		ldr	r3, [sp]
+ 612 0084 A360     		str	r3, [r4, #8]
+ 231:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     t = path[0];
+ 613              		.loc 1 231 5 is_stmt 1 view .LVU181
+ 614 0086 6A1E     		subs	r2, r5, #1
+ 615 0088 4346     		mov	r3, r8
+ 616 008a 6946     		mov	r1, sp
+ 617 008c 2000     		movs	r0, r4
+ 618 008e FFF7FEFF 		bl	QHsm_enter_target_
+ 619              	.LVL75:
+ 232:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 620              		.loc 1 232 5 view .LVU182
+ 234:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 621              		.loc 1 234 5 view .LVU183
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_UNSAFE
+ 622              		.loc 1 236 5 view .LVU184
+ 236:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_UNSAFE
+ 623              		.loc 1 236 19 is_stmt 0 view .LVU185
+ 624 0092 009B     		ldr	r3, [sp]
+ 625 0094 6360     		str	r3, [r4, #4]
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 626              		.loc 1 240 1 view .LVU186
+ 627 0096 06B0     		add	sp, sp, #24
+ 628              	.LVL76:
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 629              		.loc 1 240 1 view .LVU187
+ 630              		@ sp needed
+ 631              	.LVL77:
+ 632              	.LVL78:
+ 633              	.LVL79:
+ 240:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 634              		.loc 1 240 1 view .LVU188
+ 635 0098 80BC     		pop	{r7}
+ 636 009a B846     		mov	r8, r7
+ 637 009c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 638              	.LVL80:
+ 639              	.L47:
+ 227:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 640              		.loc 1 227 5 discriminator 1 view .LVU189
+ 641 009e DC21     		movs	r1, #220
+ 642 00a0 0348     		ldr	r0, .L48+8
+ 643 00a2 FFF7FEFF 		bl	Q_onError
+ 644              	.LVL81:
+ 645              	.L49:
+ 646 00a6 C046     		.align	2
+ 647              	.L48:
+ 648 00a8 00000000 		.word	QHsm_top
+ 649 00ac 00000000 		.word	.LANCHOR0
+ 650 00b0 00000000 		.word	.LANCHOR1
+ 651              		.cfi_endproc
+ 652              	.LFE17:
+ 654              		.section	.text.QHsm_tran_complex_,"ax",%progbits
+ 655              		.align	1
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 25
+
+
+ 656              		.syntax unified
+ 657              		.code	16
+ 658              		.thumb_func
+ 660              	QHsm_tran_complex_:
+ 661              	.LVL82:
+ 662              	.LFB23:
+ 472:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 663              		.loc 1 472 1 is_stmt 1 view -0
+ 664              		.cfi_startproc
+ 665              		@ args = 0, pretend = 0, frame = 0
+ 666              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 667              		.loc 1 472 1 is_stmt 0 view .LVU191
+ 668 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 669              	.LCFI6:
+ 670              		.cfi_def_cfa_offset 24
+ 671              		.cfi_offset 3, -24
+ 672              		.cfi_offset 4, -20
+ 673              		.cfi_offset 5, -16
+ 674              		.cfi_offset 6, -12
+ 675              		.cfi_offset 7, -8
+ 676              		.cfi_offset 14, -4
+ 677 0002 CE46     		mov	lr, r9
+ 678 0004 4746     		mov	r7, r8
+ 679 0006 80B5     		push	{r7, lr}
+ 680              	.LCFI7:
+ 681              		.cfi_def_cfa_offset 32
+ 682              		.cfi_offset 8, -32
+ 683              		.cfi_offset 9, -28
+ 684 0008 0700     		movs	r7, r0
+ 685 000a 0C00     		movs	r4, r1
+ 474:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 686              		.loc 1 474 5 is_stmt 1 view .LVU192
+ 479:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = 1; // enter target and its superstate
+ 687              		.loc 1 479 5 view .LVU193
+ 688              	.LVL83:
+ 480:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const s = path[2]; // source state
+ 689              		.loc 1 480 5 view .LVU194
+ 481:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = me->temp.fun;  // source->super
+ 690              		.loc 1 481 5 view .LVU195
+ 481:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = me->temp.fun;  // source->super
+ 691              		.loc 1 481 25 is_stmt 0 view .LVU196
+ 692 000c 8B68     		ldr	r3, [r1, #8]
+ 693 000e 9846     		mov	r8, r3
+ 694              	.LVL84:
+ 482:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 695              		.loc 1 482 5 is_stmt 1 view .LVU197
+ 482:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 696              		.loc 1 482 19 is_stmt 0 view .LVU198
+ 697 0010 8568     		ldr	r5, [r0, #8]
+ 698              	.LVL85:
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while ((r == Q_RET_SUPER) && (ip < (QHSM_MAX_NEST_DEPTH_ - 1))) {
+ 699              		.loc 1 487 5 is_stmt 1 view .LVU199
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while ((r == Q_RET_SUPER) && (ip < (QHSM_MAX_NEST_DEPTH_ - 1))) {
+ 700              		.loc 1 487 16 is_stmt 0 view .LVU200
+ 701 0012 2B49     		ldr	r1, .L71
+ 702              	.LVL86:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 26
+
+
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while ((r == Q_RET_SUPER) && (ip < (QHSM_MAX_NEST_DEPTH_ - 1))) {
+ 703              		.loc 1 487 16 view .LVU201
+ 704 0014 6368     		ldr	r3, [r4, #4]
+ 705              	.LVL87:
+ 487:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while ((r == Q_RET_SUPER) && (ip < (QHSM_MAX_NEST_DEPTH_ - 1))) {
+ 706              		.loc 1 487 16 view .LVU202
+ 707 0016 9847     		blx	r3
+ 708              	.LVL88:
+ 488:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ++ip;
+ 709              		.loc 1 488 5 is_stmt 1 view .LVU203
+ 480:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler const s = path[2]; // source state
+ 710              		.loc 1 480 17 is_stmt 0 view .LVU204
+ 711 0018 0126     		movs	r6, #1
+ 712              	.LVL89:
+ 713              	.L51:
+ 488:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ++ip;
+ 714              		.loc 1 488 11 is_stmt 1 view .LVU205
+ 715 001a 0028     		cmp	r0, #0
+ 716 001c 29D1     		bne	.L65
+ 488:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         ++ip;
+ 717              		.loc 1 488 31 is_stmt 0 discriminator 1 view .LVU206
+ 718 001e 042E     		cmp	r6, #4
+ 719 0020 0BDC     		bgt	.L66
+ 489:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun; // store the entry path
+ 720              		.loc 1 489 9 is_stmt 1 view .LVU207
+ 721 0022 731C     		adds	r3, r6, #1
+ 722 0024 9946     		mov	r9, r3
+ 723              	.LVL90:
+ 490:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (me->temp.fun == s) { // is it the source?
+ 724              		.loc 1 490 9 view .LVU208
+ 490:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (me->temp.fun == s) { // is it the source?
+ 725              		.loc 1 490 13 is_stmt 0 view .LVU209
+ 726 0026 9A00     		lsls	r2, r3, #2
+ 490:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (me->temp.fun == s) { // is it the source?
+ 727              		.loc 1 490 28 view .LVU210
+ 728 0028 BB68     		ldr	r3, [r7, #8]
+ 729              	.LVL91:
+ 490:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (me->temp.fun == s) { // is it the source?
+ 730              		.loc 1 490 18 view .LVU211
+ 731 002a A350     		str	r3, [r4, r2]
+ 491:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             iq = 1; // indicate that the LCA found
+ 732              		.loc 1 491 9 is_stmt 1 view .LVU212
+ 491:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             iq = 1; // indicate that the LCA found
+ 733              		.loc 1 491 12 is_stmt 0 view .LVU213
+ 734 002c 4345     		cmp	r3, r8
+ 735 002e 1DD0     		beq	.L64
+ 496:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 736              		.loc 1 496 9 is_stmt 1 view .LVU214
+ 496:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 737              		.loc 1 496 13 is_stmt 0 view .LVU215
+ 738 0030 2349     		ldr	r1, .L71
+ 739 0032 3800     		movs	r0, r7
+ 740              	.LVL92:
+ 496:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 741              		.loc 1 496 13 view .LVU216
+ 742 0034 9847     		blx	r3
+ 743              	.LVL93:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 27
+
+
+ 489:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[ip] = me->temp.fun; // store the entry path
+ 744              		.loc 1 489 9 view .LVU217
+ 745 0036 4E46     		mov	r6, r9
+ 746 0038 EFE7     		b	.L51
+ 747              	.LVL94:
+ 748              	.L66:
+ 479:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = 1; // enter target and its superstate
+ 749              		.loc 1 479 17 view .LVU218
+ 750 003a 0023     		movs	r3, #0
+ 751 003c 9946     		mov	r9, r3
+ 752              	.LVL95:
+ 753              	.L52:
+ 498:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_INVARIANT_INCRIT(711, ip < (QHSM_MAX_NEST_DEPTH_ - 1));
+ 754              		.loc 1 498 5 is_stmt 1 view .LVU219
+ 755 003e FFF7FEFF 		bl	vPortEnterCritical
+ 756              	.LVL96:
+ 499:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 757              		.loc 1 499 5 view .LVU220
+ 758 0042 042E     		cmp	r6, #4
+ 759 0044 18DC     		bgt	.L67
+ 500:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 760              		.loc 1 500 5 view .LVU221
+ 761 0046 FFF7FEFF 		bl	vPortExitCritical
+ 762              	.LVL97:
+ 503:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 763              		.loc 1 503 5 view .LVU222
+ 503:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 764              		.loc 1 503 8 is_stmt 0 view .LVU223
+ 765 004a 4B46     		mov	r3, r9
+ 766 004c 002B     		cmp	r3, #0
+ 767 004e 18D1     		bne	.L50
+ 507:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #else
+ 768              		.loc 1 507 9 is_stmt 1 view .LVU224
+ 507:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #else
+ 769              		.loc 1 507 15 is_stmt 0 view .LVU225
+ 770 0050 1B49     		ldr	r1, .L71
+ 771 0052 0831     		adds	r1, r1, #8
+ 772 0054 3800     		movs	r0, r7
+ 773 0056 C047     		blx	r8
+ 774              	.LVL98:
+ 516:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = Q_RET_IGNORED; // indicate that the LCA NOT found
+ 775              		.loc 1 516 9 is_stmt 1 view .LVU226
+ 517:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // note: iq is the fixed upper loop bound
+ 776              		.loc 1 517 9 view .LVU227
+ 516:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = Q_RET_IGNORED; // indicate that the LCA NOT found
+ 777              		.loc 1 516 12 is_stmt 0 view .LVU228
+ 778 0058 3300     		movs	r3, r6
+ 779              	.LVL99:
+ 780              	.L57:
+ 519:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             if (t == path[iq]) { // is this the LCA?
+ 781              		.loc 1 519 9 is_stmt 1 view .LVU229
+ 520:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 r = Q_RET_HANDLED; // indicate the LCA found
+ 782              		.loc 1 520 13 view .LVU230
+ 520:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 r = Q_RET_HANDLED; // indicate the LCA found
+ 783              		.loc 1 520 26 is_stmt 0 view .LVU231
+ 784 005a 9A00     		lsls	r2, r3, #2
+ 785 005c 1259     		ldr	r2, [r2, r4]
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 28
+
+
+ 520:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 r = Q_RET_HANDLED; // indicate the LCA found
+ 786              		.loc 1 520 16 view .LVU232
+ 787 005e AA42     		cmp	r2, r5
+ 788 0060 0ED0     		beq	.L68
+ 525:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         } while (iq >= 0);
+ 789              		.loc 1 525 13 is_stmt 1 view .LVU233
+ 790              	.LVL100:
+ 526:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 791              		.loc 1 526 17 view .LVU234
+ 526:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 792              		.loc 1 526 9 is_stmt 0 view .LVU235
+ 793 0062 013B     		subs	r3, r3, #1
+ 794 0064 F9D5     		bpl	.L57
+ 795              	.LVL101:
+ 531:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             while (r != Q_RET_HANDLED) {
+ 796              		.loc 1 531 15 view .LVU236
+ 797 0066 0023     		movs	r3, #0
+ 798              	.LVL102:
+ 531:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             while (r != Q_RET_HANDLED) {
+ 799              		.loc 1 531 15 view .LVU237
+ 800 0068 9846     		mov	r8, r3
+ 801              	.LVL103:
+ 531:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             while (r != Q_RET_HANDLED) {
+ 802              		.loc 1 531 15 view .LVU238
+ 803 006a 16E0     		b	.L58
+ 804              	.LVL104:
+ 805              	.L64:
+ 492:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             --ip;   // do not enter the source
+ 806              		.loc 1 492 16 view .LVU239
+ 807 006c 0123     		movs	r3, #1
+ 808 006e 9946     		mov	r9, r3
+ 809              	.LVL105:
+ 492:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             --ip;   // do not enter the source
+ 810              		.loc 1 492 16 view .LVU240
+ 811 0070 E5E7     		b	.L52
+ 812              	.LVL106:
+ 813              	.L65:
+ 479:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = 1; // enter target and its superstate
+ 814              		.loc 1 479 17 view .LVU241
+ 815 0072 0023     		movs	r3, #0
+ 816 0074 9946     		mov	r9, r3
+ 817 0076 E2E7     		b	.L52
+ 818              	.LVL107:
+ 819              	.L67:
+ 499:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 820              		.loc 1 499 5 discriminator 1 view .LVU242
+ 821 0078 1249     		ldr	r1, .L71+4
+ 822 007a 1348     		ldr	r0, .L71+8
+ 823 007c FFF7FEFF 		bl	Q_onError
+ 824              	.LVL108:
+ 825              	.L68:
+ 521:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 ip = iq - 1; // do not enter the LCA
+ 826              		.loc 1 521 17 is_stmt 1 view .LVU243
+ 522:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 break; // terminate the loop
+ 827              		.loc 1 522 17 view .LVU244
+ 522:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 break; // terminate the loop
+ 828              		.loc 1 522 20 is_stmt 0 view .LVU245
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 29
+
+
+ 829 0080 5E1E     		subs	r6, r3, #1
+ 830              	.LVL109:
+ 523:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 831              		.loc 1 523 17 is_stmt 1 view .LVU246
+ 528:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // (g) check each source->super->...
+ 832              		.loc 1 528 9 view .LVU247
+ 833              	.L50:
+ 553:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 834              		.loc 1 553 1 is_stmt 0 view .LVU248
+ 835 0082 3000     		movs	r0, r6
+ 836              		@ sp needed
+ 837              	.LVL110:
+ 838              	.LVL111:
+ 839              	.LVL112:
+ 840              	.LVL113:
+ 553:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 841              		.loc 1 553 1 view .LVU249
+ 842 0084 C0BC     		pop	{r6, r7}
+ 843 0086 B946     		mov	r9, r7
+ 844 0088 B046     		mov	r8, r6
+ 845 008a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 846              	.LVL114:
+ 847              	.L69:
+ 535:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     // find superstate of t
+ 848              		.loc 1 535 21 is_stmt 1 view .LVU250
+ 537:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 849              		.loc 1 537 21 view .LVU251
+ 537:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 }
+ 850              		.loc 1 537 27 is_stmt 0 view .LVU252
+ 851 008c 0C49     		ldr	r1, .L71
+ 852 008e 3800     		movs	r0, r7
+ 853 0090 A847     		blx	r5
+ 854              	.LVL115:
+ 855 0092 0BE0     		b	.L59
+ 856              	.LVL116:
+ 857              	.L70:
+ 543:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         r = Q_RET_HANDLED; // break outer loop
+ 858              		.loc 1 543 25 is_stmt 1 view .LVU253
+ 543:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         r = Q_RET_HANDLED; // break outer loop
+ 859              		.loc 1 543 28 is_stmt 0 view .LVU254
+ 860 0094 5E1E     		subs	r6, r3, #1
+ 861              	.LVL117:
+ 544:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         break;  // terminate the inner loop
+ 862              		.loc 1 544 25 is_stmt 1 view .LVU255
+ 545:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     }
+ 863              		.loc 1 545 25 view .LVU256
+ 544:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         break;  // terminate the inner loop
+ 864              		.loc 1 544 27 is_stmt 0 view .LVU257
+ 865 0096 0223     		movs	r3, #2
+ 866              	.LVL118:
+ 544:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         break;  // terminate the inner loop
+ 867              		.loc 1 544 27 view .LVU258
+ 868 0098 9846     		mov	r8, r3
+ 869              	.LVL119:
+ 870              	.L58:
+ 532:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 // exit from t
+ 871              		.loc 1 532 19 is_stmt 1 view .LVU259
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 30
+
+
+ 872 009a 4346     		mov	r3, r8
+ 873 009c 022B     		cmp	r3, #2
+ 874 009e F0D0     		beq	.L50
+ 534:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 875              		.loc 1 534 17 view .LVU260
+ 534:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 876              		.loc 1 534 21 is_stmt 0 view .LVU261
+ 877 00a0 0749     		ldr	r1, .L71
+ 878 00a2 0831     		adds	r1, r1, #8
+ 879 00a4 3800     		movs	r0, r7
+ 880 00a6 A847     		blx	r5
+ 881              	.LVL120:
+ 534:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 882              		.loc 1 534 20 view .LVU262
+ 883 00a8 0228     		cmp	r0, #2
+ 884 00aa EFD0     		beq	.L69
+ 885              	.L59:
+ 539:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 iq = ip;
+ 886              		.loc 1 539 17 is_stmt 1 view .LVU263
+ 539:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 iq = ip;
+ 887              		.loc 1 539 19 is_stmt 0 view .LVU264
+ 888 00ac BD68     		ldr	r5, [r7, #8]
+ 889              	.LVL121:
+ 540:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 do {
+ 890              		.loc 1 540 17 is_stmt 1 view .LVU265
+ 540:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 do {
+ 891              		.loc 1 540 20 is_stmt 0 view .LVU266
+ 892 00ae 3300     		movs	r3, r6
+ 893              	.LVL122:
+ 894              	.L62:
+ 541:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                     if (t == path[iq]) { // is this the LCA?
+ 895              		.loc 1 541 17 is_stmt 1 view .LVU267
+ 542:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         ip = iq - 1; // do not enter the LCA
+ 896              		.loc 1 542 21 view .LVU268
+ 542:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         ip = iq - 1; // do not enter the LCA
+ 897              		.loc 1 542 34 is_stmt 0 view .LVU269
+ 898 00b0 9A00     		lsls	r2, r3, #2
+ 899 00b2 1259     		ldr	r2, [r2, r4]
+ 542:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                         ip = iq - 1; // do not enter the LCA
+ 900              		.loc 1 542 24 view .LVU270
+ 901 00b4 AA42     		cmp	r2, r5
+ 902 00b6 EDD0     		beq	.L70
+ 547:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 } while (iq >= 0);
+ 903              		.loc 1 547 21 is_stmt 1 view .LVU271
+ 904              	.LVL123:
+ 548:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 905              		.loc 1 548 25 view .LVU272
+ 548:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 906              		.loc 1 548 17 is_stmt 0 view .LVU273
+ 907 00b8 013B     		subs	r3, r3, #1
+ 908 00ba F9D5     		bpl	.L62
+ 909              	.LVL124:
+ 548:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 910              		.loc 1 548 17 view .LVU274
+ 911 00bc EDE7     		b	.L58
+ 912              	.L72:
+ 913 00be C046     		.align	2
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 31
+
+
+ 914              	.L71:
+ 915 00c0 00000000 		.word	.LANCHOR0
+ 916 00c4 C7020000 		.word	711
+ 917 00c8 00000000 		.word	.LANCHOR1
+ 918              		.cfi_endproc
+ 919              	.LFE23:
+ 921              		.section	.text.QHsm_dispatch_,"ax",%progbits
+ 922              		.align	1
+ 923              		.global	QHsm_dispatch_
+ 924              		.syntax unified
+ 925              		.code	16
+ 926              		.thumb_func
+ 928              	QHsm_dispatch_:
+ 929              	.LVL125:
+ 930              	.LFB18:
+ 248:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 931              		.loc 1 248 1 is_stmt 1 view -0
+ 932              		.cfi_startproc
+ 933              		@ args = 0, pretend = 0, frame = 24
+ 934              		@ frame_needed = 0, uses_anonymous_args = 0
+ 248:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_SPY
+ 935              		.loc 1 248 1 is_stmt 0 view .LVU276
+ 936 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 937              	.LCFI8:
+ 938              		.cfi_def_cfa_offset 20
+ 939              		.cfi_offset 4, -20
+ 940              		.cfi_offset 5, -16
+ 941              		.cfi_offset 6, -12
+ 942              		.cfi_offset 7, -8
+ 943              		.cfi_offset 14, -4
+ 944 0002 D646     		mov	lr, r10
+ 945 0004 4F46     		mov	r7, r9
+ 946 0006 4646     		mov	r6, r8
+ 947 0008 C0B5     		push	{r6, r7, lr}
+ 948              	.LCFI9:
+ 949              		.cfi_def_cfa_offset 32
+ 950              		.cfi_offset 8, -32
+ 951              		.cfi_offset 9, -28
+ 952              		.cfi_offset 10, -24
+ 953 000a 86B0     		sub	sp, sp, #24
+ 954              	.LCFI10:
+ 955              		.cfi_def_cfa_offset 56
+ 956 000c 0500     		movs	r5, r0
+ 957 000e 8946     		mov	r9, r1
+ 958 0010 9246     		mov	r10, r2
+ 250:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 959              		.loc 1 250 5 is_stmt 1 view .LVU277
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = s;
+ 960              		.loc 1 253 5 view .LVU278
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = s;
+ 961              		.loc 1 253 19 is_stmt 0 view .LVU279
+ 962 0012 4668     		ldr	r6, [r0, #4]
+ 963              	.LVL126:
+ 254:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_STAT
+ 964              		.loc 1 254 5 is_stmt 1 view .LVU280
+ 257:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_REQUIRE_INCRIT(300,
+ 965              		.loc 1 257 5 view .LVU281
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 32
+
+
+ 966 0014 FFF7FEFF 		bl	vPortEnterCritical
+ 967              	.LVL127:
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (e != (QEvt *)0)
+ 968              		.loc 1 258 5 view .LVU282
+ 969 0018 4B46     		mov	r3, r9
+ 970 001a 002B     		cmp	r3, #0
+ 971 001c 09D0     		beq	.L74
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (e != (QEvt *)0)
+ 972              		.loc 1 258 5 is_stmt 0 discriminator 2 view .LVU283
+ 973 001e 002E     		cmp	r6, #0
+ 974 0020 07D0     		beq	.L74
+ 261:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 975              		.loc 1 261 5 is_stmt 1 view .LVU284
+ 976 0022 FFF7FEFF 		bl	vPortExitCritical
+ 977              	.LVL128:
+ 263:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 978              		.loc 1 263 5 view .LVU285
+ 265:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 979              		.loc 1 265 5 view .LVU286
+ 268:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = QHSM_MAX_NEST_DEPTH_;
+ 980              		.loc 1 268 5 view .LVU287
+ 268:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     int_fast8_t ip = QHSM_MAX_NEST_DEPTH_;
+ 981              		.loc 1 268 18 is_stmt 0 view .LVU288
+ 982 0026 AE60     		str	r6, [r5, #8]
+ 269:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // NOTE: ip is the fixed loop upper bound
+ 983              		.loc 1 269 5 is_stmt 1 view .LVU289
+ 984              	.LVL129:
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+ 985              		.loc 1 271 5 view .LVU290
+ 253:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QStateHandler t = s;
+ 986              		.loc 1 253 19 is_stmt 0 view .LVU291
+ 987 0028 3700     		movs	r7, r6
+ 269:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     // NOTE: ip is the fixed loop upper bound
+ 988              		.loc 1 269 17 view .LVU292
+ 989 002a 0623     		movs	r3, #6
+ 990 002c 9846     		mov	r8, r3
+ 265:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 991              		.loc 1 265 12 view .LVU293
+ 992 002e 0024     		movs	r4, #0
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+ 993              		.loc 1 271 5 view .LVU294
+ 994 0030 0AE0     		b	.L76
+ 995              	.LVL130:
+ 996              	.L74:
+ 258:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         (e != (QEvt *)0)
+ 997              		.loc 1 258 5 discriminator 3 view .LVU295
+ 998 0032 9621     		movs	r1, #150
+ 999 0034 4900     		lsls	r1, r1, #1
+ 1000 0036 2A48     		ldr	r0, .L89
+ 1001 0038 FFF7FEFF 		bl	Q_onError
+ 1002              	.LVL131:
+ 1003              	.L77:
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break;
+ 1004              		.loc 1 279 9 is_stmt 1 view .LVU296
+ 279:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             break;
+ 1005              		.loc 1 279 12 is_stmt 0 view .LVU297
+ 1006 003c 002C     		cmp	r4, #0
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 33
+
+
+ 1007 003e 12D1     		bne	.L78
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+ 1008              		.loc 1 271 20 is_stmt 1 view .LVU298
+ 1009 0040 0123     		movs	r3, #1
+ 1010 0042 5B42     		rsbs	r3, r3, #0
+ 1011 0044 9C46     		mov	ip, r3
+ 1012 0046 E044     		add	r8, r8, ip
+ 1013              	.LVL132:
+ 1014              	.L76:
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+ 1015              		.loc 1 271 12 discriminator 1 view .LVU299
+ 271:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         s = me->temp.fun;
+ 1016              		.loc 1 271 5 is_stmt 0 discriminator 1 view .LVU300
+ 1017 0048 4346     		mov	r3, r8
+ 1018 004a 002B     		cmp	r3, #0
+ 1019 004c 0BDD     		ble	.L78
+ 272:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = (*s)(me, e); // invoke state handler s
+ 1020              		.loc 1 272 9 is_stmt 1 view .LVU301
+ 272:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = (*s)(me, e); // invoke state handler s
+ 1021              		.loc 1 272 11 is_stmt 0 view .LVU302
+ 1022 004e AF68     		ldr	r7, [r5, #8]
+ 1023              	.LVL133:
+ 273:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1024              		.loc 1 273 9 is_stmt 1 view .LVU303
+ 273:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1025              		.loc 1 273 14 is_stmt 0 view .LVU304
+ 1026 0050 4946     		mov	r1, r9
+ 1027 0052 2800     		movs	r0, r5
+ 1028 0054 B847     		blx	r7
+ 1029              	.LVL134:
+ 1030 0056 0400     		movs	r4, r0
+ 1031              	.LVL135:
+ 275:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_TRAN_ACT_(QS_QEP_UNHANDLED, s);
+ 1032              		.loc 1 275 9 is_stmt 1 view .LVU305
+ 275:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             QS_TRAN_ACT_(QS_QEP_UNHANDLED, s);
+ 1033              		.loc 1 275 12 is_stmt 0 view .LVU306
+ 1034 0058 0128     		cmp	r0, #1
+ 1035 005a EFD1     		bne	.L77
+ 276:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             r = QHSM_RESERVED_EVT_(s, Q_EMPTY_SIG); // superstate of s
+ 1036              		.loc 1 276 13 is_stmt 1 view .LVU307
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1037              		.loc 1 277 13 view .LVU308
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1038              		.loc 1 277 17 is_stmt 0 view .LVU309
+ 1039 005c 2149     		ldr	r1, .L89+4
+ 1040 005e 2800     		movs	r0, r5
+ 1041              	.LVL136:
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1042              		.loc 1 277 17 view .LVU310
+ 1043 0060 B847     		blx	r7
+ 1044              	.LVL137:
+ 1045 0062 0400     		movs	r4, r0
+ 1046              	.LVL138:
+ 277:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1047              		.loc 1 277 17 view .LVU311
+ 1048 0064 EAE7     		b	.L77
+ 1049              	.LVL139:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 34
+
+
+ 1050              	.L78:
+ 283:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_ASSERT_INCRIT(310, ip > 0);
+ 1051              		.loc 1 283 5 is_stmt 1 view .LVU312
+ 1052 0066 FFF7FEFF 		bl	vPortEnterCritical
+ 1053              	.LVL140:
+ 284:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 1054              		.loc 1 284 5 view .LVU313
+ 1055 006a 4346     		mov	r3, r8
+ 1056 006c 002B     		cmp	r3, #0
+ 1057 006e 08DD     		ble	.L86
+ 1058              	.LVL141:
+ 285:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1059              		.loc 1 285 5 view .LVU314
+ 1060 0070 FFF7FEFF 		bl	vPortExitCritical
+ 1061              	.LVL142:
+ 287:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 1062              		.loc 1 287 5 view .LVU315
+ 287:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifdef Q_SPY
+ 1063              		.loc 1 287 8 is_stmt 0 view .LVU316
+ 1064 0074 062C     		cmp	r4, #6
+ 1065 0076 24D9     		bls	.L81
+ 1066              	.LBB2:
+ 294:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[0] = me->temp.fun; // tran. target
+ 1067              		.loc 1 294 9 is_stmt 1 view .LVU317
+ 295:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[1] = t; // current state
+ 1068              		.loc 1 295 9 view .LVU318
+ 295:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[1] = t; // current state
+ 1069              		.loc 1 295 17 is_stmt 0 view .LVU319
+ 1070 0078 AB68     		ldr	r3, [r5, #8]
+ 1071 007a 0093     		str	r3, [sp]
+ 296:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[2] = s; // tran. source
+ 1072              		.loc 1 296 9 is_stmt 1 view .LVU320
+ 296:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         path[2] = s; // tran. source
+ 1073              		.loc 1 296 17 is_stmt 0 view .LVU321
+ 1074 007c 0196     		str	r6, [sp, #4]
+ 297:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1075              		.loc 1 297 9 is_stmt 1 view .LVU322
+ 297:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1076              		.loc 1 297 17 is_stmt 0 view .LVU323
+ 1077 007e 0297     		str	r7, [sp, #8]
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // exit from t
+ 1078              		.loc 1 300 9 is_stmt 1 view .LVU324
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // exit from t
+ 1079              		.loc 1 300 15 is_stmt 0 view .LVU325
+ 1080 0080 05E0     		b	.L82
+ 1081              	.LVL143:
+ 1082              	.L86:
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // exit from t
+ 1083              		.loc 1 300 15 view .LVU326
+ 1084              	.LBE2:
+ 284:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 1085              		.loc 1 284 5 discriminator 1 view .LVU327
+ 1086 0082 9B21     		movs	r1, #155
+ 1087 0084 4900     		lsls	r1, r1, #1
+ 1088 0086 1648     		ldr	r0, .L89
+ 1089 0088 FFF7FEFF 		bl	Q_onError
+ 1090              	.LVL144:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 35
+
+
+ 1091              	.L83:
+ 1092              	.LBB3:
+ 307:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1093              		.loc 1 307 13 is_stmt 1 view .LVU328
+ 307:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1094              		.loc 1 307 15 is_stmt 0 view .LVU329
+ 1095 008c AE68     		ldr	r6, [r5, #8]
+ 1096              	.LVL145:
+ 1097              	.L82:
+ 300:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             // exit from t
+ 1098              		.loc 1 300 15 is_stmt 1 view .LVU330
+ 1099 008e B742     		cmp	r7, r6
+ 1100 0090 09D0     		beq	.L87
+ 302:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 1101              		.loc 1 302 13 view .LVU331
+ 302:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 1102              		.loc 1 302 17 is_stmt 0 view .LVU332
+ 1103 0092 1449     		ldr	r1, .L89+4
+ 1104 0094 0831     		adds	r1, r1, #8
+ 1105 0096 2800     		movs	r0, r5
+ 1106 0098 B047     		blx	r6
+ 1107              	.LVL146:
+ 302:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 QS_STATE_ACT_(QS_QEP_STATE_EXIT, t);
+ 1108              		.loc 1 302 16 view .LVU333
+ 1109 009a 0228     		cmp	r0, #2
+ 1110 009c F6D1     		bne	.L83
+ 303:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****                 // find superstate of t
+ 1111              		.loc 1 303 17 is_stmt 1 view .LVU334
+ 305:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 1112              		.loc 1 305 17 view .LVU335
+ 305:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             }
+ 1113              		.loc 1 305 23 is_stmt 0 view .LVU336
+ 1114 009e 1149     		ldr	r1, .L89+4
+ 1115 00a0 2800     		movs	r0, r5
+ 1116 00a2 B047     		blx	r6
+ 1117              	.LVL147:
+ 1118 00a4 F2E7     		b	.L83
+ 1119              	.L87:
+ 311:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (ip < -1) { // not a simple tran.?
+ 1120              		.loc 1 311 9 is_stmt 1 view .LVU337
+ 311:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         if (ip < -1) { // not a simple tran.?
+ 1121              		.loc 1 311 14 is_stmt 0 view .LVU338
+ 1122 00a6 5246     		mov	r2, r10
+ 1123 00a8 6946     		mov	r1, sp
+ 1124 00aa 2800     		movs	r0, r5
+ 1125 00ac FFF7FEFF 		bl	QHsm_tran_simple_
+ 1126              	.LVL148:
+ 1127 00b0 0200     		movs	r2, r0
+ 1128              	.LVL149:
+ 312:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ip = QHsm_tran_complex_(me, &path[0], qsId);
+ 1129              		.loc 1 312 9 is_stmt 1 view .LVU339
+ 312:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****             ip = QHsm_tran_complex_(me, &path[0], qsId);
+ 1130              		.loc 1 312 12 is_stmt 0 view .LVU340
+ 1131 00b2 431C     		adds	r3, r0, #1
+ 1132 00b4 0CDB     		blt	.L88
+ 1133              	.L85:
+ 316:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         t = path[0];
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 36
+
+
+ 1134              		.loc 1 316 9 is_stmt 1 view .LVU341
+ 1135 00b6 5346     		mov	r3, r10
+ 1136 00b8 6946     		mov	r1, sp
+ 1137 00ba 2800     		movs	r0, r5
+ 1138              	.LVL150:
+ 316:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         t = path[0];
+ 1139              		.loc 1 316 9 is_stmt 0 view .LVU342
+ 1140 00bc FFF7FEFF 		bl	QHsm_enter_target_
+ 1141              	.LVL151:
+ 317:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TRAN_END_(QS_QEP_TRAN, s, t);
+ 1142              		.loc 1 317 9 is_stmt 1 view .LVU343
+ 317:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         QS_TRAN_END_(QS_QEP_TRAN, s, t);
+ 1143              		.loc 1 317 11 is_stmt 0 view .LVU344
+ 1144 00c0 009E     		ldr	r6, [sp]
+ 1145              	.LVL152:
+ 318:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 1146              		.loc 1 318 9 is_stmt 1 view .LVU345
+ 1147              	.L81:
+ 318:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 1148              		.loc 1 318 9 is_stmt 0 view .LVU346
+ 1149              	.LBE3:
+ 329:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 1150              		.loc 1 329 5 is_stmt 1 view .LVU347
+ 329:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 1151              		.loc 1 329 19 is_stmt 0 view .LVU348
+ 1152 00c2 6E60     		str	r6, [r5, #4]
+ 330:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1153              		.loc 1 330 1 view .LVU349
+ 1154 00c4 06B0     		add	sp, sp, #24
+ 1155              		@ sp needed
+ 1156              	.LVL153:
+ 1157              	.LVL154:
+ 1158              	.LVL155:
+ 1159              	.LVL156:
+ 1160              	.LVL157:
+ 1161              	.LVL158:
+ 330:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1162              		.loc 1 330 1 view .LVU350
+ 1163 00c6 E0BC     		pop	{r5, r6, r7}
+ 1164 00c8 BA46     		mov	r10, r7
+ 1165 00ca B146     		mov	r9, r6
+ 1166 00cc A846     		mov	r8, r5
+ 1167 00ce F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1168              	.LVL159:
+ 1169              	.L88:
+ 1170              	.LBB4:
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1171              		.loc 1 313 13 is_stmt 1 view .LVU351
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1172              		.loc 1 313 18 is_stmt 0 view .LVU352
+ 1173 00d0 5246     		mov	r2, r10
+ 1174 00d2 6946     		mov	r1, sp
+ 1175 00d4 2800     		movs	r0, r5
+ 1176              	.LVL160:
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1177              		.loc 1 313 18 view .LVU353
+ 1178 00d6 FFF7FEFF 		bl	QHsm_tran_complex_
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 37
+
+
+ 1179              	.LVL161:
+ 1180 00da 0200     		movs	r2, r0
+ 1181              	.LVL162:
+ 313:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         }
+ 1182              		.loc 1 313 18 view .LVU354
+ 1183 00dc EBE7     		b	.L85
+ 1184              	.L90:
+ 1185 00de C046     		.align	2
+ 1186              	.L89:
+ 1187 00e0 00000000 		.word	.LANCHOR1
+ 1188 00e4 00000000 		.word	.LANCHOR0
+ 1189              	.LBE4:
+ 1190              		.cfi_endproc
+ 1191              	.LFE18:
+ 1193              		.section	.text.QHsm_ctor,"ax",%progbits
+ 1194              		.align	1
+ 1195              		.global	QHsm_ctor
+ 1196              		.syntax unified
+ 1197              		.code	16
+ 1198              		.thumb_func
+ 1200              	QHsm_ctor:
+ 1201              	.LVL163:
+ 1202              	.LFB16:
+ 157:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     static struct QAsmVtable const vtable = { // QAsm virtual table
+ 1203              		.loc 1 157 1 is_stmt 1 view -0
+ 1204              		.cfi_startproc
+ 1205              		@ args = 0, pretend = 0, frame = 0
+ 1206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1207              		@ link register save eliminated.
+ 158:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         &QHsm_init_,
+ 1208              		.loc 1 158 5 view .LVU356
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.state.fun = Q_STATE_CAST(&QHsm_top);
+ 1209              		.loc 1 167 5 view .LVU357
+ 167:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.state.fun = Q_STATE_CAST(&QHsm_top);
+ 1210              		.loc 1 167 25 is_stmt 0 view .LVU358
+ 1211 0000 024B     		ldr	r3, .L92
+ 1212 0002 0360     		str	r3, [r0]
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.temp.fun  = initial;
+ 1213              		.loc 1 168 5 is_stmt 1 view .LVU359
+ 168:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.temp.fun  = initial;
+ 1214              		.loc 1 168 25 is_stmt 0 view .LVU360
+ 1215 0004 024B     		ldr	r3, .L92+4
+ 1216 0006 4360     		str	r3, [r0, #4]
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 1217              		.loc 1 169 5 is_stmt 1 view .LVU361
+ 169:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 1218              		.loc 1 169 25 is_stmt 0 view .LVU362
+ 1219 0008 8160     		str	r1, [r0, #8]
+ 170:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1220              		.loc 1 170 1 view .LVU363
+ 1221              		@ sp needed
+ 1222 000a 7047     		bx	lr
+ 1223              	.L93:
+ 1224              		.align	2
+ 1225              	.L92:
+ 1226 000c 00000000 		.word	.LANCHOR2
+ 1227 0010 00000000 		.word	QHsm_top
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 38
+
+
+ 1228              		.cfi_endproc
+ 1229              	.LFE16:
+ 1231              		.section	.text.QHsm_childState,"ax",%progbits
+ 1232              		.align	1
+ 1233              		.global	QHsm_childState
+ 1234              		.syntax unified
+ 1235              		.code	16
+ 1236              		.thumb_func
+ 1238              	QHsm_childState:
+ 1239              	.LVL164:
+ 1240              	.LFB21:
+ 376:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 1241              		.loc 1 376 1 is_stmt 1 view -0
+ 1242              		.cfi_startproc
+ 1243              		@ args = 0, pretend = 0, frame = 0
+ 1244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 376:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 1245              		.loc 1 376 1 is_stmt 0 view .LVU365
+ 1246 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1247              	.LCFI11:
+ 1248              		.cfi_def_cfa_offset 24
+ 1249              		.cfi_offset 3, -24
+ 1250              		.cfi_offset 4, -20
+ 1251              		.cfi_offset 5, -16
+ 1252              		.cfi_offset 6, -12
+ 1253              		.cfi_offset 7, -8
+ 1254              		.cfi_offset 14, -4
+ 1255 0002 0500     		movs	r5, r0
+ 1256 0004 0F00     		movs	r7, r1
+ 378:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 1257              		.loc 1 378 5 is_stmt 1 view .LVU366
+ 1258              	.LVL165:
+ 381:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.temp.fun = child; // establish stable state configuration
+ 1259              		.loc 1 381 5 view .LVU367
+ 381:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     me->super.temp.fun = child; // establish stable state configuration
+ 1260              		.loc 1 381 19 is_stmt 0 view .LVU368
+ 1261 0006 4668     		ldr	r6, [r0, #4]
+ 1262              	.LVL166:
+ 382:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = Q_RET_SUPER;
+ 1263              		.loc 1 382 5 is_stmt 1 view .LVU369
+ 382:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QState r = Q_RET_SUPER;
+ 1264              		.loc 1 382 24 is_stmt 0 view .LVU370
+ 1265 0008 8660     		str	r6, [r0, #8]
+ 383:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while (r != Q_RET_IGNORED) {
+ 1266              		.loc 1 383 5 is_stmt 1 view .LVU371
+ 1267              	.LVL167:
+ 384:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // have the parent of the current child?
+ 1268              		.loc 1 384 5 view .LVU372
+ 383:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     while (r != Q_RET_IGNORED) {
+ 1269              		.loc 1 383 12 is_stmt 0 view .LVU373
+ 1270 000a 0020     		movs	r0, #0
+ 1271              	.LVL168:
+ 384:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // have the parent of the current child?
+ 1272              		.loc 1 384 11 view .LVU374
+ 1273 000c 03E0     		b	.L95
+ 1274              	.LVL169:
+ 1275              	.L101:
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 39
+
+
+ 392:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = QHSM_RESERVED_EVT_(child, Q_EMPTY_SIG);
+ 1276              		.loc 1 392 9 is_stmt 1 view .LVU375
+ 393:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 1277              		.loc 1 393 9 view .LVU376
+ 393:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 1278              		.loc 1 393 13 is_stmt 0 view .LVU377
+ 1279 000e 0C49     		ldr	r1, .L103
+ 1280 0010 2800     		movs	r0, r5
+ 1281              	.LVL170:
+ 393:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     }
+ 1282              		.loc 1 393 13 view .LVU378
+ 1283 0012 A047     		blx	r4
+ 1284              	.LVL171:
+ 392:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         r = QHSM_RESERVED_EVT_(child, Q_EMPTY_SIG);
+ 1285              		.loc 1 392 15 view .LVU379
+ 1286 0014 2600     		movs	r6, r4
+ 1287              	.LVL172:
+ 1288              	.L95:
+ 384:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****         // have the parent of the current child?
+ 1289              		.loc 1 384 11 is_stmt 1 view .LVU380
+ 1290 0016 0328     		cmp	r0, #3
+ 1291 0018 04D0     		beq	.L100
+ 386:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 1292              		.loc 1 386 9 view .LVU381
+ 386:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 1293              		.loc 1 386 27 is_stmt 0 view .LVU382
+ 1294 001a AC68     		ldr	r4, [r5, #8]
+ 386:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #ifndef Q_UNSAFE
+ 1295              		.loc 1 386 12 view .LVU383
+ 1296 001c BC42     		cmp	r4, r7
+ 1297 001e F6D1     		bne	.L101
+ 388:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 1298              		.loc 1 388 21 view .LVU384
+ 1299 0020 0124     		movs	r4, #1
+ 1300 0022 00E0     		b	.L96
+ 1301              	.L100:
+ 378:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** #endif
+ 1302              		.loc 1 378 10 view .LVU385
+ 1303 0024 0024     		movs	r4, #0
+ 1304              	.L96:
+ 1305              	.LVL173:
+ 396:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     Q_ASSERT_INCRIT(590, isFound);
+ 1306              		.loc 1 396 5 is_stmt 1 view .LVU386
+ 1307 0026 FFF7FEFF 		bl	vPortEnterCritical
+ 1308              	.LVL174:
+ 397:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 1309              		.loc 1 397 5 view .LVU387
+ 1310 002a 002C     		cmp	r4, #0
+ 1311 002c 03D0     		beq	.L102
+ 398:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1312              		.loc 1 398 5 view .LVU388
+ 1313 002e FFF7FEFF 		bl	vPortExitCritical
+ 1314              	.LVL175:
+ 400:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** }
+ 1315              		.loc 1 400 5 view .LVU389
+ 401:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1316              		.loc 1 401 1 is_stmt 0 view .LVU390
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 40
+
+
+ 1317 0032 3000     		movs	r0, r6
+ 1318              		@ sp needed
+ 1319              	.LVL176:
+ 1320              	.LVL177:
+ 1321              	.LVL178:
+ 1322              	.LVL179:
+ 401:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c **** 
+ 1323              		.loc 1 401 1 view .LVU391
+ 1324 0034 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1325              	.LVL180:
+ 1326              	.L102:
+ 397:Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/src/qf/qep_hsm.c ****     QF_CRIT_EXIT();
+ 1327              		.loc 1 397 5 discriminator 1 view .LVU392
+ 1328 0036 0349     		ldr	r1, .L103+4
+ 1329 0038 0348     		ldr	r0, .L103+8
+ 1330 003a FFF7FEFF 		bl	Q_onError
+ 1331              	.LVL181:
+ 1332              	.L104:
+ 1333 003e C046     		.align	2
+ 1334              	.L103:
+ 1335 0040 00000000 		.word	.LANCHOR0
+ 1336 0044 4E020000 		.word	590
+ 1337 0048 00000000 		.word	.LANCHOR1
+ 1338              		.cfi_endproc
+ 1339              	.LFE21:
+ 1341              		.section	.rodata.Q_this_module_,"a"
+ 1342              		.align	2
+ 1343              		.set	.LANCHOR1,. + 0
+ 1346              	Q_this_module_:
+ 1347 0000 7165705F 		.ascii	"qep_hsm\000"
+ 1347      68736D00 
+ 1348              		.section	.rodata.l_reservedEvt_,"a"
+ 1349              		.align	2
+ 1350              		.set	.LANCHOR0,. + 0
+ 1353              	l_reservedEvt_:
+ 1354 0000 0000     		.short	0
+ 1355 0002 00       		.byte	0
+ 1356 0003 E0       		.byte	-32
+ 1357 0004 0100     		.short	1
+ 1358 0006 00       		.byte	0
+ 1359 0007 E0       		.byte	-32
+ 1360 0008 0200     		.short	2
+ 1361 000a 00       		.byte	0
+ 1362 000b E0       		.byte	-32
+ 1363 000c 0300     		.short	3
+ 1364 000e 00       		.byte	0
+ 1365 000f E0       		.byte	-32
+ 1366              		.section	.rodata.vtable.0,"a"
+ 1367              		.align	2
+ 1368              		.set	.LANCHOR2,. + 0
+ 1371              	vtable.0:
+ 1372 0000 00000000 		.word	QHsm_init_
+ 1373 0004 00000000 		.word	QHsm_dispatch_
+ 1374 0008 00000000 		.word	QHsm_isIn_
+ 1375              		.text
+ 1376              	.Letext0:
+ 1377              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 41
+
+
+ 1378              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 1379              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 1380              		.file 5 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qp.h"
+ 1381              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h"
+ 1382              		.file 7 "Middlewares/Third_Party/QuantumLeaps_RTEF_qpc/include/qsafe.h"
+ARM GAS  C:\Users\main\AppData\Local\Temp\cc8I32pi.s 			page 42
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 qep_hsm.c
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:18     .text.QHsm_isIn_:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:24     .text.QHsm_isIn_:00000000 QHsm_isIn_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:98     .text.QHsm_isIn_:00000024 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:103    .text.QHsm_top:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:109    .text.QHsm_top:00000000 QHsm_top
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:130    .text.QHsm_tran_simple_:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:135    .text.QHsm_tran_simple_:00000000 QHsm_tran_simple_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:270    .text.QHsm_tran_simple_:0000005c $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:275    .text.QHsm_enter_target_:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:280    .text.QHsm_enter_target_:00000000 QHsm_enter_target_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:460    .text.QHsm_enter_target_:00000094 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:467    .text.QHsm_init_:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:473    .text.QHsm_init_:00000000 QHsm_init_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:648    .text.QHsm_init_:000000a8 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:655    .text.QHsm_tran_complex_:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:660    .text.QHsm_tran_complex_:00000000 QHsm_tran_complex_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:915    .text.QHsm_tran_complex_:000000c0 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:922    .text.QHsm_dispatch_:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:928    .text.QHsm_dispatch_:00000000 QHsm_dispatch_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1187   .text.QHsm_dispatch_:000000e0 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1194   .text.QHsm_ctor:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1200   .text.QHsm_ctor:00000000 QHsm_ctor
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1226   .text.QHsm_ctor:0000000c $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1232   .text.QHsm_childState:00000000 $t
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1238   .text.QHsm_childState:00000000 QHsm_childState
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1335   .text.QHsm_childState:00000040 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1342   .rodata.Q_this_module_:00000000 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1346   .rodata.Q_this_module_:00000000 Q_this_module_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1349   .rodata.l_reservedEvt_:00000000 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1353   .rodata.l_reservedEvt_:00000000 l_reservedEvt_
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1367   .rodata.vtable.0:00000000 $d
+C:\Users\main\AppData\Local\Temp\cc8I32pi.s:1371   .rodata.vtable.0:00000000 vtable.0
+
+UNDEFINED SYMBOLS
+vPortEnterCritical
+vPortExitCritical
+Q_onError
