@@ -24,6 +24,8 @@
 /* USER CODE BEGIN Includes */
 #include "adc.h"
 #include "lcd.h"
+#include "gpio.h"
+#include "cmsis_os.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,7 +45,11 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+#define DATA_SIZE 10  // Розмір буфера для збереження значень
+uint16_t sensor_data[DATA_SIZE]; // Буфер для збереження значень
+uint8_t data_index = 0; // Поточний індекс буфера
+uint8_t display_mode = 0; // Режим відображення
+osSemaphoreId_t dataSemaphore;  // Оголошення семафору
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -69,11 +75,18 @@ const osThreadAttr_t myTask03_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-uint16_t lightValue;  // Значення від фоторезистора
-
 long map(long x, long in_min, long in_max, long out_min, long out_max)
 {
   return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
+}
+
+uint16_t getAverage()
+{
+  uint32_t sum = 0;
+  for (uint8_t i = 0; i < DATA_SIZE; i++) {
+    sum += sensor_data[i];
+  }
+  return sum / DATA_SIZE;
 }
 /* USER CODE END FunctionPrototypes */
 
@@ -84,7 +97,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-
+  dataSemaphore = osSemaphoreNew(1, 1, NULL); // Створення семафору з початковим значенням 1
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -148,25 +161,25 @@ void StartDefaultTask(void *argument)
 void StartTask02(void *argument)
 {
   /* USER CODE BEGIN myTask02 */
-  char buffer[15];  // Буфер для рядка
   /* Infinite loop */
   for(;;)
   {
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
-    HAL_ADC_Start(&hadc1);
-    HAL_ADC_PollForConversion(&hadc1, 100);
-    lightValue = HAL_ADC_GetValue(&hadc1);
-    HAL_ADC_Stop(&hadc1);
-    int lightPercent = map(lightValue, 4096, 0, 0, 100);
-    sprintf(buffer, "%d", lightPercent);  // Конвертуємо int у рядок
-    if (lightPercent < 20) {
-      lcd_print("Dark");
-  } else {
-      lcd_print("Light");
-  }
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
-    vTaskDelay(100 / portTICK_PERIOD_MS);
+    if (display_mode == 0) {
+      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
+      HAL_ADC_Start(&hadc1);
+      HAL_ADC_PollForConversion(&hadc1, 100);
+      uint16_t new_value = map(HAL_ADC_GetValue(&hadc1), 0, 4095, 0, 100);
+      
+      if (osSemaphoreAcquire(dataSemaphore, osWaitForever) == osOK) {  // Очікуємо доступ
+        sensor_data[data_index] = new_value;
+        data_index = (data_index + 1) % DATA_SIZE;
+        osSemaphoreRelease(dataSemaphore);  // Звільняємо семафор
+      }
+
+      HAL_ADC_Stop(&hadc1);
+      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
+      vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
   }
   /* USER CODE END myTask02 */
 }
@@ -181,10 +194,23 @@ void StartTask02(void *argument)
 void StartTask03(void *argument)
 {
   /* USER CODE BEGIN myTask03 */
+  char buffer[16];
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1000);
+    if (osSemaphoreAcquire(dataSemaphore, osWaitForever) == osOK) {  // Очікуємо доступ
+      if (display_mode == 0) {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        sprintf(buffer, "Value: %d", sensor_data[(data_index + DATA_SIZE - 1) % DATA_SIZE]);
+      } else {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        sprintf(buffer, "Avg: %d", getAverage());
+      }
+      osSemaphoreRelease(dataSemaphore);  // Звільняємо семафор
+    }
+
+    lcd_print(buffer);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
   }
   /* USER CODE END myTask03 */
 }

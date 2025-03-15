@@ -179,7 +179,13 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+extern uint8_t display_mode; // Глобальна змінна для відображення режиму
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == GPIO_PIN_13) {
+    display_mode = !display_mode; // Перемикання режиму відображення
+  }
+}
 /* USER CODE END 4 */
 
 /**

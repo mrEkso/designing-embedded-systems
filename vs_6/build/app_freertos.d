@@ -45,7 +45,8 @@ build/app_freertos.o: Core/Src/app_freertos.c Core/Inc/app_freertos.h \
  Core/Inc/stm32c0xx_nucleo_conf.h \
  Drivers/BSP/STM32C0xx_Nucleo/stm32c0xx_nucleo_errno.h \
  Middlewares/Third_Party/CMSIS/RTOS2/Include/cmsis_os2.h Core/Inc/adc.h \
- Core/Inc/lcd.h
+ Core/Inc/lcd.h Core/Inc/gpio.h \
+ Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 Core/Inc/app_freertos.h:
 Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 Core/Inc/FreeRTOSConfig.h:
@@ -97,3 +98,5 @@ Drivers/BSP/STM32C0xx_Nucleo/stm32c0xx_nucleo_errno.h:
 Middlewares/Third_Party/CMSIS/RTOS2/Include/cmsis_os2.h:
 Core/Inc/adc.h:
 Core/Inc/lcd.h:
+Core/Inc/gpio.h:
+Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
